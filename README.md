@@ -2,3 +2,6 @@
 
 - Виправлена робота з `CSV`, через що втрачались пробіли при перекладі в **Google Sheets** та **Crowdin**.
 - Швидша робота програми шляхом використання асинхронних методів.
+
+Original author of program is **amrshaheen61**
+https://github.com/amrshaheen61/UE4LocalizationsTool
