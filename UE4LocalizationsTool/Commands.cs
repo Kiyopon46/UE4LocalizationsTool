@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using UE4LocalizationsTool.Core.locres;
 using UE4LocalizationsTool.Helper;
 
@@ -18,8 +19,6 @@ namespace UE4LocalizationsTool
         CSV = 1 << 3,
     }
 
-
-
     public class Commands
     {
         private List<List<string>> Strings;
@@ -30,7 +29,15 @@ namespace UE4LocalizationsTool
         private bool RegularExpression = false;
         private bool ReverseMode = false;
         private List<string> ArrayValues;
-        public Commands(string Options, string SourcePath, Args args)
+
+        // Конструктор тепер ініціалізує поля і не є асинхронним
+        public Commands()
+        {
+            Strings = new List<List<string>>();
+        }
+
+        // Вся логіка переміщена в асинхронний метод
+        public async Task RunAsync(string Options, string SourcePath, Args args)
         {
             Flags = args;
             if (Flags.HasFlag(Args.filter))
@@ -40,7 +47,6 @@ namespace UE4LocalizationsTool
 
             if (Flags.HasFlag(Args.CSV))
             {
-
                 TextFileExtension = ".csv";
             }
             string[] Paths;
@@ -48,8 +54,7 @@ namespace UE4LocalizationsTool
             string[] rows;
             switch (Options.ToLower())
             {
-                case "export"://Single File
-                    Strings = new List<List<string>>();
+                case "export":
                     Console.ForegroundColor = ConsoleColor.Blue;
                     ConsoleText = $"Exporting... '{Path.GetFileName(SourcePath)}' ";
                     Console.Write(ConsoleText);
@@ -66,19 +71,17 @@ namespace UE4LocalizationsTool
                     Console.Write("Done\n");
                     Console.ForegroundColor = ConsoleColor.White;
 
-                    SaveTextFile(SourcePath + TextFileExtension);
-
-
+                    await SaveTextFile(SourcePath + TextFileExtension);
                     break;
-                case "exportall"://Folders
-                    Strings = new List<List<string>>();
+
+                case "exportall":
                     Paths = SourcePath.Split(new char[] { '*' }, 2);
-                    ExportFolder(Paths[0]);
-                    SaveTextFile(Paths[1]);
+                    await ExportFolder(Paths[0]);
+                    await SaveTextFile(Paths[1]);
                     break;
 
-                case "import"://Single File
-                case "-import"://Single File Without rename
+                case "import":
+                case "-import":
                     Console.ForegroundColor = ConsoleColor.Blue;
                     ConsoleText = $"Importing... '{Path.GetFileName(SourcePath)}' ";
                     Console.Write(ConsoleText);
@@ -89,11 +92,9 @@ namespace UE4LocalizationsTool
                         throw new Exception("Invalid text file type: " + Path.GetFileName(SourcePath));
                     }
 
-
-
                     if (Flags.HasFlag(Args.CSV))
                     {
-                        rows = CSVFile.Instance.Load(SourcePath, Flags.HasFlag(Args.noname));
+                        rows = await CSVFile.Instance.Load(SourcePath, Flags.HasFlag(Args.noname));
                     }
                     else
                     {
@@ -104,12 +105,10 @@ namespace UE4LocalizationsTool
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Done\n");
                     Console.ForegroundColor = ConsoleColor.White;
-
-
                     break;
 
-                case "importall"://Folders
-                case "-importall"://Folders Without rename Files
+                case "importall":
+                case "-importall":
                     Paths = SourcePath.Split(new char[] { '*' }, 2);
 
                     if (!Paths[1].EndsWith(TextFileExtension, StringComparison.OrdinalIgnoreCase))
@@ -117,28 +116,23 @@ namespace UE4LocalizationsTool
                         throw new Exception("Invalid text file type: " + Path.GetFileName(SourcePath));
                     }
 
-
-
                     if (Flags.HasFlag(Args.CSV))
                     {
-                        rows = CSVFile.Instance.Load(Paths[1], Flags.HasFlag(Args.noname));
+                        rows = await CSVFile.Instance.Load(Paths[1], Flags.HasFlag(Args.noname));
                     }
                     else
                     {
                         rows = File.ReadAllLines(Paths[1]);
                     }
 
-
-                    ImportFolder(Paths[0], rows, Options.ToLower());
+                    await ImportFolder(Paths[0], rows, Options.ToLower());
                     break;
                 default:
                     throw new Exception("Invalid number of arguments.\n" + Program.commandlines);
             }
-
         }
 
-
-        private void SaveTextFile(string FilePath)
+        private async Task SaveTextFile(string FilePath)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             string ConsoleText = "Saving text file... ";
@@ -148,8 +142,7 @@ namespace UE4LocalizationsTool
 
             if (Flags.HasFlag(Args.CSV))
             {
-                CSVFile.Instance.Save(Strings, FilePath, Flags.HasFlag(Args.noname));
-
+                await CSVFile.Instance.Save(Strings, FilePath, Flags.HasFlag(Args.noname));
                 goto End;
             }
 
@@ -195,7 +188,6 @@ namespace UE4LocalizationsTool
             {
                 IAsset locres = new LocresFile(FilePath);
                 return locres.ExtractTexts();
-                //  SizeOfRecord = locres.Strings.Count;
             }
             else if (FilePath.EndsWith(".uasset", StringComparison.OrdinalIgnoreCase) || FilePath.EndsWith(".umap", StringComparison.OrdinalIgnoreCase))
             {
@@ -208,7 +200,6 @@ namespace UE4LocalizationsTool
 
                 Uexp uexp = new Uexp(Uasset);
                 return uexp.Strings;
-                //  SizeOfRecord = uexp.Strings.Count;
             }
             else
             {
@@ -217,7 +208,7 @@ namespace UE4LocalizationsTool
         }
 
 
-        private void ExportFolder(string FolderPath)
+        private async Task ExportFolder(string FolderPath)
         {
             if (!Directory.Exists(FolderPath))
             {
@@ -228,53 +219,64 @@ namespace UE4LocalizationsTool
             Console.Write(ConsoleText);
             Console.ForegroundColor = ConsoleColor.White;
 
-            string[] LanguageFiles = Directory.GetFiles(FolderPath, "*.*", SearchOption.AllDirectories).Where(x => x.EndsWith(".locres", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".uasset", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".umap", StringComparison.OrdinalIgnoreCase)).ToArray<string>();
+            // Виконуємо сканування файлів у фоновому потоці
+            string[] LanguageFiles = await Task.Run(() =>
+            {
+                return Directory.GetFiles(FolderPath, "*.*", SearchOption.AllDirectories)
+                                .Where(x => x.EndsWith(".locres", StringComparison.OrdinalIgnoreCase) ||
+                                            x.EndsWith(".uasset", StringComparison.OrdinalIgnoreCase) ||
+                                            x.EndsWith(".umap", StringComparison.OrdinalIgnoreCase))
+                                .ToArray();
+            });
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Done\n");
             Console.ForegroundColor = ConsoleColor.White;
 
-            if (LanguageFiles.Count() == 0)
+            if (LanguageFiles.Length == 0) // Використовуємо .Length, це ефективніше, ніж .Count()
             {
                 throw new Exception($"This directory '{FolderPath}' not contine any language files.");
             }
 
-            for (int i = 0; i < LanguageFiles.Count(); i++)
+            // Виконуємо цикл обробки файлів у фоновому потоці
+            await Task.Run(() =>
             {
-                Console.ForegroundColor = ConsoleColor.Blue;
-                ConsoleText = $"[{i + 1}:{LanguageFiles.Count()}] Exporting... '{Path.GetFileName(LanguageFiles[i])}' ";
-                Console.Write(ConsoleText);
-                Console.ForegroundColor = ConsoleColor.White;
-
-                int ThisPosition = Strings.Count - 1;
-                try
+                for (int i = 0; i < LanguageFiles.Length; i++)
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    string currentConsoleText = $"[{i + 1}:{LanguageFiles.Length}] Exporting... '{Path.GetFileName(LanguageFiles[i])}' ";
+                    Console.Write(currentConsoleText);
+                    Console.ForegroundColor = ConsoleColor.White;
 
-                    List<List<string>> Souce = Export(LanguageFiles[i]);
-
-                    if (Flags.HasFlag(Args.filter))
+                    try
                     {
-                        Souce = ApplyFilter(Souce);
+                        // Припускаємо, що метод Export() є синхронним, тому він виконується всередині Task.Run
+                        List<List<string>> Souce = Export(LanguageFiles[i]);
+
+                        if (Flags.HasFlag(Args.filter))
+                        {
+                            Souce = ApplyFilter(Souce);
+                        }
+
+                        Strings.Add(new List<string>() { "[~PATHFile~]", "[PATH]" + Souce.Count + "*" + Path.GetFullPath(LanguageFiles[i]).Replace(Path.GetFullPath(FolderPath), "") + "[PATH]", "[~PATHFile~]" });
+                        Strings.AddRange(Souce);
                     }
+                    catch (Exception EX)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("Fail\n");
+                        Console.ForegroundColor = ConsoleColor.White;
 
-                    Strings.Add(new List<string>() { "[~PATHFile~]", "[PATH]" + Souce.Count + "*" + Path.GetFullPath(LanguageFiles[i]).Replace(Path.GetFullPath(FolderPath), "") + "[PATH]", "[~PATHFile~]" });
-                    Strings.AddRange(Souce);
-                }
-                catch (Exception EX)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("Fail\n");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Can't parse it, the tool will skip this file.\n" + EX.Message);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        continue;
+                    }
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("Done\n");
                     Console.ForegroundColor = ConsoleColor.White;
-
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Can't parse it, the tool will skip this file.\n" + EX.Message);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    continue;
-
                 }
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("Done\n");
-                Console.ForegroundColor = ConsoleColor.White;
-            }
+            });
         }
 
 
@@ -308,7 +310,6 @@ namespace UE4LocalizationsTool
                 {
                     throw new Exception("Can't parse this line from text file: " + StringValues[i]);
                 }
-
             }
         }
 
@@ -370,75 +371,76 @@ namespace UE4LocalizationsTool
             {
                 throw new Exception("Invalid language file type: " + Path.GetFileName(FilePath));
             }
-
         }
 
-        private void ImportFolder(string FolderPath, string[] Values, string Option)
+        private async Task ImportFolder(string FolderPath, string[] Values, string Option)
         {
-
-            if (!Directory.Exists(FolderPath))
+            // Виконуємо всю логіку імпорту у фоновому потоці
+            await Task.Run(() =>
             {
-                throw new Exception("Directory not existed: " + FolderPath);
-            }
-
-
-            int[] Indexs = Values.Select((Value, Index) => (Value.Trim().StartsWith("[PATH]") && Value.Trim().EndsWith("[PATH]")) ? Index : -1).Where(index => index != -1).ToArray();
-
-            if (Indexs.Length == 0)
-            {
-                throw new Exception("Source text file is corrupted or not contain text or you modified language files path ([PATH]....[PATH]).");
-            }
-
-            for (int PathIndex = 0; PathIndex < Indexs.Length; PathIndex++)
-            {
-                string[] RecordInfo = Values[Indexs[PathIndex]].Replace("[PATH]", "").Trim().Split(new char[] { '*' }, 2);
-                int ArraySize = int.Parse(RecordInfo[0]);
-                string FilePath = RecordInfo[1];
-
-                if (string.IsNullOrEmpty(FilePath))
+                if (!Directory.Exists(FolderPath))
                 {
-                    Console.WriteLine("Can't get path from" + Indexs[PathIndex] + "line");
-                    continue;
+                    throw new Exception("Directory not existed: " + FolderPath);
                 }
-                FilePath = FolderPath + @"\" + FilePath;
-                FilePath = FilePath.Replace(@"\\", @"\");
-                Console.ForegroundColor = ConsoleColor.Blue;
-                string ConsoleText = $"[{PathIndex + 1}:{Indexs.Length}] Importing... '{Path.GetFileName(FilePath)}' ";
-                Console.Write(ConsoleText);
-                Console.ForegroundColor = ConsoleColor.White;
-                string[] StringArrayValues = new string[ArraySize];
-                Array.Copy(Values, Indexs[PathIndex] + 1, StringArrayValues, 0, ArraySize);
 
-                try
+                int[] Indexs = Values.Select((Value, Index) => (Value.Trim().StartsWith("[PATH]") && Value.Trim().EndsWith("[PATH]")) ? Index : -1).Where(index => index != -1).ToArray();
+
+                if (Indexs.Length == 0)
                 {
-                    if (Option == "importall")
-                        Import(FilePath, StringArrayValues, "import");
-                    else
-                        Import(FilePath, StringArrayValues, "-import");
+                    throw new Exception("Source text file is corrupted or not contain text or you modified language files path ([PATH]....[PATH]).");
                 }
-                catch (Exception EX)
+
+                for (int PathIndex = 0; PathIndex < Indexs.Length; PathIndex++)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("Fail\n");
+                    string[] RecordInfo = Values[Indexs[PathIndex]].Replace("[PATH]", "").Trim().Split(new char[] { '*' }, 2);
+                    int ArraySize = int.Parse(RecordInfo[0]);
+                    string FilePath = RecordInfo[1];
+
+                    if (string.IsNullOrEmpty(FilePath))
+                    {
+                        Console.WriteLine("Can't get path from" + Indexs[PathIndex] + "line");
+                        continue;
+                    }
+                    FilePath = FolderPath + @"\" + FilePath;
+                    FilePath = FilePath.Replace(@"\\", @"\");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    string ConsoleText = $"[{PathIndex + 1}:{Indexs.Length}] Importing... '{Path.GetFileName(FilePath)}' ";
+                    Console.Write(ConsoleText);
                     Console.ForegroundColor = ConsoleColor.White;
+                    string[] StringArrayValues = new string[ArraySize];
+                    Array.Copy(Values, Indexs[PathIndex] + 1, StringArrayValues, 0, ArraySize);
 
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Can't parse it, the tool will skip this file.\n" + EX.Message);
+                    try
+                    {
+                        if (Option == "importall")
+                        {
+                            Import(FilePath, StringArrayValues, "import");
+                        }
+                        else
+                        {
+                            Import(FilePath, StringArrayValues, "-import");
+                        }
+                    }
+                    catch (Exception EX)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("Fail\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Can't parse it, the tool will skip this file.\n" + EX.Message);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        continue;
+                    }
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("Done\n");
                     Console.ForegroundColor = ConsoleColor.White;
-                    continue;
                 }
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("Done\n");
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-
-
+            });
         }
-
 
         private void GetFilterValues()
         {
-
             if (!File.Exists("FilterValues.txt"))
             {
                 throw new Exception("Can't find 'FilterValues.txt' file, open the GUI and create new one from (Tool>Filter)");
@@ -467,57 +469,53 @@ namespace UE4LocalizationsTool
             List<List<string>> FV = new List<List<string>>();
             for (int x = 0; x < Strings.Count; x++)
             {
-
                 bool CanAdd = false;
 
-
                 ArrayValues.ForEach(Value =>
-                  {
-
-                      if (UseMatching)
-                      {
-                          if (RegularExpression)
-                          {
-                              try
-                              {
-                                  if (Regex.IsMatch(Strings[x][0], Value))
-                                  {
-                                      CanAdd = true;
-                                  }
-
-                              }
-                              catch { }
-                          }
-                          else
-                          {
-                              if (Strings[x][0] == Value)
-                              {
-                                  CanAdd = true;
-                              }
-                          }
-                      }
-                      else
-                      {
-                          if (RegularExpression)
-                          {
-                              try
-                              {
-                                  if (Regex.IsMatch(Strings[x][0], Value, RegexOptions.IgnoreCase))
-                                  {
-                                      CanAdd = true;
-                                  }
-                              }
-                              catch { }
-                          }
-                          else
-                          {
-                              if (Strings[x][0].IndexOf(Value, StringComparison.OrdinalIgnoreCase) >= 0)
-                              {
-                                  CanAdd = true;
-                              }
-                          }
-                      }
-                  });
+                {
+                    if (UseMatching)
+                    {
+                        if (RegularExpression)
+                        {
+                            try
+                            {
+                                if (Regex.IsMatch(Strings[x][0], Value))
+                                {
+                                    CanAdd = true;
+                                }
+                            }
+                            catch { }
+                        }
+                        else
+                        {
+                            if (Strings[x][0] == Value)
+                            {
+                                CanAdd = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (RegularExpression)
+                        {
+                            try
+                            {
+                                if (Regex.IsMatch(Strings[x][0], Value, RegexOptions.IgnoreCase))
+                                {
+                                    CanAdd = true;
+                                }
+                            }
+                            catch { }
+                        }
+                        else
+                        {
+                            if (Strings[x][0].IndexOf(Value, StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                CanAdd = true;
+                            }
+                        }
+                    }
+                });
 
                 if (CanAdd)
                 {
@@ -538,7 +536,6 @@ namespace UE4LocalizationsTool
             int i = 0;
             for (int x = 0; x < Strings.Count; x++)
             {
-
                 bool CanAdd = false;
 
 
@@ -555,7 +552,6 @@ namespace UE4LocalizationsTool
                                 {
                                     CanAdd = true;
                                 }
-
                             }
                             catch { }
                         }
@@ -594,7 +590,6 @@ namespace UE4LocalizationsTool
                 {
                     if (!ReverseMode)
                     {
-
                         try
                         {
                             if (!Flags.HasFlag(Args.noname))
@@ -636,11 +631,5 @@ namespace UE4LocalizationsTool
                 }
             }
         }
-
-
-
-
     }
-
 }
-

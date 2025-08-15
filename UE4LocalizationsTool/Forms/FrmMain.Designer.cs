@@ -73,7 +73,6 @@ namespace UE4LocalizationsTool
             this.UseFixedSize = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.DataCount = new System.Windows.Forms.ToolStripLabel();
             this.locresOprationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -441,7 +440,6 @@ namespace UE4LocalizationsTool
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.commandLinesToolStripMenuItem,
-            this.donateToolStripMenuItem,
             this.aboutToolStripMenuItem1});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
@@ -453,13 +451,6 @@ namespace UE4LocalizationsTool
             this.commandLinesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.commandLinesToolStripMenuItem.Text = "Command Lines";
             this.commandLinesToolStripMenuItem.Click += new System.EventHandler(this.commandLinesToolStripMenuItem_Click);
-            // 
-            // donateToolStripMenuItem
-            // 
-            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.donateToolStripMenuItem.Text = "Donate";
-            this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem1
             // 
@@ -697,7 +688,7 @@ namespace UE4LocalizationsTool
             this.MinimumSize = new System.Drawing.Size(933, 589);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "UE4 Localizations Tool";
+            this.Text = "UE Localizations Tool";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FrmMain_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.FrmMain_DragEnter);
             this.menuStrip1.ResumeLayout(false);
@@ -745,7 +736,6 @@ namespace UE4LocalizationsTool
         private System.Windows.Forms.ToolStripMenuItem descendingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ascendingToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem descendingToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem UseFixedSize;
         private System.Windows.Forms.PictureBox pictureBox1;

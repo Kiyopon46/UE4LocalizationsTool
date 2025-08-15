@@ -6,43 +6,35 @@ using uint8 = System.Byte;
 
 namespace UE4LocalizationsTool.Core.Hash
 {
-
-    class CityHash
+    public static class CityHash
     {
+        // Some primes between 2^63 and 2^64 for various uses.
+        private const uint64 k0 = 0xc3a5c85c97cb3127UL;
+        private const uint64 k1 = 0xb492b66fbe98f273UL;
+        private const uint64 k2 = 0x9ae16a3b2f90404fUL;
 
-        public static CityHash Init
+        // Magic numbers for 32-bit hashing. Copied from Murmur3.
+        private const uint32 c1 = 0xcc9e2d51;
+        private const uint32 c2 = 0x1b873593;
+
+        public static bool IsBigEndian { get; set; } = false;
+
+        public struct Uint128_64
         {
-            get
+            public ulong lo;
+            public ulong hi;
+
+            public Uint128_64(ulong inLo, ulong inHi)
             {
-                return new CityHash();
+                lo = inLo;
+                hi = inHi;
             }
         }
 
-        // Some primes between 2^63 and 2^64 for various uses.
-        static uint64 k0 = 0xc3a5c85c97cb3127UL;
-        static uint64 k1 = 0xb492b66fbe98f273UL;
-        static uint64 k2 = 0x9ae16a3b2f90404fUL;
-
-        // Magic numbers for 32-bit hashing.  Copied from Murmur3.
-        static uint32 c1 = 0xcc9e2d51;
-        static uint32 c2 = 0x1b873593;
-        public static bool IsBigEndian { get; set; } = false;
-        public class Uint128_64
-        {
-            public Uint128_64(ulong InLo, ulong InHi)
-            {
-                lo = InLo;
-                hi = InHi;
-            }
-            public ulong lo;
-            public ulong hi;
-        };
-
         // Hash 128 input bits down to 64 bits of output.
         // This is intended to be a reasonably good hash function.
-        public ulong CityHash128to64(ref Uint128_64 x)
+        private static ulong CityHash128to64(ref Uint128_64 x)
         {
-            // Murmur-inspired hashing.
             const ulong kMul = 0x9ddfea08eb382d69UL;
             ulong a = (x.lo ^ x.hi) * kMul;
             a ^= (a >> 47);
@@ -52,20 +44,10 @@ namespace UE4LocalizationsTool.Core.Hash
             return b;
         }
 
+        private static unsafe uint64 UNALIGNED_LOAD64(byte* p) => *(uint64*)p;
+        private static unsafe uint32 UNALIGNED_LOAD32(byte* p) => *(uint32*)p;
 
-        unsafe uint64 UNALIGNED_LOAD64(byte* p)
-        {
-
-            return *(uint64*)p;
-        }
-
-        unsafe uint32 UNALIGNED_LOAD32(byte* p)
-        {
-
-            return *(uint32*)p;
-        }
-
-        protected uint32 _byteswap_ulong(uint32 value)
+        private static uint32 _byteswap_ulong(uint32 value)
         {
             return ((value & 0xFFu) << 24) |
                    ((value & 0xFF00u) << 8) |
@@ -73,7 +55,7 @@ namespace UE4LocalizationsTool.Core.Hash
                    ((value >> 24) & 0xFFu);
         }
 
-        protected uint64 _byteswap_uint64(uint64 value)
+        private static uint64 _byteswap_uint64(uint64 value)
         {
             return ((value & 0xFFUL) << 56) |
                    ((value & 0xFF00UL) << 40) |
@@ -85,30 +67,24 @@ namespace UE4LocalizationsTool.Core.Hash
                    ((value >> 56) & 0xFFUL);
         }
 
-        uint32 bswap_32(uint32 x) => _byteswap_ulong(x);
-        uint64 bswap_64(uint64 x) => _byteswap_uint64(x);
+        private static uint32 bswap_32(uint32 x) => _byteswap_ulong(x);
+        private static uint64 bswap_64(uint64 x) => _byteswap_uint64(x);
 
-        uint32 uint32_in_expected_order(uint32 x) => bswap_32(x);
-        uint64 uint64_in_expected_order(uint64 x) => bswap_64(x);
+        private static uint32 uint32_in_expected_order(uint32 x) => bswap_32(x);
+        private static uint64 uint64_in_expected_order(uint64 x) => bswap_64(x);
 
-
-
-        unsafe uint64 Fetch64(byte* p)
+        private static unsafe uint64 Fetch64(byte* p)
         {
-            var val = IsBigEndian ? uint64_in_expected_order(UNALIGNED_LOAD64(p)) : UNALIGNED_LOAD64(p);
-            return val;
+            return IsBigEndian ? uint64_in_expected_order(UNALIGNED_LOAD64(p)) : UNALIGNED_LOAD64(p);
         }
 
-        unsafe uint32 Fetch32(byte* p)
+        private static unsafe uint32 Fetch32(byte* p)
         {
-            var val = IsBigEndian ? uint32_in_expected_order(UNALIGNED_LOAD32(p)) : UNALIGNED_LOAD32(p);
-            return val;
+            return IsBigEndian ? uint32_in_expected_order(UNALIGNED_LOAD32(p)) : UNALIGNED_LOAD32(p);
         }
-
-
 
         // A 32-bit to 32-bit integer hash copied from Murmur3.
-        static uint32 fmix(uint32 h)
+        private static uint32 fmix(uint32 h)
         {
             h ^= h >> 16;
             h *= 0x85ebca6b;
@@ -118,33 +94,20 @@ namespace UE4LocalizationsTool.Core.Hash
             return h;
         }
 
-        static uint32 Rotate32(uint32 val, int shift)
+        private static uint32 Rotate32(uint32 val, int shift)
         {
-            // Avoid shifting by 32: doing so yields an undefined result.
             return shift == 0 ? val : ((val >> shift) | (val << (32 - shift)));
         }
 
-
-        void SwapValues<T>(ref T a, ref T b)
+        private static void SwapValues<T>(ref T a, ref T b)
         {
             T c = a;
             a = b;
             b = c;
         }
 
-        void PERMUTE3<T>(ref T a, ref T b, ref T c)
+        private static uint32 Mur(uint32 a, uint32 h)
         {
-            do
-            {
-                SwapValues(ref a, ref b);
-                SwapValues(ref a, ref c);
-            } while (true);
-        }
-
-        uint32 Mur(uint32 a, uint32 h)
-        {
-
-            // Helper from Murmur3 for combining two 32-bit values.
             a *= c1;
             a = Rotate32(a, 17);
             a *= c2;
@@ -153,7 +116,7 @@ namespace UE4LocalizationsTool.Core.Hash
             return h * 5 + 0xe6546b64;
         }
 
-        unsafe uint32 Hash32Len13to24(byte* s, uint32 len)
+        private static unsafe uint32 Hash32Len13to24(byte* s, uint32 len)
         {
             uint32 a = Fetch32(s - 4 + (len >> 1));
             uint32 b = Fetch32(s + 4);
@@ -166,23 +129,20 @@ namespace UE4LocalizationsTool.Core.Hash
             return fmix(Mur(f, Mur(e, Mur(d, Mur(c, Mur(b, Mur(a, h)))))));
         }
 
-        unsafe uint32 Hash32Len0to4(byte* s, uint32 len)
+        private static unsafe uint32 Hash32Len0to4(byte* s, uint32 len)
         {
-
             uint32 b = 0;
             uint32 c = 9;
-            byte* bytePtr = s;
             for (uint32 i = 0; i < len; i++)
             {
-                byte v = *bytePtr;
+                byte v = s[i];
                 b = b * c1 + v;
                 c ^= b;
-                bytePtr++;
             }
             return fmix(Mur(b, Mur(len, c)));
         }
 
-        unsafe uint32 Hash32Len5to12(byte* s, uint32 len)
+        private static unsafe uint32 Hash32Len5to12(byte* s, uint32 len)
         {
             uint32 a = len, b = len * 5, c = 9, d = b;
             a += Fetch32(s);
@@ -191,9 +151,8 @@ namespace UE4LocalizationsTool.Core.Hash
             return fmix(Mur(c, Mur(b, Mur(a, d))));
         }
 
-        unsafe uint32 CityHash32(byte* s, uint32 len)
+        public static unsafe uint32 CityHash32(byte* s, uint32 len)
         {
-
             if (len <= 24)
             {
                 return len <= 12 ?
@@ -201,7 +160,6 @@ namespace UE4LocalizationsTool.Core.Hash
                     Hash32Len13to24(s, len);
             }
 
-            // len > 24
             uint32 h = len, g = c1 * len, f = g;
             uint32 a0 = Rotate32(Fetch32(s + len - 4) * c1, 17) * c2;
             uint32 a1 = Rotate32(Fetch32(s + len - 8) * c1, 17) * c2;
@@ -209,20 +167,16 @@ namespace UE4LocalizationsTool.Core.Hash
             uint32 a3 = Rotate32(Fetch32(s + len - 12) * c1, 17) * c2;
             uint32 a4 = Rotate32(Fetch32(s + len - 20) * c1, 17) * c2;
             h ^= a0;
-            h = Rotate32(h, 19);
-            h = h * 5 + 0xe6546b64;
+            h = Rotate32(h, 19) * 5 + 0xe6546b64;
             h ^= a2;
-            h = Rotate32(h, 19);
-            h = h * 5 + 0xe6546b64;
+            h = Rotate32(h, 19) * 5 + 0xe6546b64;
             g ^= a1;
-            g = Rotate32(g, 19);
-            g = g * 5 + 0xe6546b64;
+            g = Rotate32(g, 19) * 5 + 0xe6546b64;
             g ^= a3;
-            g = Rotate32(g, 19);
-            g = g * 5 + 0xe6546b64;
+            g = Rotate32(g, 19) * 5 + 0xe6546b64;
             f += a4;
-            f = Rotate32(f, 19);
-            f = f * 5 + 0xe6546b64;
+            f = Rotate32(f, 19) * 5 + 0xe6546b64;
+
             uint32 iters = (len - 1) / 20;
             do
             {
@@ -232,60 +186,49 @@ namespace UE4LocalizationsTool.Core.Hash
                 uint32 _a3 = Rotate32(Fetch32(s + 12) * c1, 17) * c2;
                 uint32 _a4 = Fetch32(s + 16);
                 h ^= _a0;
-                h = Rotate32(h, 18);
-                h = h * 5 + 0xe6546b64;
+                h = Rotate32(h, 18) * 5 + 0xe6546b64;
                 f += _a1;
-                f = Rotate32(f, 19);
-                f = f * c1;
+                f = Rotate32(f, 19) * c1;
                 g += _a2;
-                g = Rotate32(g, 18);
-                g = g * 5 + 0xe6546b64;
+                g = Rotate32(g, 18) * 5 + 0xe6546b64;
                 h ^= _a3 + _a1;
-                h = Rotate32(h, 19);
-                h = h * 5 + 0xe6546b64;
+                h = Rotate32(h, 19) * 5 + 0xe6546b64;
                 g ^= _a4;
                 g = bswap_32(g) * 5;
                 h += _a4 * 5;
                 h = bswap_32(h);
                 f += _a0;
-                PERMUTE3(ref f, ref h, ref g);
+
+                uint32 temp = f;
+                f = g;
+                g = h;
+                h = temp;
+
                 s += 20;
             } while (--iters != 0);
+
             g = Rotate32(g, 11) * c1;
             g = Rotate32(g, 17) * c1;
             f = Rotate32(f, 11) * c1;
             f = Rotate32(f, 17) * c1;
-            h = Rotate32(h + g, 19);
-            h = h * 5 + 0xe6546b64;
+            h = Rotate32(h + g, 19) * 5 + 0xe6546b64;
             h = Rotate32(h, 17) * c1;
-            h = Rotate32(h + f, 19);
-            h = h * 5 + 0xe6546b64;
+            h = Rotate32(h + f, 19) * 5 + 0xe6546b64;
             h = Rotate32(h, 17) * c1;
             return h;
         }
 
-        // Bitwise right rotate.  Normally this will compile to a single
-        // instruction, especially if the shift is a manifest constant.
-        static uint64 Rotate(uint64 val, int shift)
-        {
-            // Avoid shifting by 64: doing so yields an undefined result.
-            return shift == 0 ? val : ((val >> shift) | (val << (64 - shift)));
-        }
+        private static uint64 Rotate(uint64 val, int shift) => shift == 0 ? val : ((val >> shift) | (val << (64 - shift)));
+        private static uint64 ShiftMix(uint64 val) => val ^ (val >> 47);
 
-        static uint64 ShiftMix(uint64 val)
-        {
-            return val ^ (val >> 47);
-        }
-
-        uint64 HashLen16(uint64 u, uint64 v)
+        private static uint64 HashLen16(uint64 u, uint64 v)
         {
             var val = new Uint128_64(u, v);
             return CityHash128to64(ref val);
         }
 
-        static uint64 HashLen16(uint64 u, uint64 v, uint64 mul)
+        private static uint64 HashLen16(uint64 u, uint64 v, uint64 mul)
         {
-            // Murmur-inspired hashing.
             uint64 a = (u ^ v) * mul;
             a ^= (a >> 47);
             uint64 b = (v ^ a) * mul;
@@ -294,10 +237,8 @@ namespace UE4LocalizationsTool.Core.Hash
             return b;
         }
 
-        unsafe uint64 HashLen0to16(byte* s, uint32 len)
+        private static unsafe uint64 HashLen0to16(byte* s, uint32 len)
         {
-
-
             if (len >= 8)
             {
                 uint64 mul = k2 + len * 2;
@@ -319,15 +260,13 @@ namespace UE4LocalizationsTool.Core.Hash
                 uint8 b = s[len >> 1];
                 uint8 c = s[len - 1];
                 uint32 y = a + ((uint32)b << 8);
-                uint32 z = len + ((uint32)(c) << 2);
+                uint32 z = len + ((uint32)c << 2);
                 return ShiftMix(y * k2 ^ z * k0) * k2;
             }
             return k2;
         }
 
-        // This probably works well for 16-byte strings as well, but it may be overkill
-        // in that case.
-        unsafe uint64 HashLen17to32(byte* s, uint32 len)
+        private static unsafe uint64 HashLen17to32(byte* s, uint32 len)
         {
             uint64 mul = k2 + len * 2;
             uint64 a = Fetch64(s) * k1;
@@ -338,9 +277,7 @@ namespace UE4LocalizationsTool.Core.Hash
                 a + Rotate(b + k2, 18) + c, mul);
         }
 
-        // Return a 16-byte hash for 48 bytes.  Quick and dirty.
-        // Callers do best to use "random-looking" values for a and b.
-        static Uint128_64 WeakHashLen32WithSeeds(
+        private static Uint128_64 WeakHashLen32WithSeeds(
             uint64 w, uint64 x, uint64 y, uint64 z, uint64 a, uint64 b)
         {
             a += w;
@@ -349,12 +286,10 @@ namespace UE4LocalizationsTool.Core.Hash
             a += x;
             a += y;
             b += Rotate(a, 44);
-            return new Uint128_64((a + z), (b + c));
+            return new Uint128_64(a + z, b + c);
         }
 
-        // Return a 16-byte hash for s[0] ... s[31], a, and b.  Quick and dirty.
-        unsafe Uint128_64 WeakHashLen32WithSeeds(
-            byte* s, uint64 a, uint64 b)
+        private static unsafe Uint128_64 WeakHashLen32WithSeeds(byte* s, uint64 a, uint64 b)
         {
             return WeakHashLen32WithSeeds(Fetch64(s),
                 Fetch64(s + 8),
@@ -364,11 +299,8 @@ namespace UE4LocalizationsTool.Core.Hash
                 b);
         }
 
-        // Return an 8-byte hash for 33 to 64 bytes.
-        unsafe uint64 HashLen33to64(byte* s, uint32 len)
+        private static unsafe uint64 HashLen33to64(byte* s, uint32 len)
         {
-
-
             uint64 mul = k2 + len * 2;
             uint64 a = Fetch64(s) * k2;
             uint64 b = Fetch64(s + 8);
@@ -389,28 +321,18 @@ namespace UE4LocalizationsTool.Core.Hash
             return b + x;
         }
 
-        unsafe uint64 CityHash64(byte* s, uint32 len)
+        public static unsafe uint64 CityHash64(byte* s, uint32 len)
         {
             if (len <= 32)
             {
-                if (len <= 16)
-                {
-                    return HashLen0to16(s, len);
-                }
-
-                else
-                {
-                    return HashLen17to32(s, len);
-                }
+                return len <= 16 ? HashLen0to16(s, len) : HashLen17to32(s, len);
             }
 
-            else if (len <= 64)
+            if (len <= 64)
             {
                 return HashLen33to64(s, len);
             }
 
-            // For strings over 64 bytes we hash the end first, and then as we
-            // loop we keep 56 bytes of state: v, w, x, y, and z.
             uint64 x = Fetch64(s + len - 40);
             uint64 y = Fetch64(s + len - 16) + Fetch64(s + len - 56);
             uint64 z = HashLen16(Fetch64(s + len - 48) + len, Fetch64(s + len - 24));
@@ -418,8 +340,7 @@ namespace UE4LocalizationsTool.Core.Hash
             Uint128_64 w = WeakHashLen32WithSeeds(s + len - 32, y + k1, x);
             x = x * k1 + Fetch64(s);
 
-            // Decrease len to the nearest multiple of 64, and operate on 64-byte chunks.
-            len = (len - 1) & ~(uint32)(63);
+            len = (len - 1) & ~(uint32)63;
             do
             {
                 x = Rotate(x + y + v.lo + Fetch64(s + 8), 37) * k1;
@@ -429,16 +350,22 @@ namespace UE4LocalizationsTool.Core.Hash
                 z = Rotate(z + w.lo, 33) * k1;
                 v = WeakHashLen32WithSeeds(s, v.hi * k1, x + w.lo);
                 w = WeakHashLen32WithSeeds(s + 32, z + w.hi, y + Fetch64(s + 16));
-                SwapValues(ref z, ref x);
+
+                uint64 tempZ = z;
+                z = x;
+                x = tempZ;
+
                 s += 64;
                 len -= 64;
             } while (len != 0);
+
             return HashLen16(HashLen16(v.lo, w.lo) + ShiftMix(y) * k1 + z,
                 HashLen16(v.hi, w.hi) + x);
         }
 
-        public ulong CityHash64(byte[] s)
+        public static ulong CityHash64(byte[] s)
         {
+            if (s == null) return 0;
             unsafe
             {
                 fixed (byte* ptr = s)
@@ -448,32 +375,21 @@ namespace UE4LocalizationsTool.Core.Hash
             }
         }
 
-        public ulong CityHash64(string s)
+        public static ulong CityHash64(string s)
         {
+            if (string.IsNullOrEmpty(s)) return 0;
             byte[] byteArray = Encoding.UTF8.GetBytes(s);
-
-            unsafe
-            {
-                fixed (byte* ptr = byteArray)
-                {
-                    return CityHash64(ptr, (uint)byteArray.Length);
-                }
-            }
+            return CityHash64(byteArray);
         }
 
-        unsafe uint64 CityHash64WithSeed(byte* s, uint32 len, uint64 seed)
+        public static unsafe ulong CityHash64WithSeed(byte* s, uint32 len, uint64 seed)
         {
-
-
             return CityHash64WithSeeds(s, len, k2, seed);
         }
 
-        unsafe uint64 CityHash64WithSeeds(byte* s, uint32 len, uint64 seed0, uint64 seed1)
+        public static unsafe ulong CityHash64WithSeeds(byte* s, uint32 len, uint64 seed0, uint64 seed1)
         {
-
-
             return HashLen16(CityHash64(s, len) - seed0, seed1);
         }
-
     }
 }

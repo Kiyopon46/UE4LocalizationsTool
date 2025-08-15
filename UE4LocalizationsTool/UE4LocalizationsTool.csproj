@@ -8,7 +8,7 @@
     <ProjectGuid>{C8AA2127-04A4-400B-9CA3-1951639BB0A3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>UE4LocalizationsTool</RootNamespace>
-    <AssemblyName>UE4LocalizationsTool</AssemblyName>
+    <AssemblyName>UE Localizations Tool</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

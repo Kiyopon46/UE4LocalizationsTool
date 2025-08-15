@@ -7,19 +7,20 @@ namespace UE4LocalizationsTool.Controls
 {
     public partial class SearchBox : UserControl
     {
-
-        private string ColumnName = "Text value";
+        private const string DefaultColumnName = "Text value";
+        private string _columnName = DefaultColumnName;
 
         [Browsable(true)]
         public NDataGridView DataGridView { get; set; }
-        int CurrentRowIndex = -1;
-        int CurrentColumnIndex = -1;
+        private int _currentRowIndex = -1;
+        private int _currentColumnIndex = -1;
 
         public SearchBox()
         {
             InitializeComponent();
             Hide();
         }
+
         public SearchBox(NDataGridView dataGrid)
         {
             DataGridView = dataGrid;
@@ -34,103 +35,79 @@ namespace UE4LocalizationsTool.Controls
             label2.Text = string.Empty;
         }
 
-        private bool IsMatch(string value)
+        // Оптимізований метод IsMatch
+        // Тепер приймає текст для пошуку як параметр, що усуває повторне звернення до InputSearch.Text
+        private bool IsMatch(string value, string searchText)
         {
-            string searchText = InputSearch.Text;
-
             if (string.IsNullOrWhiteSpace(searchText))
                 return false;
 
-            return value.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1;
+            return value.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        private bool IsMatch(string value, string match)
+        // Оптимізований і спрощений метод FindCell
+        private DataGridViewCell FindCell(int startRowIndex, string searchText, bool searchUpwards = false)
         {
-            if (string.IsNullOrWhiteSpace(match))
-                return false;
+            int step = searchUpwards ? -1 : 1;
+            int count = DataGridView.Rows.Count;
 
-            return value.IndexOf(match, StringComparison.OrdinalIgnoreCase) > -1;
-        }
+            // Якщо таблиця порожня або колонка не існує, виходимо
+            if (count == 0 || !DataGridView.Columns.Contains(_columnName))
+                return null;
 
-
-        private DataGridViewCell FindCell(int startRowIndex, int endRowIndex, string columnName, string value, bool endToTop = false, bool returnNullIfNotFound = false)
-        {
-            int step = endToTop ? -1 : 1;
-
-            for (int rowIndex = startRowIndex; endToTop ? rowIndex > endRowIndex : rowIndex < endRowIndex; rowIndex += step)
+            // Цикл пошуку
+            for (int i = 0; i < count; i++)
             {
-                if (DataGridView.Columns.Contains(columnName))
+                int rowIndex = (startRowIndex + i * step + count) % count;
+
+                // Перевірка на вихід за межі, щоб уникнути помилок
+                if (rowIndex < 0 || rowIndex >= count) continue;
+
+                DataGridViewCell cell = DataGridView.Rows[rowIndex].Cells[_columnName];
+                if (cell.Value != null && IsMatch(cell.Value.ToString(), searchText))
                 {
-                    DataGridViewCell cell = DataGridView.Rows[rowIndex].Cells[columnName];
-                    if (cell.Value != null && IsMatch(cell.Value.ToString(), value))
-                    {
-                        return cell;
-                    }
+                    return cell;
                 }
             }
-
-            if (returnNullIfNotFound)
-            {
-                return null;
-            }
-
-            return FindCell(endToTop ? DataGridView.Rows.Count - 1 : 0, endToTop ? startRowIndex : endRowIndex, columnName, value, endToTop, true);
+            return null;
         }
-
 
         private void FindNext_Click(object sender, EventArgs e)
         {
-            if (DataGridView.Rows.Count == 0)
+            if (DataGridView.Rows.Count == 0 || string.IsNullOrWhiteSpace(InputSearch.Text))
             {
-                MessageBox.Show("No data found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Failedmessage();
                 return;
             }
 
-            var selectedCell = DataGridView.SelectedCells.Count > 0 ? DataGridView.SelectedCells[0] : DataGridView.Rows[0].Cells[ColumnName];
-
-            var cell = FindCell(selectedCell.RowIndex + 1, DataGridView.Rows.Count, ColumnName, InputSearch.Text);
+            // Починаємо пошук з наступного рядка після поточного
+            int startIndex = _currentRowIndex == -1 ? 0 : _currentRowIndex + 1;
+            var cell = FindCell(startIndex, InputSearch.Text);
 
             if (cell != null)
             {
-
-                if (object.ReferenceEquals(cell, DataGridView.SelectedCells[0]))
-                {
-                    MessageBox.Show("No more matches found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
                 SelectCell(cell.RowIndex, cell.ColumnIndex);
             }
             else
             {
                 Failedmessage();
             }
-
         }
-
 
         private void FindPrevious_Click(object sender, EventArgs e)
         {
-
-            if (DataGridView.Rows.Count == 0)
+            if (DataGridView.Rows.Count == 0 || string.IsNullOrWhiteSpace(InputSearch.Text))
             {
-                MessageBox.Show("No data found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Failedmessage();
                 return;
             }
 
-            var selectedCell = DataGridView.SelectedCells.Count > 0 ? DataGridView.SelectedCells[0] : DataGridView.Rows[0].Cells[ColumnName];
-
-            var cell = FindCell(selectedCell.RowIndex - 1, -1, ColumnName, InputSearch.Text, true);
+            // Починаємо пошук з попереднього рядка від поточного
+            int startIndex = _currentRowIndex == -1 ? DataGridView.Rows.Count - 1 : _currentRowIndex - 1;
+            var cell = FindCell(startIndex, InputSearch.Text, true);
 
             if (cell != null)
             {
-
-                if (object.ReferenceEquals(cell, DataGridView.SelectedCells[0]))
-                {
-                    MessageBox.Show("No more matches found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
                 SelectCell(cell.RowIndex, cell.ColumnIndex);
             }
             else
@@ -138,7 +115,6 @@ namespace UE4LocalizationsTool.Controls
                 Failedmessage();
             }
         }
-
 
         private void Failedmessage()
         {
@@ -152,21 +128,18 @@ namespace UE4LocalizationsTool.Controls
 
         private void SelectCell(int rowIndex, int colIndex)
         {
-            DataGridView.ClearSelection();
-            DataGridView.FirstDisplayedScrollingRowIndex = rowIndex;
-            DataGridView.Rows[rowIndex].Cells[colIndex].Selected = true;
+            if (DataGridView == null || rowIndex < 0 || colIndex < 0 || rowIndex >= DataGridView.Rows.Count || colIndex >= DataGridView.Columns.Count)
+                return;
 
-            CurrentRowIndex = rowIndex;
-            CurrentColumnIndex = colIndex;
+            DataGridView.ClearSelection();
+            DataGridView.Rows[rowIndex].Selected = true;
+            DataGridView.FirstDisplayedScrollingRowIndex = rowIndex;
+            _currentRowIndex = rowIndex;
+            _currentColumnIndex = colIndex;
         }
 
         private void InputSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!InputSearch.Focused)
-            {
-                InputSearch.Focus();
-            }
-
             if (e.KeyCode == Keys.Enter)
             {
                 FindNext_Click(sender, e);
@@ -175,14 +148,13 @@ namespace UE4LocalizationsTool.Controls
 
         public new void Show()
         {
-            if (DataGridView.CurrentCell != null)
-            {
-                InputSearch.Text = DataGridView.CurrentCell.Value.ToString();
-            }
-            InputSearch.Focus();
-
-            label2.Text = string.Empty;
             base.Show();
+            InputSearch.Focus();
+            if (DataGridView?.CurrentCell != null)
+            {
+                InputSearch.Text = DataGridView.CurrentCell.Value?.ToString();
+            }
+            label2.Text = string.Empty;
         }
 
         public void ShowReplacePanel()
@@ -192,95 +164,93 @@ namespace UE4LocalizationsTool.Controls
             txtReplace.Focus();
         }
 
+        // Оптимізований метод CountTotalMatches
+        // Тепер перевіряє тільки одну колонку, що значно швидше
         public int CountTotalMatches()
         {
-            int totalMatches = 0;
-
-            for (int rowIndex = 0; rowIndex < DataGridView.Rows.Count; rowIndex++)
+            if (string.IsNullOrWhiteSpace(InputSearch.Text) || DataGridView.Rows.Count == 0 || !DataGridView.Columns.Contains(_columnName))
             {
-                for (int colIndex = 0; colIndex < DataGridView.Columns.Count; colIndex++)
-                {
-                    if (rowIndex >= 0 && rowIndex < DataGridView.Rows.Count && colIndex >= 0 && colIndex < DataGridView.Columns.Count)
-                    {
-                        DataGridViewCell cell = DataGridView.Rows[rowIndex].Cells[colIndex];
-                        if (cell.Value != null && IsMatch(cell.Value.ToString()))
-                        {
-                            totalMatches++;
-                        }
-                    }
-                }
+                return 0;
             }
 
+            int totalMatches = 0;
+            string searchText = InputSearch.Text;
+            foreach (DataGridViewRow row in DataGridView.Rows)
+            {
+                if (row.Cells[_columnName].Value != null && IsMatch(row.Cells[_columnName].Value.ToString(), searchText))
+                {
+                    totalMatches++;
+                }
+            }
             return totalMatches;
         }
-
-        string ButtonText;
-        bool IsFindAll = false;
 
         private void FindAll_Click(object sender, EventArgs e)
         {
             Replacepanel.Visible = false;
 
-            if (DataGridView.Rows.Count == 0)
+            if (DataGridView.Rows.Count == 0 || string.IsNullOrWhiteSpace(InputSearch.Text))
             {
-                MessageBox.Show("No data found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Failedmessage();
                 return;
             }
 
             listView1.Items.Clear();
+            string searchText = InputSearch.Text;
 
-            foreach (DataGridViewRow row in DataGridView.Rows)
+            // Оптимізований цикл
+            if (DataGridView.Columns.Contains(_columnName))
             {
-                if (DataGridView.Columns.Contains(ColumnName))
+                foreach (DataGridViewRow row in DataGridView.Rows)
                 {
-                    if (row.Cells[ColumnName].Value != null && IsMatch(row.Cells[ColumnName].Value.ToString()))
+                    if (row.Cells[_columnName].Value != null && IsMatch(row.Cells[_columnName].Value.ToString(), searchText))
                     {
-                        ListViewItem item = new ListViewItem();
-                        item.Text = (row.Index + 1).ToString();
-                        item.SubItems.Add(row.Cells[ColumnName].Value.ToString());
+                        var item = new ListViewItem((row.Index + 1).ToString());
+                        item.SubItems.Add(row.Cells[_columnName].Value.ToString());
                         item.Tag = row;
                         listView1.Items.Add(item);
                     }
                 }
             }
+
             listView1.Visible = true;
             label2.Text = $"Total matches: {listView1.Items.Count}";
-
         }
-
 
         private void Replace_Click(object sender, EventArgs e)
         {
-
-            void ReplaceCell(DataGridViewCell Cell)
+            if (string.IsNullOrWhiteSpace(InputSearch.Text) || string.IsNullOrWhiteSpace(txtReplace.Text))
             {
-
-
-                DataGridView.SetValue(Cell, Regex.Replace(Cell.Value.ToString(), InputSearch.Text, txtReplace.Text, RegexOptions.IgnoreCase));
-
-            }
-
-            var selectedCell = DataGridView.SelectedCells.Count > 0 ? DataGridView.SelectedCells[0] : DataGridView.Rows[0].Cells[ColumnName];
-
-
-
-            if (IsMatch(selectedCell.Value.ToString()))
-            {
-                ReplaceCell(selectedCell);
+                MessageBox.Show("Search or replace text cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            var cell = FindCell(selectedCell.RowIndex + 1, DataGridView.Rows.Count, ColumnName, InputSearch.Text);
+            var selectedCell = DataGridView.SelectedCells.Count > 0 ? DataGridView.SelectedCells[0] : null;
 
-            if (cell != null)
+            if (selectedCell != null && IsMatch(selectedCell.Value?.ToString(), InputSearch.Text))
             {
-                SelectCell(cell.RowIndex, cell.ColumnIndex);
-                ReplaceCell(cell);
+                ReplaceCell(selectedCell);
             }
             else
             {
-                Failedmessage();
+                var cell = FindCell(_currentRowIndex, InputSearch.Text);
+                if (cell != null)
+                {
+                    SelectCell(cell.RowIndex, cell.ColumnIndex);
+                    ReplaceCell(cell);
+                }
+                else
+                {
+                    Failedmessage();
+                }
             }
+        }
+
+        // Винесено в окремий приватний метод для чистоти коду
+        private void ReplaceCell(DataGridViewCell cell)
+        {
+            if (cell?.Value == null) return;
+            DataGridView.SetValue(cell, Regex.Replace(cell.Value.ToString(), InputSearch.Text, txtReplace.Text, RegexOptions.IgnoreCase));
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -292,8 +262,7 @@ namespace UE4LocalizationsTool.Controls
         {
             if (this.listView1.SelectedItems.Count == 0)
                 return;
-            var cell = (listView1.SelectedItems[0].Tag as DataGridViewRow).Cells[ColumnName];
-
+            var cell = (listView1.SelectedItems[0].Tag as DataGridViewRow).Cells[_columnName];
             SelectCell(cell.RowIndex, cell.ColumnIndex);
         }
 
@@ -305,20 +274,36 @@ namespace UE4LocalizationsTool.Controls
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(InputSearch.Text) || string.IsNullOrWhiteSpace(txtReplace.Text))
+            {
+                MessageBox.Show("Search or replace text cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             int totalMatches = 0;
-            foreach (DataGridViewRow row in DataGridView.Rows)
+            string searchText = InputSearch.Text;
+            string replaceText = txtReplace.Text;
+
+            // Оптимізація для швидкого оновлення UI
+            DataGridView.SuspendLayout();
+            try
             {
-                if (DataGridView.Columns.Contains(ColumnName))
+                foreach (DataGridViewRow row in DataGridView.Rows)
                 {
-                    if (row.Cells[ColumnName].Value != null && IsMatch(row.Cells[ColumnName].Value.ToString()))
+                    if (DataGridView.Columns.Contains(_columnName))
                     {
-                        DataGridView.SetValue(row.Cells[ColumnName], Regex.Replace(row.Cells[ColumnName].Value.ToString(), InputSearch.Text, txtReplace.Text, RegexOptions.IgnoreCase));
-                        totalMatches++;
+                        if (row.Cells[_columnName].Value != null && IsMatch(row.Cells[_columnName].Value.ToString(), searchText))
+                        {
+                            DataGridView.SetValue(row.Cells[_columnName], Regex.Replace(row.Cells[_columnName].Value.ToString(), searchText, replaceText, RegexOptions.IgnoreCase));
+                            totalMatches++;
+                        }
                     }
                 }
             }
-
+            finally
+            {
+                DataGridView.ResumeLayout();
+            }
 
             MessageBox.Show($"Total matches replaced: {totalMatches}", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

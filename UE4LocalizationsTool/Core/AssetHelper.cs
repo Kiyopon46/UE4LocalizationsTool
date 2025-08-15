@@ -8,7 +8,6 @@ namespace AssetParser
 {
     public static class AssetHelper
     {
-
         public static string GetPropertyName(this IUasset SourceFile, int Index)
         {
             if (SourceFile.NAMES_DIRECTORY.Count > Index && Index > 0)
@@ -24,7 +23,6 @@ namespace AssetParser
             {
                 return GetPropertyName(SourceFile, Index);
             }
-
 
             if (Index > 0)
             {
@@ -61,8 +59,6 @@ namespace AssetParser
                     Stringvalue = memoryList.GetStringValue(StringLength);
                 }
             }
-
-
             return ReplaceBreaklines(Stringvalue).TrimEnd('\0');
         }
 
@@ -86,7 +82,7 @@ namespace AssetParser
 
             if (IsUtf16(Data[0]))
             {
-                if (memoryList.GetByteValue(false) == 0) //because "GetRequiredUtf16Padding" not work right :/
+                if (memoryList.GetByteValue(false) == 0)
                 {
                     memoryList.Skip(1);
                 }
@@ -96,7 +92,6 @@ namespace AssetParser
             {
                 Stringvalue = memoryList.GetStringValue(len);
             }
-
 
             return ReplaceBreaklines(Stringvalue).TrimEnd('\0');
         }
@@ -118,8 +113,6 @@ namespace AssetParser
             {
                 Stringvalue = memoryList.GetStringValue(len);
             }
-
-
             return ReplaceBreaklines(Stringvalue).TrimEnd('\0');
         }
 
@@ -133,19 +126,16 @@ namespace AssetParser
             memoryList.SetStringValueN(ReplaceBreaklines(str, true), SavePosition, SeekAndRead, encoding);
         }
 
-        public static void SetStringUE(this MemoryList memoryList, string StringValue, bool UseUnicode = false,bool IgnoreNull=true)
+        public static void SetStringUE(this MemoryList memoryList, string StringValue, bool UseUnicode = false, bool IgnoreNull = true)
         {
-
             StringValue = ReplaceBreaklines(StringValue, true);
+            StringValue += '\0';
 
-            if (string.IsNullOrEmpty(StringValue)&&IgnoreNull)
+            if (string.IsNullOrEmpty(StringValue) && IgnoreNull)
             {
                 memoryList.InsertIntValue(0);
                 return;
             }
-
-
-            StringValue += '\0';
 
             Encoding encoding = Encoding.Unicode;
             if (IsASCII(StringValue) && !UseUnicode)
@@ -166,16 +156,12 @@ namespace AssetParser
                 memoryList.InsertBytes(TextBytes);
             }
         }
-        
+
         public static string GetStringUE(this MemoryList memoryList, int Lenght, bool SavePosition = true, int SeekAndRead = -1, Encoding encoding = null)
         {
             string Stringvalue = ReplaceBreaklines(memoryList.GetStringValue(Lenght, SavePosition, SeekAndRead, encoding));
             return Stringvalue.TrimEnd('\0');
         }
-
-
-
-
 
         public static int ReplaceStringUE_Func(this MemoryList memoryList, string StringValue)
         {
@@ -193,7 +179,6 @@ namespace AssetParser
                 StringLength = memoryList.DeleteStringN(-1, Encoding.Unicode);
             }
             memoryList.Skip(-1);
-
 
             Encoding encoding = Encoding.Unicode;
             if (IsASCII(StringValue))
@@ -213,8 +198,6 @@ namespace AssetParser
             }
             return StringLength;
         }
-
-
 
         public static bool IsASCII(string StringValue)
         {
@@ -244,48 +227,33 @@ namespace AssetParser
 
         public static string ReplaceBreaklines(string StringValue, bool Back = false)
         {
+            if (string.IsNullOrEmpty(StringValue))
+            {
+                return StringValue;
+            }
             if (!Back)
             {
-                StringValue = StringValue.Replace("\r\n", "<cf>");
-                StringValue = StringValue.Replace("\r", "<cr>");
-                StringValue = StringValue.Replace("\n", "<lf>");
+                return StringValue.Replace("\r\n", "<cf>").Replace("\r", "<cr>").Replace("\n", "<lf>");
             }
             else
             {
-                StringValue = StringValue.Replace("<cf>", "\r\n");
-                StringValue = StringValue.Replace("<cr>", "\r");
-                StringValue = StringValue.Replace("<lf>", "\n");
+                return StringValue.Replace("<cf>", "\r\n").Replace("<cr>", "\r").Replace("<lf>", "\n");
             }
-
-            return StringValue;
         }
 
         public static void ReplaceStringUE(this MemoryList memoryList, string StringValue)
         {
-
+            int oldPosition = memoryList.GetPosition();
+            memoryList.DeleteStringUE();
+            memoryList.Seek(oldPosition);
 
             StringValue = ReplaceBreaklines(StringValue, true);
 
-            //To save time
-            int ThisPosition = memoryList.GetPosition();
-            string TempString = memoryList.GetStringUE();
-            if (StringValue == TempString)
+            // Add null terminator
+            if (!string.IsNullOrEmpty(StringValue))
             {
-                return;
+                StringValue += '\0';
             }
-
-            memoryList.Seek(ThisPosition);
-            memoryList.DeleteStringUE();
-
-
-            if (string.IsNullOrEmpty(StringValue))
-            {
-                memoryList.InsertIntValue(0);
-                return;
-            }
-
-
-            StringValue += '\0';
 
             Encoding encoding = Encoding.Unicode;
             if (IsASCII(StringValue))
@@ -306,7 +274,6 @@ namespace AssetParser
                 memoryList.InsertBytes(TextBytes);
             }
         }
-
     }
 
 
@@ -316,8 +283,9 @@ namespace AssetParser
         {
             if (!Modify)
             {
-                uexp.Strings.Add(new List<string>() { PropertyName, memoryList.GetStringUE() });
-                ConsoleMode.Print(uexp.Strings[uexp.Strings.Count - 1][1], ConsoleColor.Magenta);
+                string readValue = memoryList.GetStringUE();
+                uexp.Strings.Add(new List<string>() { PropertyName, readValue });
+                ConsoleMode.Print(readValue, ConsoleColor.Magenta);
             }
             else
             {
@@ -335,7 +303,10 @@ namespace AssetParser
             memoryList.Skip(4);
             if (!Modify)
             {
-                uexp.Strings.Add(new List<string>() { PropertyName, uexp.UassetData.GetPropertyName(NameIndex), !uexp.UassetData.IOFile ? "be careful with this value." : "Can't edit this value.", !uexp.UassetData.IOFile ? "#FFBFB2" : "#FF0000", "#000000" });
+                string propName = uexp.UassetData.GetPropertyName(NameIndex);
+                string cautionText = !uexp.UassetData.IOFile ? "be careful with this value." : "Can't edit this value.";
+                string colorHex = !uexp.UassetData.IOFile ? "#FFBFB2" : "#FF0000";
+                uexp.Strings.Add(new List<string>() { PropertyName, propName, cautionText, colorHex, "#000000" });
             }
             else
             {
@@ -350,7 +321,7 @@ namespace AssetParser
     {
         public TextHistory(MemoryList memoryList, Uexp uexp, string PropertyName, bool Modify = false)
         {
-            memoryList.Skip(4); //unkown
+            memoryList.Skip(4); // unkown
             TextHistoryType texthistorytype = (TextHistoryType)memoryList.GetUByteValue();
             switch (texthistorytype)
             {
@@ -362,16 +333,21 @@ namespace AssetParser
                     break;
 
                 case TextHistoryType.Base:
+                    string name1 = uexp.Strings[uexp.Strings.Count][1];
+                    string name2 = uexp.Strings[uexp.Strings.Count][1];
+                    string name3 = uexp.Strings[uexp.Strings.Count][1];
+
                     new ReadStringProperty(memoryList, uexp, PropertyName + "_1", Modify);
                     new ReadStringProperty(memoryList, uexp, PropertyName + "_2", Modify);
                     new ReadStringProperty(memoryList, uexp, PropertyName + "_3", Modify);
 
                     if (uexp.DumpNameSpaces)
                     {
-                        uexp.StringNodes.Add(new StringNode() { 
-                        NameSpace = uexp.Strings[uexp.Strings.Count - 3][1],
-                        Key= uexp.Strings[uexp.Strings.Count - 2][1],
-                        Value= uexp.Strings[uexp.Strings.Count - 1][1]
+                        uexp.StringNodes.Add(new StringNode()
+                        {
+                            NameSpace = uexp.Strings[uexp.Strings.Count - 3][1],
+                            Key = uexp.Strings[uexp.Strings.Count - 2][1],
+                            Value = uexp.Strings[uexp.Strings.Count - 1][1]
                         });
                     }
 
@@ -442,7 +418,4 @@ namespace AssetParser
             }
         }
     }
-
-
-
 }

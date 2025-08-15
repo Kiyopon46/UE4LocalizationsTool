@@ -472,7 +472,7 @@ namespace UE4LocalizationsTool.Core.locres
         }
         public uint Optimized_CityHash64_UTF16Hash(string value)
         {
-            var Hash = CityHash.Init.CityHash64(Encoding.Unicode.GetBytes(value));
+            var Hash = CityHash.CityHash64(Encoding.Unicode.GetBytes(value));
             return (uint)Hash + ((uint)(Hash >> 32) * 23);
         }
 

@@ -1,41 +1,40 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace UE4LocalizationsTool
 {
     internal static class Program
     {
-
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool AttachConsole(int dwProcessId);
         private const int ATTACH_PARENT_PROCESS = -1;
 
-
         public static string commandlines =
-         $"{AppDomain.CurrentDomain.FriendlyName}  export     <(Locres/Uasset/Umap) FilePath>  <Options>\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName}  import     <(txt) FilePath>  <Options>\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName} -import     <(txt) FilePath>  <Options>\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName}  exportall  <Folder> <TxtFile> <Options>\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName}  importall  <Folder> <TxtFile>  <Options>\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName} -importall  <Folder> <TxtFile>  <Options>\n\n" +
-          "- for import without rename file be careful with this command.\n\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName}  export    <(Locres/Uasset/Umap) FilePath>  <Options>\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName}  import    <(txt) FilePath>  <Options>\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName} -import    <(txt) FilePath>  <Options>\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName}  exportall <Folder> <TxtFile> <Options>\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName}  importall <Folder> <TxtFile>  <Options>\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName} -importall  <Folder> <TxtFile>  <Options>\n\n" +
+           "- for import without rename file be careful with this command.\n\n" +
 
-          "Options:\n" +
-          "To use last filter you applied before in GUI, add (-f \\ -filter) after command line\n" +
-          "filter will apply only in name table " +
-            "\n(Remember to apply the same filter when importing)\n\n" +
+           "Options:\n" +
+           "To use last filter you applied before in GUI, add (-f \\ -filter) after command line\n" +
+           "filter will apply only in name table " +
+           "\n(Remember to apply the same filter when importing)\n\n" +
 
-          "To export file without including the names use (-nn \\ -NoName)" +
-          "\n(Remember to use this command when importing)\n\n" +
+           "To export file without including the names use (-nn \\ -NoName)" +
+           "\n(Remember to use this command when importing)\n\n" +
 
-          "To use method 2 (-m2 \\ -method2)" +
-          "\n(Remember to use this command when importing)\n\n" +
+           "To use method 2 (-m2 \\ -method2)" +
+           "\n(Remember to use this command when importing)\n\n" +
 
-          "Examples:\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName} export Actions.uasset\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName} import Actions.uasset.txt\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName} exportall Actions text.txt\n" +
-         $"{AppDomain.CurrentDomain.FriendlyName} importall Actions text.txt\n";
+           "Examples:\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName} export Actions.uasset\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName} import Actions.uasset.txt\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName} exportall Actions text.txt\n" +
+           $"{AppDomain.CurrentDomain.FriendlyName} importall Actions text.txt\n";
 
         public static Args GetArgs(int Index, string[] args)
         {
@@ -57,7 +56,6 @@ namespace UE4LocalizationsTool
                     case "-method2":
                         args1 |= Args.method2;
                         break;
-                    
                     case "-c":
                     case "-csv":
                         args1 |= Args.CSV;
@@ -71,7 +69,6 @@ namespace UE4LocalizationsTool
             }
             return args1;
         }
-
 
         public static void CheckArges(int Index, string[] args)
         {
@@ -92,13 +89,15 @@ namespace UE4LocalizationsTool
             }
         }
 
-
-
         [STAThread]
-
         static void Main(string[] args)
         {
+            // The main entry point now calls an async wrapper method.
+            MainAsync(args).Wait();
+        }
 
+        static async Task MainAsync(string[] args)
+        {
             if (args.Length > 0)
             {
                 if (args.Length == 1 && (args[0].EndsWith(".uasset") || args[0].EndsWith(".umap") || args[0].EndsWith(".locres")))
@@ -107,15 +106,16 @@ namespace UE4LocalizationsTool
                     Application.SetCompatibleTextRenderingDefault(false);
                     var FrmMain = new FrmMain();
                     FrmMain.Show();
-                    FrmMain.LoadFile(args[0]);
+
+                    // Corrected: Await the async method call.
+                    await FrmMain.LoadFile(args[0]);
+
                     Application.Run(FrmMain);
                     return;
                 }
 
-
                 AttachConsole(ATTACH_PARENT_PROCESS);
                 Console.WriteLine("");
-                //  Console.SetCursorPosition(0, Console.CursorTop + 1);
 
                 if (args.Length < 2)
                 {
@@ -126,6 +126,7 @@ namespace UE4LocalizationsTool
                 }
                 try
                 {
+                    var commands = new Commands();
 
                     if (args[0].ToLower() == "importall" || args[0].ToLower() == "-importall" || args[0].ToLower() == "exportall")
                     {
@@ -135,19 +136,18 @@ namespace UE4LocalizationsTool
                         }
 
                         CheckArges(3, args);
-                        new Commands(args[0], args[1] + "*" + args[2], GetArgs(3, args));
+                        commands.RunAsync(args[0], args[1] + "*" + args[2], GetArgs(3, args)).Wait();
                     }
                     else
                     {
                         CheckArges(2, args);
-                        new Commands(args[0], args[1], GetArgs(2, args));
+                        commands.RunAsync(args[0], args[1], GetArgs(2, args)).Wait();
                     }
-
                 }
                 catch (Exception ex)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n"+ex.Message);
+                    Console.WriteLine("\n" + ex.Message);
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 return;
