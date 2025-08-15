@@ -44,18 +44,18 @@ namespace UELocalizationsTool.Forms
             );
 
             this.Asset = asset;
-            var items = gridView.CurrentCell.OwningRow.Cells["Name"].Value.ToString().Split(new string[] { "::" }, StringSplitOptions.None);
+            var items = gridView.CurrentCell.OwningRow.Cells["ID"].Value.ToString().Split(new string[] { "::" }, StringSplitOptions.None);
 
             if (items.Length == 2)
             {
                 NameSpace = items[0];
                 Key = items[1];
-                Value = gridView.CurrentCell.OwningRow.Cells["Text value"].Value.ToString();
+                Value = gridView.CurrentCell.OwningRow.Cells["Text"].Value.ToString();
             }
             else
             {
                 Key = items[0];
-                Value = gridView.CurrentCell.OwningRow.Cells["Text value"].Value.ToString();
+                Value = gridView.CurrentCell.OwningRow.Cells["Text"].Value.ToString();
             }
 
             var Hashs = gridView.CurrentCell.OwningRow.Cells["Hash Table"].Value as HashTable;
@@ -90,7 +90,7 @@ namespace UELocalizationsTool.Forms
             //bool rowExists = false;
             //foreach (DataRow row in dt.Rows)
             //{
-            //    if (string.Equals(row["Name"].ToString(), RowName, StringComparison.OrdinalIgnoreCase))
+            //    if (string.Equals(row["ID"].ToString(), RowName, StringComparison.OrdinalIgnoreCase))
             //    {
             //        rowExists = true;
             //        break;
@@ -118,8 +118,8 @@ namespace UELocalizationsTool.Forms
 
         public void EditRow(NDataGridView DGV)
         {
-            DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["Name"], GetName());
-            DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["Text value"], txtValue.Text);
+            DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["ID"], GetName());
+            DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["Text"], txtValue.Text);
             DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["Hash Table"], HashTable);
         }
 

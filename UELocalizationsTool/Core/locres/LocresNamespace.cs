@@ -484,8 +484,8 @@ namespace UELocalizationsTool.Core.locres
             dataGrid.Columns.Clear();
 
             var dataTable = new System.Data.DataTable();
-            dataTable.Columns.Add("Name", typeof(string));
-            dataTable.Columns.Add("Text value", typeof(string));
+            dataTable.Columns.Add("ID", typeof(string));
+            dataTable.Columns.Add("Text", typeof(string));
             dataTable.Columns.Add("Hash Table", typeof(HashTable));
 
             foreach (var names in this)
@@ -499,7 +499,7 @@ namespace UELocalizationsTool.Core.locres
             }
 
             dataGrid.DataSource = dataTable;
-            dataGrid.Columns["Text value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGrid.Columns["Text"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGrid.Columns["Hash Table"].Visible = false;
         }
 
@@ -510,7 +510,7 @@ namespace UELocalizationsTool.Core.locres
             {
                 //0-> NameSpace
                 //1-> Key
-                var items = row.Cells["Name"].Value.ToString().Split(new string[] { "::" }, StringSplitOptions.None);
+                var items = row.Cells["ID"].Value.ToString().Split(new string[] { "::" }, StringSplitOptions.None);
 
                 string NameSpaceStr = "";
                 string KeyStr = "";
@@ -530,7 +530,7 @@ namespace UELocalizationsTool.Core.locres
 
 
 
-                AddString(NameSpaceStr, KeyStr, row.Cells["Text value"].Value.ToString(), HashTable.NameHash, HashTable.KeyHash, HashTable.ValueHash);
+                AddString(NameSpaceStr, KeyStr, row.Cells["Text"].Value.ToString(), HashTable.NameHash, HashTable.KeyHash, HashTable.ValueHash);
             }
         }
 

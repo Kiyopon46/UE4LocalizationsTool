@@ -68,21 +68,21 @@ namespace UELocalizationsTool.Controls
             // 
             // FindPrevious
             // 
-            this.FindPrevious.Location = new System.Drawing.Point(311, 5);
+            this.FindPrevious.Location = new System.Drawing.Point(395, 5);
             this.FindPrevious.Name = "FindPrevious";
-            this.FindPrevious.Size = new System.Drawing.Size(92, 23);
+            this.FindPrevious.Size = new System.Drawing.Size(140, 23);
             this.FindPrevious.TabIndex = 4;
-            this.FindPrevious.Text = "Find Previous";
+            this.FindPrevious.Text = "Знайти попереднє";
             this.FindPrevious.UseVisualStyleBackColor = true;
             this.FindPrevious.Click += new System.EventHandler(this.FindPrevious_Click);
             // 
             // FindNext
             // 
-            this.FindNext.Location = new System.Drawing.Point(231, 5);
+            this.FindNext.Location = new System.Drawing.Point(280, 5);
             this.FindNext.Name = "FindNext";
-            this.FindNext.Size = new System.Drawing.Size(76, 23);
+            this.FindNext.Size = new System.Drawing.Size(100, 23);
             this.FindNext.TabIndex = 3;
-            this.FindNext.Text = "Find Next";
+            this.FindNext.Text = "Знайти далі";
             this.FindNext.UseVisualStyleBackColor = true;
             this.FindNext.Click += new System.EventHandler(this.FindNext_Click);
             // 
@@ -93,7 +93,7 @@ namespace UELocalizationsTool.Controls
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Find:";
+            this.label1.Text = "Пошук:";
             // 
             // panel1
             // 
@@ -112,11 +112,11 @@ namespace UELocalizationsTool.Controls
             // 
             // FindAll
             // 
-            this.FindAll.Location = new System.Drawing.Point(407, 5);
+            this.FindAll.Location = new System.Drawing.Point(550, 5);
             this.FindAll.Name = "FindAll";
-            this.FindAll.Size = new System.Drawing.Size(64, 23);
+            this.FindAll.Size = new System.Drawing.Size(90, 23);
             this.FindAll.TabIndex = 7;
-            this.FindAll.Text = "All";
+            this.FindAll.Text = "Знайти все";
             this.FindAll.UseVisualStyleBackColor = true;
             this.FindAll.Click += new System.EventHandler(this.FindAll_Click);
             // 
@@ -141,7 +141,7 @@ namespace UELocalizationsTool.Controls
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Replace:";
+            this.label3.Text = "Заміна:";
             // 
             // label4
             // 
@@ -158,11 +158,11 @@ namespace UELocalizationsTool.Controls
             // 
             // Replace
             // 
-            this.Replace.Location = new System.Drawing.Point(231, 5);
+            this.Replace.Location = new System.Drawing.Point(280, 5);
             this.Replace.Name = "Replace";
-            this.Replace.Size = new System.Drawing.Size(76, 23);
+            this.Replace.Size = new System.Drawing.Size(80, 23);
             this.Replace.TabIndex = 3;
-            this.Replace.Text = "Replace";
+            this.Replace.Text = "Замінити";
             this.Replace.UseVisualStyleBackColor = true;
             this.Replace.Click += new System.EventHandler(this.Replace_Click);
             // 
@@ -187,20 +187,20 @@ namespace UELocalizationsTool.Controls
             // 
             // RowIndex
             // 
-            this.RowIndex.Text = "Row Index";
+            this.RowIndex.Text = "Індекс рядка";
             this.RowIndex.Width = 100;
             // 
             // CellValue
             // 
-            this.CellValue.Text = "Value";
+            this.CellValue.Text = "Текст";
             this.CellValue.Width = 593;
             // 
             // txtReplace
             // 
             this.txtReplace.Location = new System.Drawing.Point(65, 7);
             this.txtReplace.Name = "txtReplace";
-            this.txtReplace.PlaceholderText = "Type your replace value here...";
-            this.txtReplace.Size = new System.Drawing.Size(162, 20);
+            this.txtReplace.PlaceholderText = "Введіть текст для заміни...";
+            this.txtReplace.Size = new System.Drawing.Size(200, 20);
             this.txtReplace.StopEnterKey = false;
             this.txtReplace.TabIndex = 0;
             // 
@@ -208,8 +208,8 @@ namespace UELocalizationsTool.Controls
             // 
             this.InputSearch.Location = new System.Drawing.Point(65, 7);
             this.InputSearch.Name = "InputSearch";
-            this.InputSearch.PlaceholderText = "Type your search here...";
-            this.InputSearch.Size = new System.Drawing.Size(162, 20);
+            this.InputSearch.PlaceholderText = "Введіть текст для пошуку...";
+            this.InputSearch.Size = new System.Drawing.Size(200, 20);
             this.InputSearch.StopEnterKey = false;
             this.InputSearch.TabIndex = 0;
             this.InputSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputSearch_KeyDown);
@@ -217,18 +217,18 @@ namespace UELocalizationsTool.Controls
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(478, 11);
+            this.label2.Location = new System.Drawing.Point(700, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.Size = new System.Drawing.Size(0, 15);
             this.label2.TabIndex = 8;
             // 
             // ReplaceAll
             // 
-            this.ReplaceAll.Location = new System.Drawing.Point(311, 5);
+            this.ReplaceAll.Location = new System.Drawing.Point(375, 5);
             this.ReplaceAll.Name = "ReplaceAll";
-            this.ReplaceAll.Size = new System.Drawing.Size(64, 23);
+            this.ReplaceAll.Size = new System.Drawing.Size(120, 23);
             this.ReplaceAll.TabIndex = 6;
-            this.ReplaceAll.Text = "All";
+            this.ReplaceAll.Text = "Замінити все";
             this.ReplaceAll.UseVisualStyleBackColor = true;
             this.ReplaceAll.Click += new System.EventHandler(this.ReplaceAll_Click);
             // 

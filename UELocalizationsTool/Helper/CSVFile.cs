@@ -54,7 +54,7 @@ namespace UELocalizationsTool.Helper
 
                         if (!string.IsNullOrWhiteSpace(newValue))
                         {
-                            var originalValue = dataGrid.Rows[i].Cells["Text value"].Value?.ToString();
+                            var originalValue = dataGrid.Rows[i].Cells["Text"].Value?.ToString();
                             bool shouldHighlight = originalValue != newValue;
 
                             updates.Add((i, newValue, shouldHighlight));
@@ -70,9 +70,9 @@ namespace UELocalizationsTool.Helper
                     {
                         if (update.shouldHighlight)
                         {
-                            dataGrid.Rows[update.rowIndex].Cells["Text value"].Style.BackColor = Color.Yellow;
+                            dataGrid.Rows[update.rowIndex].Cells["Text"].Style.BackColor = Color.Yellow;
                         }
-                        dataGrid.Rows[update.rowIndex].Cells["Text value"].Value = update.newValue;
+                        dataGrid.Rows[update.rowIndex].Cells["Text"].Value = update.newValue;
                     }
 
                     dataGrid.ResumeLayout();
@@ -88,7 +88,7 @@ namespace UELocalizationsTool.Helper
                 foreach (DataGridViewRow row in dataGrid.Rows)
                 {
                     if (row.IsNewRow) continue;
-                    var key = row.Cells["Name"].Value?.ToString();
+                    var key = row.Cells["ID"].Value?.ToString();
                     if (!string.IsNullOrEmpty(key))
                     {
                         dataGridRows[key] = row;
@@ -113,7 +113,7 @@ namespace UELocalizationsTool.Helper
                             if (!string.IsNullOrEmpty(key) && dataGridRows.ContainsKey(key))
                             {
                                 var rowToUpdate = dataGridRows[key];
-                                var originalValue = rowToUpdate.Cells["Text value"].Value?.ToString();
+                                var originalValue = rowToUpdate.Cells["Text"].Value?.ToString();
 
                                 if (!string.IsNullOrWhiteSpace(newValue))
                                 {
@@ -133,9 +133,9 @@ namespace UELocalizationsTool.Helper
                     {
                         if (update.shouldHighlight)
                         {
-                            update.row.Cells["Text value"].Style.BackColor = Color.Yellow;
+                            update.row.Cells["Text"].Style.BackColor = Color.Yellow;
                         }
-                        update.row.Cells["Text value"].Value = update.newValue;
+                        update.row.Cells["Text"].Value = update.newValue;
                     }
 
                     dataGrid.ResumeLayout();
@@ -153,9 +153,9 @@ namespace UELocalizationsTool.Helper
                 var existingNames = new HashSet<string>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    if (row["Name"] != DBNull.Value)
+                    if (row["ID"] != DBNull.Value)
                     {
-                        existingNames.Add(row["Name"].ToString());
+                        existingNames.Add(row["ID"].ToString());
                     }
                 }
 
@@ -207,8 +207,8 @@ namespace UELocalizationsTool.Helper
                     foreach (DataGridViewRow row in dataGrid.Rows)
                     {
                         if (row.IsNewRow) continue;
-                        csv.WriteField(row.Cells["Name"].Value?.ToString() ?? "");
-                        csv.WriteField(row.Cells["Text value"].Value?.ToString() ?? "");
+                        csv.WriteField(row.Cells["ID"].Value?.ToString() ?? "");
+                        csv.WriteField(row.Cells["Text"].Value?.ToString() ?? "");
                         csv.WriteField("");
                         csv.NextRecord();
                     }

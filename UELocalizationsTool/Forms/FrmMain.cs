@@ -49,7 +49,7 @@ namespace UELocalizationsTool
 
             try
             {
-                StatusMessage("loading File...", "loading File, please wait.");
+                StatusMessage("Відкриття файлу...", "Відкриття файлу, зачекайте.");
 
                 if (filePath.ToLower().EndsWith(".locres"))
                 {
@@ -65,7 +65,7 @@ namespace UELocalizationsTool
                     CreateBackupList();
                     if (!Asset.IsGood)
                     {
-                        StateLabel.Text = "Warning: This file is't fully parsed and may not contain some text.";
+                        StateLabel.Text = "Увага: файл прочитано не повністю, деякі тексти можуть бути відсутні.";
                     }
                 }
 
@@ -145,10 +145,10 @@ namespace UELocalizationsTool
                         {
                             if (exportType == ExportType.WithNames)
                             {
-                                stream.WriteLine($"{row.Cells["Name"].Value}={row.Cells["Text value"].Value}");
+                                stream.WriteLine($"{row.Cells["ID"].Value}={row.Cells["Text"].Value}");
                                 continue;
                             }
-                            stream.WriteLine(row.Cells["Text value"].Value.ToString());
+                            stream.WriteLine(row.Cells["Text"].Value.ToString());
                         }
 
                     }
@@ -216,7 +216,7 @@ namespace UELocalizationsTool
                                 ? line.Split(new[] { '=' }, 2).Skip(1).FirstOrDefault() ?? string.Empty
                                 : line;
 
-                            dataGridView1.SetValue(dataGridView1.Rows[n].Cells["Text value"], valueToImport);
+                            dataGridView1.SetValue(dataGridView1.Rows[n].Cells["Text"], valueToImport);
                         }
 
                         MessageBox.Show("Successful import!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -251,13 +251,13 @@ namespace UELocalizationsTool
             {
                 try
                 {
-                    StatusMessage("Saving File...", "Saving File ,please wait.");
+                    StatusMessage("Збереження файлу...", "Збереження файлу, зачекайте.");
                     await Task.Run(() =>
                     {
                         Asset.LoadFromDataGridView(dataGridView1);
                         Asset.SaveFile(sfd.FileName);
                     });
-                    MessageBox.Show("Saved Successful.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Успішно збережено.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -331,7 +331,7 @@ namespace UELocalizationsTool
 
         private void UpdateCounter()
         {
-            DataCount.Text = "Strings count: " + dataGridView1.Rows.Count;
+            DataCount.Text = "К-сть рядків: " + dataGridView1.Rows.Count;
         }
 
         private void NoNamesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -714,9 +714,9 @@ namespace UELocalizationsTool
 
                     foreach (DataGridViewRow gridRow in dataGridView1.Rows)
                     {
-                        if (gridRow.Cells["Name"].Value != null)
+                        if (gridRow.Cells["ID"].Value != null)
                         {
-                            string gridName = gridRow.Cells["Name"].Value.ToString();
+                            string gridName = gridRow.Cells["ID"].Value.ToString();
                             if (sourceHashes.ContainsKey(gridName))
                             {
                                 gridRow.Cells["Hash Table"].Value = sourceHashes[gridName];
@@ -752,16 +752,16 @@ namespace UELocalizationsTool
                     {
                         foreach (System.Data.DataRow row in sourceDataTable.Rows)
                         {
-                            if (row["Name"] != System.DBNull.Value)
+                            if (row["ID"] != System.DBNull.Value)
                             {
-                                existingNames.Add(row["Name"].ToString());
+                                existingNames.Add(row["ID"].ToString());
                             }
                         }
                     }
 
                     System.Data.DataTable newRowsTable = new System.Data.DataTable();
-                    newRowsTable.Columns.Add("Name", typeof(string));
-                    newRowsTable.Columns.Add("Text value", typeof(string));
+                    newRowsTable.Columns.Add("ID", typeof(string));
+                    newRowsTable.Columns.Add("Text", typeof(string));
                     newRowsTable.Columns.Add("Hash Table", typeof(HashTable));
 
                     foreach (string fileName in ofd.FileNames)

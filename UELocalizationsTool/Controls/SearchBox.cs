@@ -7,7 +7,7 @@ namespace UELocalizationsTool.Controls
 {
     public partial class SearchBox : UserControl
     {
-        private const string DefaultColumnName = "Text value";
+        private const string DefaultColumnName = "Text";
         private string _columnName = DefaultColumnName;
 
         [Browsable(true)]
@@ -214,7 +214,7 @@ namespace UELocalizationsTool.Controls
             }
 
             listView1.Visible = true;
-            label2.Text = $"Total matches: {listView1.Items.Count}";
+            label2.Text = $"Всього збігів: {listView1.Items.Count}";
         }
 
         private void Replace_Click(object sender, EventArgs e)

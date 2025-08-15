@@ -244,9 +244,9 @@ namespace AssetParser
             dataGrid.Columns.Clear();
 
             var dataTable = new System.Data.DataTable();
-            dataTable.Columns.Add("Name");
-            dataTable.Columns["Name"].ReadOnly = true;
-            dataTable.Columns.Add("Text value");
+            dataTable.Columns.Add("ID");
+            dataTable.Columns["ID"].ReadOnly = true;
+            dataTable.Columns.Add("Text");
             dataTable.Columns.Add("index", typeof(int));
 
             int i = 0;
@@ -257,7 +257,7 @@ namespace AssetParser
 
             dataGrid.DataSource = dataTable;
 
-            dataGrid.Columns["Text value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGrid.Columns["Text"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGrid.Columns["index"].Visible = false;
 
 
@@ -283,7 +283,7 @@ namespace AssetParser
                 if (!isFound) return;
 
 
-                if (dataGridView.Columns[e.ColumnIndex].Name == "Name")
+                if (dataGridView.Columns[e.ColumnIndex].Name == "ID")
                 {
                     var rowIndexCell = dataGridView.Rows[e.RowIndex].Cells["index"];
 
@@ -321,7 +321,7 @@ namespace AssetParser
                 }
                 if (!isFound) return;
 
-                if (dataGridView.Columns[e.ColumnIndex].Name == "Name")
+                if (dataGridView.Columns[e.ColumnIndex].Name == "ID")
                 {
                     var rowIndexCell = dataGridView.Rows[e.RowIndex].Cells["index"];
                     if (rowIndexCell != null && rowIndexCell.Value != null)
@@ -352,9 +352,9 @@ namespace AssetParser
             foreach (DataGridViewRow row in dataGrid.Rows)
             {
                 if (row.Cells["index"].Value is int itemIndex &&
-                    row.Cells["Text value"].Value != null)
+                    row.Cells["Text"].Value != null)
                 {
-                    Strings[itemIndex][1] = row.Cells["Text value"].Value.ToString();
+                    Strings[itemIndex][1] = row.Cells["Text"].Value.ToString();
                 }
             }
         }

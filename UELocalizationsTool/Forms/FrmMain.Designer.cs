@@ -64,13 +64,11 @@ namespace UELocalizationsTool
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rightToLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.Method2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.UseFixedSize = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,6 +83,7 @@ namespace UELocalizationsTool
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.transferTextHashFromOriginalLocresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StateLabel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridView1 = new NDataGridView();
             this.TextName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TextValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,6 +108,7 @@ namespace UELocalizationsTool
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
+            this.ToolToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.DataCount,
             this.locresOprationsToolStripMenuItem,
@@ -116,7 +116,7 @@ namespace UELocalizationsTool
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(919, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(982, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,33 +126,33 @@ namespace UELocalizationsTool
             this.OpenFile,
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.fileToolStripMenuItem.Text = "Файл";
             // 
             // OpenFile
             // 
             this.OpenFile.Name = "OpenFile";
             this.OpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.OpenFile.Size = new System.Drawing.Size(181, 26);
-            this.OpenFile.Text = "Open";
+            this.OpenFile.Size = new System.Drawing.Size(233, 26);
+            this.OpenFile.Text = "Відкрити";
             this.OpenFile.Click += new System.EventHandler(this.OpenFile_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Enabled = false;
-            this.saveToolStripMenuItem.Name = "SaveToolStripMenuItem";
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            this.saveToolStripMenuItem.Text = "Зберегти як...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveFile);
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            this.exitToolStripMenuItem.Text = "Вихід";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
@@ -172,17 +172,10 @@ namespace UELocalizationsTool
             this.undoToolStripMenuItem,
             this.redoToolStripMenuItem,
             this.copyToolStripMenuItem1,
-            this.pasteToolStripMenuItem1,
-            this.toolStripSeparator3,
-            this.fontToolStripMenuItem,
-            this.rightToLeftToolStripMenuItem,
-            this.darkModeToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.Method2,
-            this.UseFixedSize});
+            this.pasteToolStripMenuItem1});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
-            this.editToolStripMenuItem.Text = "Tool";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(110, 24);
+            this.editToolStripMenuItem.Text = "Редагування";
             // 
             // exportAllTextToolStripMenuItem
             // 
@@ -192,16 +185,16 @@ namespace UELocalizationsTool
             this.csvFileToolStripMenuItem});
             this.exportAllTextToolStripMenuItem.Enabled = false;
             this.exportAllTextToolStripMenuItem.Name = "exportAllTextToolStripMenuItem";
-            this.exportAllTextToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.exportAllTextToolStripMenuItem.Text = "Export all text";
+            this.exportAllTextToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.exportAllTextToolStripMenuItem.Text = "Експорт";
             // 
             // noNamesToolStripMenuItem
             // 
             this.noNamesToolStripMenuItem.Enabled = false;
             this.noNamesToolStripMenuItem.Name = "noNamesToolStripMenuItem";
             this.noNamesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.noNamesToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
-            this.noNamesToolStripMenuItem.Text = "No names";
+            this.noNamesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.noNamesToolStripMenuItem.Text = "TXT (без ID)";
             this.noNamesToolStripMenuItem.Click += new System.EventHandler(this.NoNamesToolStripMenuItem_Click);
             // 
             // withNamesToolStripMenuItem
@@ -209,15 +202,15 @@ namespace UELocalizationsTool
             this.withNamesToolStripMenuItem.Enabled = false;
             this.withNamesToolStripMenuItem.Name = "withNamesToolStripMenuItem";
             this.withNamesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.withNamesToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
-            this.withNamesToolStripMenuItem.Text = "With names";
+            this.withNamesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.withNamesToolStripMenuItem.Text = "TXT";
             this.withNamesToolStripMenuItem.Click += new System.EventHandler(this.WithNamesToolStripMenuItem_Click);
             // 
             // csvFileToolStripMenuItem
             // 
             this.csvFileToolStripMenuItem.Name = "csvFileToolStripMenuItem";
-            this.csvFileToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
-            this.csvFileToolStripMenuItem.Text = "CSV file";
+            this.csvFileToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.csvFileToolStripMenuItem.Text = "CSV";
             this.csvFileToolStripMenuItem.Click += new System.EventHandler(this.CsvFileToolStripMenuItem_Click);
             // 
             // importAllTextToolStripMenuItem
@@ -225,61 +218,61 @@ namespace UELocalizationsTool
             this.importAllTextToolStripMenuItem.Enabled = false;
             this.importAllTextToolStripMenuItem.Name = "importAllTextToolStripMenuItem";
             this.importAllTextToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.importAllTextToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.importAllTextToolStripMenuItem.Text = "Import all text (by indexes)";
+            this.importAllTextToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.importAllTextToolStripMenuItem.Text = "Імпорт за індексами рядків";
             this.importAllTextToolStripMenuItem.Click += new System.EventHandler(this.ImportAllTextToolStripMenuItem_Click);
             // 
             // importAllTextByKeystoolStripMenuItem
             // 
             this.importAllTextByKeystoolStripMenuItem.Enabled = false;
             this.importAllTextByKeystoolStripMenuItem.Name = "importAllTextByKeystoolStripMenuItem";
-            this.importAllTextByKeystoolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.importAllTextByKeystoolStripMenuItem.Text = "Import all text (by keys)";
+            this.importAllTextByKeystoolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.importAllTextByKeystoolStripMenuItem.Text = "Імпорт за ID (повільно)";
             this.importAllTextByKeystoolStripMenuItem.Click += new System.EventHandler(this.ImportAllTextByKeystoolStripMenuItem_Click);
             // 
             // importNewLinesFromCSVtoolStripMenuItem
             // 
             this.importNewLinesFromCSVtoolStripMenuItem.Enabled = false;
             this.importNewLinesFromCSVtoolStripMenuItem.Name = "importNewLinesFromCSVtoolStripMenuItem";
-            this.importNewLinesFromCSVtoolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.importNewLinesFromCSVtoolStripMenuItem.Text = "Import new lines from CSV";
+            this.importNewLinesFromCSVtoolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.importNewLinesFromCSVtoolStripMenuItem.Text = "Імпорт нових рядків з CSV";
             this.importNewLinesFromCSVtoolStripMenuItem.Click += new System.EventHandler(this.ImportNewLinesFromCSVtoolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(313, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(325, 6);
             // 
             // find
             // 
-            this.find.Name = "Find";
+            this.find.Name = "find";
             this.find.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.find.Size = new System.Drawing.Size(316, 26);
-            this.find.Text = "Find";
+            this.find.Size = new System.Drawing.Size(328, 26);
+            this.find.Text = "Знайти";
             this.find.Click += new System.EventHandler(this.Find_Click);
             // 
             // replaceToolStripMenuItem
             // 
             this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
             this.replaceToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.replaceToolStripMenuItem.Text = "Replace";
+            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.replaceToolStripMenuItem.Text = "Замінити";
             this.replaceToolStripMenuItem.Click += new System.EventHandler(this.ReplaceToolStripMenuItem_Click);
             // 
             // filterToolStripMenuItem
             // 
             this.filterToolStripMenuItem.Enabled = false;
             this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
-            this.filterToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.filterToolStripMenuItem.Text = "Filter";
+            this.filterToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.filterToolStripMenuItem.Text = "Фільтрувати";
             this.filterToolStripMenuItem.Click += new System.EventHandler(this.FilterToolStripMenuItem_Click);
             // 
             // clearFilterToolStripMenuItem
             // 
             this.clearFilterToolStripMenuItem.Enabled = false;
             this.clearFilterToolStripMenuItem.Name = "clearFilterToolStripMenuItem";
-            this.clearFilterToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.clearFilterToolStripMenuItem.Text = "Clear filter";
+            this.clearFilterToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.clearFilterToolStripMenuItem.Text = "Очистити фільтр";
             this.clearFilterToolStripMenuItem.Visible = false;
             this.clearFilterToolStripMenuItem.Click += new System.EventHandler(this.ClearFilterToolStripMenuItem_Click);
             // 
@@ -289,8 +282,8 @@ namespace UELocalizationsTool
             this.nameToolStripMenuItem,
             this.valueToolStripMenuItem});
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.sortToolStripMenuItem.Text = "Sort";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.sortToolStripMenuItem.Text = "Сортувати";
             // 
             // nameToolStripMenuItem
             // 
@@ -298,21 +291,21 @@ namespace UELocalizationsTool
             this.ascendingToolStripMenuItem,
             this.descendingToolStripMenuItem});
             this.nameToolStripMenuItem.Name = "nameToolStripMenuItem";
-            this.nameToolStripMenuItem.Size = new System.Drawing.Size(132, 26);
-            this.nameToolStripMenuItem.Text = "Name";
+            this.nameToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
+            this.nameToolStripMenuItem.Text = "За ID";
             // 
             // ascendingToolStripMenuItem
             // 
             this.ascendingToolStripMenuItem.Name = "ascendingToolStripMenuItem";
-            this.ascendingToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
-            this.ascendingToolStripMenuItem.Text = "Ascending";
+            this.ascendingToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
+            this.ascendingToolStripMenuItem.Text = "За зростанням (A-Z)";
             this.ascendingToolStripMenuItem.Click += new System.EventHandler(this.AscendingToolStripMenuItem_Click);
             // 
             // descendingToolStripMenuItem
             // 
             this.descendingToolStripMenuItem.Name = "descendingToolStripMenuItem";
-            this.descendingToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
-            this.descendingToolStripMenuItem.Text = "Descending";
+            this.descendingToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
+            this.descendingToolStripMenuItem.Text = "За спаданням (Z-A)";
             this.descendingToolStripMenuItem.Click += new System.EventHandler(this.DescendingToolStripMenuItem_Click);
             // 
             // valueToolStripMenuItem
@@ -321,36 +314,36 @@ namespace UELocalizationsTool
             this.ascendingToolStripMenuItem1,
             this.descendingToolStripMenuItem1});
             this.valueToolStripMenuItem.Name = "valueToolStripMenuItem";
-            this.valueToolStripMenuItem.Size = new System.Drawing.Size(132, 26);
-            this.valueToolStripMenuItem.Text = "Value";
+            this.valueToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
+            this.valueToolStripMenuItem.Text = "За текстом";
             this.valueToolStripMenuItem.Click += new System.EventHandler(this.ValueToolStripMenuItem_Click);
             // 
             // ascendingToolStripMenuItem1
             // 
             this.ascendingToolStripMenuItem1.Name = "ascendingToolStripMenuItem1";
-            this.ascendingToolStripMenuItem1.Size = new System.Drawing.Size(170, 26);
-            this.ascendingToolStripMenuItem1.Text = "Ascending";
+            this.ascendingToolStripMenuItem1.Size = new System.Drawing.Size(234, 26);
+            this.ascendingToolStripMenuItem1.Text = "За зростанням (A-Z)";
             this.ascendingToolStripMenuItem1.Click += new System.EventHandler(this.AscendingToolStripMenuItem1_Click);
             // 
             // descendingToolStripMenuItem1
             // 
             this.descendingToolStripMenuItem1.Name = "descendingToolStripMenuItem1";
-            this.descendingToolStripMenuItem1.Size = new System.Drawing.Size(170, 26);
-            this.descendingToolStripMenuItem1.Text = "Descending";
+            this.descendingToolStripMenuItem1.Size = new System.Drawing.Size(234, 26);
+            this.descendingToolStripMenuItem1.Text = "За спаданням (Z-A)";
             this.descendingToolStripMenuItem1.Click += new System.EventHandler(this.DescendingToolStripMenuItem1_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(313, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(325, 6);
             // 
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Enabled = false;
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Z";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.undoToolStripMenuItem.Text = "Undo";
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.undoToolStripMenuItem.Text = "Скасувати";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.UndoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem
@@ -360,45 +353,43 @@ namespace UELocalizationsTool
             this.redoToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+Z/Ctrl+Y";
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.Z)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.redoToolStripMenuItem.Text = "Redo";
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(328, 26);
+            this.redoToolStripMenuItem.Text = "Повторити";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.RedoToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem1
             // 
             this.copyToolStripMenuItem1.Name = "copyToolStripMenuItem1";
             this.copyToolStripMenuItem1.ShortcutKeyDisplayString = "Ctrl+C";
-            this.copyToolStripMenuItem1.Size = new System.Drawing.Size(316, 26);
-            this.copyToolStripMenuItem1.Text = "Copy";
+            this.copyToolStripMenuItem1.Size = new System.Drawing.Size(328, 26);
+            this.copyToolStripMenuItem1.Text = "Копіювати";
             this.copyToolStripMenuItem1.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem1
             // 
             this.pasteToolStripMenuItem1.Name = "pasteToolStripMenuItem1";
             this.pasteToolStripMenuItem1.ShortcutKeyDisplayString = "Ctrl+V";
-            this.pasteToolStripMenuItem1.Size = new System.Drawing.Size(316, 26);
-            this.pasteToolStripMenuItem1.Text = "Paste";
+            this.pasteToolStripMenuItem1.Size = new System.Drawing.Size(328, 26);
+            this.pasteToolStripMenuItem1.Text = "Вставити";
             this.pasteToolStripMenuItem1.Click += new System.EventHandler(this.PasteToolStripMenuItem_Click);
             // 
-            // toolStripSeparator3
+            // ToolToolStripMenuItem
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(313, 6);
+            this.ToolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fontToolStripMenuItem,
+            this.darkModeToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.Method2});
+            this.ToolToolStripMenuItem.Name = "ToolToolStripMenuItem";
+            this.ToolToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.ToolToolStripMenuItem.Text = "Програма";
             // 
             // fontToolStripMenuItem
             // 
             this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(344, 26);
+            this.fontToolStripMenuItem.Text = "Шрифт та розмір";
             this.fontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
-            // 
-            // rightToLeftToolStripMenuItem
-            // 
-            this.rightToLeftToolStripMenuItem.Name = "rightToLeftToolStripMenuItem";
-            this.rightToLeftToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.rightToLeftToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.rightToLeftToolStripMenuItem.Text = "Right to left (on/off)";
-            this.rightToLeftToolStripMenuItem.Click += new System.EventHandler(this.RightToLeftToolStripMenuItem_Click);
             // 
             // darkModeToolStripMenuItem
             // 
@@ -407,14 +398,15 @@ namespace UELocalizationsTool
             this.darkModeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
-            this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(316, 26);
-            this.darkModeToolStripMenuItem.Text = "Dark mode";
+            this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(344, 26);
+            this.darkModeToolStripMenuItem.Text = "Темна тема";
+            this.darkModeToolStripMenuItem.ToolTipText = "Програма перевідкривається, якщо був відкритий файл – зміни втрачаються.";
             this.darkModeToolStripMenuItem.CheckedChanged += new System.EventHandler(this.DarkModeToolStripMenuItem_CheckedChanged);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(313, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(341, 6);
             // 
             // Method2
             // 
@@ -422,19 +414,9 @@ namespace UELocalizationsTool
             this.Method2.Name = "Method2";
             this.Method2.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.M)));
-            this.Method2.Size = new System.Drawing.Size(316, 26);
-            this.Method2.Text = "Use method 2";
-            this.Method2.ToolTipText = "trying to catch text without using ue4 asset structure (for uasset and umap only)" +
-    "";
+            this.Method2.Size = new System.Drawing.Size(344, 26);
+            this.Method2.Text = "Підтримка .uasset/.umap";
             this.Method2.CheckedChanged += new System.EventHandler(this.Method2_CheckedChanged);
-            // 
-            // UseFixedSize
-            // 
-            this.UseFixedSize.CheckOnClick = true;
-            this.UseFixedSize.Name = "UseFixedSize";
-            this.UseFixedSize.Size = new System.Drawing.Size(316, 26);
-            this.UseFixedSize.Text = "Fixed Size";
-            this.UseFixedSize.Visible = false;
             // 
             // aboutToolStripMenuItem
             // 
@@ -442,21 +424,21 @@ namespace UELocalizationsTool
             this.commandLinesToolStripMenuItem,
             this.aboutToolStripMenuItem1});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(30, 24);
+            this.aboutToolStripMenuItem.Text = "?";
             // 
             // commandLinesToolStripMenuItem
             // 
             this.commandLinesToolStripMenuItem.Name = "commandLinesToolStripMenuItem";
-            this.commandLinesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.commandLinesToolStripMenuItem.Text = "Command Lines";
+            this.commandLinesToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.commandLinesToolStripMenuItem.Text = "Командний рядок";
             this.commandLinesToolStripMenuItem.Click += new System.EventHandler(this.CommandLinesToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
-            this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(218, 26);
+            this.aboutToolStripMenuItem1.Text = "Про програму";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1_Click);
             // 
             // DataCount
@@ -479,61 +461,61 @@ namespace UELocalizationsTool
             this.toolStripSeparator5,
             this.transferTextHashFromOriginalLocresToolStripMenuItem});
             this.locresOprationsToolStripMenuItem.Name = "locresOprationsToolStripMenuItem";
-            this.locresOprationsToolStripMenuItem.Size = new System.Drawing.Size(140, 24);
-            this.locresOprationsToolStripMenuItem.Text = "Locres operations";
+            this.locresOprationsToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.locresOprationsToolStripMenuItem.Text = "Операції над .locres";
             // 
             // editSelectedRowToolStripMenuItem
             // 
             this.editSelectedRowToolStripMenuItem.Name = "editSelectedRowToolStripMenuItem";
-            this.editSelectedRowToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
-            this.editSelectedRowToolStripMenuItem.Text = "Edit Selected Row";
+            this.editSelectedRowToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
+            this.editSelectedRowToolStripMenuItem.Text = "Редагувати вибраний рядок";
             this.editSelectedRowToolStripMenuItem.Click += new System.EventHandler(this.EditSelectedRowToolStripMenuItem_Click);
             // 
             // removeSelectedRowToolStripMenuItem
             // 
             this.removeSelectedRowToolStripMenuItem.Name = "removeSelectedRowToolStripMenuItem";
-            this.removeSelectedRowToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
-            this.removeSelectedRowToolStripMenuItem.Text = "Remove Selected Row(s)";
+            this.removeSelectedRowToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
+            this.removeSelectedRowToolStripMenuItem.Text = "Видалити вибрані рядки";
             this.removeSelectedRowToolStripMenuItem.Click += new System.EventHandler(this.RemoveSelectedRowToolStripMenuItem_Click);
             // 
             // addNewRowToolStripMenuItem
             // 
             this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
-            this.addNewRowToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
-            this.addNewRowToolStripMenuItem.Text = "Add New Row";
+            this.addNewRowToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
+            this.addNewRowToolStripMenuItem.Text = "Додати новий рядок";
             this.addNewRowToolStripMenuItem.Click += new System.EventHandler(this.AddNewRowToolStripMenuItem_Click);
             // 
             // mergeLocresFileToolStripMenuItem
             // 
             this.mergeLocresFileToolStripMenuItem.Name = "mergeLocresFileToolStripMenuItem";
-            this.mergeLocresFileToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
-            this.mergeLocresFileToolStripMenuItem.Text = "Merge Locres File";
+            this.mergeLocresFileToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
+            this.mergeLocresFileToolStripMenuItem.Text = "Об’єднати .locres";
             this.mergeLocresFileToolStripMenuItem.Click += new System.EventHandler(this.MergeLocresFileToolStripMenuItem_Click);
             // 
             // mergeLocresFileStableNEWToolStripMenuItem
             // 
             this.mergeLocresFileStableNEWToolStripMenuItem.Name = "mergeLocresFileStableNEWToolStripMenuItem";
-            this.mergeLocresFileStableNEWToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
-            this.mergeLocresFileStableNEWToolStripMenuItem.Text = "Merge Locres File - Stable";
+            this.mergeLocresFileStableNEWToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
+            this.mergeLocresFileStableNEWToolStripMenuItem.Text = "Об’єднати .locres (робоче)";
             this.mergeLocresFileStableNEWToolStripMenuItem.Click += new System.EventHandler(this.MergeLocresFileStableNEWToolStripMenuItem_Click);
             // 
             // mergeUassetFileToolStripMenuItem
             // 
             this.mergeUassetFileToolStripMenuItem.Name = "mergeUassetFileToolStripMenuItem";
-            this.mergeUassetFileToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
-            this.mergeUassetFileToolStripMenuItem.Text = "Merge Uasset File (Beta)";
+            this.mergeUassetFileToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
+            this.mergeUassetFileToolStripMenuItem.Text = "Об’єднати .uasset (бета)";
             this.mergeUassetFileToolStripMenuItem.Click += new System.EventHandler(this.MergeUassetFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(331, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(363, 6);
             // 
             // transferTextHashFromOriginalLocresToolStripMenuItem
             // 
             this.transferTextHashFromOriginalLocresToolStripMenuItem.Name = "transferTextHashFromOriginalLocresToolStripMenuItem";
-            this.transferTextHashFromOriginalLocresToolStripMenuItem.Size = new System.Drawing.Size(334, 26);
-            this.transferTextHashFromOriginalLocresToolStripMenuItem.Text = "Transfer Hashes from Original Locres";
+            this.transferTextHashFromOriginalLocresToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
+            this.transferTextHashFromOriginalLocresToolStripMenuItem.Text = "Перенести хеші з оригінального .locres";
             this.transferTextHashFromOriginalLocresToolStripMenuItem.Click += new System.EventHandler(this.TransferTextHashFromOriginalLocresToolStripMenuItem_Click);
             // 
             // StateLabel
@@ -544,6 +526,11 @@ namespace UELocalizationsTool
             this.StateLabel.Name = "StateLabel";
             this.StateLabel.Size = new System.Drawing.Size(69, 21);
             this.StateLabel.Text = "----------";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(313, 6);
             // 
             // dataGridView1
             // 
@@ -567,7 +554,7 @@ namespace UELocalizationsTool
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(919, 495);
+            this.dataGridView1.Size = new System.Drawing.Size(982, 499);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.FilterApplied += new System.EventHandler(this.DataGridView1_FilterApplied);
             this.dataGridView1.FilterCleared += new System.EventHandler(this.DataGridView1_FilterCleared);
@@ -575,7 +562,7 @@ namespace UELocalizationsTool
             // 
             // TextName
             // 
-            this.TextName.HeaderText = "Name";
+            this.TextName.HeaderText = "ID";
             this.TextName.MaxInputLength = 2147483647;
             this.TextName.MinimumWidth = 6;
             this.TextName.Name = "TextName";
@@ -585,7 +572,7 @@ namespace UELocalizationsTool
             // TextValue
             // 
             this.TextValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TextValue.HeaderText = "Text Value";
+            this.TextValue.HeaderText = "Text";
             this.TextValue.MaxInputLength = 2147483647;
             this.TextValue.MinimumWidth = 6;
             this.TextValue.Name = "TextValue";
@@ -615,10 +602,10 @@ namespace UELocalizationsTool
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBox.DataGridView = this.dataGridView1;
             this.searchBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.searchBox.Location = new System.Drawing.Point(0, 519);
+            this.searchBox.Location = new System.Drawing.Point(0, 523);
             this.searchBox.Margin = new System.Windows.Forms.Padding(4);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(919, 35);
+            this.searchBox.Size = new System.Drawing.Size(982, 35);
             this.searchBox.TabIndex = 2;
             this.searchBox.Visible = false;
             // 
@@ -631,10 +618,10 @@ namespace UELocalizationsTool
             this.StatusBlock.Controls.Add(this.StatusText);
             this.StatusBlock.Controls.Add(this.StatusTitle);
             this.StatusBlock.Controls.Add(this.pictureBox2);
-            this.StatusBlock.Location = new System.Drawing.Point(252, 214);
+            this.StatusBlock.Location = new System.Drawing.Point(284, 202);
             this.StatusBlock.Margin = new System.Windows.Forms.Padding(4);
             this.StatusBlock.Name = "StatusBlock";
-            this.StatusBlock.Size = new System.Drawing.Size(413, 126);
+            this.StatusBlock.Size = new System.Drawing.Size(410, 140);
             this.StatusBlock.TabIndex = 8;
             this.StatusBlock.Visible = false;
             // 
@@ -666,7 +653,7 @@ namespace UELocalizationsTool
             this.pictureBox2.Location = new System.Drawing.Point(12, 15);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(109, 96);
+            this.pictureBox2.Size = new System.Drawing.Size(110, 110);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -676,7 +663,7 @@ namespace UELocalizationsTool
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(919, 554);
+            this.ClientSize = new System.Drawing.Size(982, 558);
             this.Controls.Add(this.StatusBlock);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dataGridView1);
@@ -685,7 +672,7 @@ namespace UELocalizationsTool
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(933, 589);
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UE Localizations Tool";
@@ -720,8 +707,6 @@ namespace UELocalizationsTool
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rightToLeftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commandLinesToolStripMenuItem;
@@ -737,7 +722,6 @@ namespace UELocalizationsTool
         private System.Windows.Forms.ToolStripMenuItem ascendingToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem descendingToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem UseFixedSize;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem Method2;
         private System.Windows.Forms.ToolStripMenuItem darkModeToolStripMenuItem;
@@ -765,6 +749,8 @@ namespace UELocalizationsTool
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem importAllTextByKeystoolStripMenuItem;
         private ToolStripMenuItem importNewLinesFromCSVtoolStripMenuItem;
+        private ToolStripMenuItem fontToolStripMenuItem;
+        private ToolStripMenuItem ToolToolStripMenuItem;
     }
 }
 
