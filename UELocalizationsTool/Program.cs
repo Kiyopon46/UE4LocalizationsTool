@@ -92,8 +92,7 @@ namespace UELocalizationsTool
         [STAThread]
         static void Main(string[] args)
         {
-            // The main entry point now calls an async wrapper method.
-            MainAsync(args).Wait();
+            MainAsync(args).GetAwaiter().GetResult();
         }
 
         static async Task MainAsync(string[] args)
@@ -104,13 +103,23 @@ namespace UELocalizationsTool
                 {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-                    var FrmMain = new FrmMain();
-                    FrmMain.Show();
 
-                    // Corrected: Await the async method call.
-                    await FrmMain.LoadFile(args[0]);
+                    var frmMain = new FrmMain();
 
-                    Application.Run(FrmMain);
+                    frmMain.Shown += async (s, e) =>
+                    {
+                        frmMain.Shown -= null;
+                        try
+                        {
+                            await frmMain.LoadFile(args[0]);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Помилка завантаження файлу:\n" + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    };
+
+                    Application.Run(frmMain);
                     return;
                 }
 
@@ -124,6 +133,7 @@ namespace UELocalizationsTool
                     Console.ForegroundColor = ConsoleColor.White;
                     return;
                 }
+
                 try
                 {
                     var commands = new Commands();
@@ -131,17 +141,15 @@ namespace UELocalizationsTool
                     if (args[0].ToLower() == "importall" || args[0].ToLower() == "-importall" || args[0].ToLower() == "exportall")
                     {
                         if (args.Length < 3)
-                        {
                             throw new Exception("Invalid number of arguments.\n\n" + commandlines);
-                        }
 
                         CheckArges(3, args);
-                        commands.RunAsync(args[0], args[1] + "*" + args[2], GetArgs(3, args)).Wait();
+                        await commands.RunAsync(args[0], args[1] + "*" + args[2], GetArgs(3, args));
                     }
                     else
                     {
                         CheckArges(2, args);
-                        commands.RunAsync(args[0], args[1], GetArgs(2, args)).Wait();
+                        await commands.RunAsync(args[0], args[1], GetArgs(2, args));
                     }
                 }
                 catch (Exception ex)
@@ -150,6 +158,7 @@ namespace UELocalizationsTool
                     Console.WriteLine("\n" + ex.Message);
                     Console.ForegroundColor = ConsoleColor.White;
                 }
+
                 return;
             }
 
