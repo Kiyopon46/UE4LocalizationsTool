@@ -87,7 +87,7 @@
             this.Name = "FrmAbout";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "About";
+            this.Text = "Про програму";
             this.ResumeLayout(false);
             this.PerformLayout();
 

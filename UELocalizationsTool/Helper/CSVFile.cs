@@ -3,7 +3,6 @@ using CsvHelper.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -276,6 +275,9 @@ namespace UELocalizationsTool.Helper
                         csv.WriteField("");
                         csv.NextRecord();
                     }
+
+                    csv.Flush();
+                    writer.Flush();
                 }
             });
         }
@@ -363,6 +365,9 @@ namespace UELocalizationsTool.Helper
                         }
                         csv.NextRecord();
                     }
+
+                    csv.Flush();
+                    writer.Flush();
                 }
             });
         }
