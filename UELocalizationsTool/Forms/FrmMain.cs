@@ -316,7 +316,7 @@ namespace UELocalizationsTool
 
         private void CommandLinesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Program.commandlines, "Command Lines", MessageBoxButtons.OK);
+            MessageBox.Show(Program.commandlines, "Список CLI команд", MessageBoxButtons.OK);
         }
 
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -444,16 +444,16 @@ namespace UELocalizationsTool
 
                     if (dataGridView1.IsFilterApplied)
                     {
-                        MessageBox.Show("Successful export!\n Remember to apply the same filter you using right now before 'import'.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Експортування успішне!\n Не забудьте застосувати той самий фільтр, перед імпортом.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Successful export!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Експортування успішне!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Can't write export file!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Не вдається записати файл!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
             }
         }
@@ -484,12 +484,12 @@ namespace UELocalizationsTool
         {
             if (dataGridView1.SelectedCells.Count == 0)
             {
-                MessageBox.Show("No row(s) selected to remove.", "Remove Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Не вибрано рядків для видалення.", "Не вдалося видалити", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
 
-            DialogResult result = MessageBox.Show("Are you sure you want to remove the selected row(s)?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Ви впевнені, що хочете видалити вибрані рядки?", "Підтвердження", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -514,7 +514,7 @@ namespace UELocalizationsTool
         {
             if (dataGridView1.SelectedCells.Count > 1 || dataGridView1.SelectedCells.Count == 0)
             {
-                MessageBox.Show("Please select a single cell to edit.", "Edit Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Виберіть один рядок для редагування.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -524,11 +524,11 @@ namespace UELocalizationsTool
                 try
                 {
                     EntryEditor.EditRow(dataGridView1);
-                    MessageBox.Show("The row edited successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Рядок успішно відредаговано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred while editing the row:\n " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Сталася помилка під час редагування рядка:\n " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -544,11 +544,11 @@ namespace UELocalizationsTool
                     dataGridView1.BeginEdit(false);
                     EntryEditor.AddRow(dataGridView1);
                     dataGridView1.EndEdit();
-                    MessageBox.Show("New row added successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Новий рядок успішно додано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred while adding the row:\n " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Сталася помилка під час додавання рядка:\n " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -566,14 +566,10 @@ namespace UELocalizationsTool
 
                 try
                 {
-                    // Переносимо всю логіку обробки в фоновий потік
                     var dataTable = await Task.Run(() =>
                     {
                         var tempDataTable = new System.Data.DataTable();
 
-                        // Додаємо колонки. Важливо робити це до циклу.
-                        // Можливо, тут має бути логіка для копіювання колонок, як у вашому коді.
-                        // Якщо `dataGridView1.DataSource` - це `DataTable`, то можна так:
                         if (dataGridView1.DataSource is System.Data.DataTable sourceDataTable)
                         {
                             foreach (System.Data.DataColumn col in sourceDataTable.Columns)
@@ -598,7 +594,6 @@ namespace UELocalizationsTool
                         return tempDataTable;
                     });
 
-                    // Виконуємо операцію з UI-елементом на UI-потоці
                     ((System.Data.DataTable)dataGridView1.DataSource).Merge(dataTable);
                     MessageBox.Show("Locres file(s) merged successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -694,7 +689,7 @@ namespace UELocalizationsTool
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                StatusMessage("Transfering text hashes...", "Transfering text hashes, please wait.");
+                StatusMessage("Перенесення хешів тексту...", "Перенесення хешів тексту, зачекайте.");
                 var sourceHashes = new Dictionary<string, HashTable>();
 
                 try
@@ -724,11 +719,11 @@ namespace UELocalizationsTool
                         }
                     }
 
-                    MessageBox.Show("Locres file(s) hashes transfered successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Хеші файлу(-ів) .locres успішно перенесено.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while transfering locres file(s) hashes:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Сталася помилка під час перенесення хешів .locres:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 CloseFromState();
             }
@@ -743,7 +738,7 @@ namespace UELocalizationsTool
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                StatusMessage("Merging locres...", "Merging locres, please wait.");
+                StatusMessage("Об’єднання .locres...", "Об’єднання .locres, зачекайте.");
 
                 try
                 {
@@ -789,11 +784,11 @@ namespace UELocalizationsTool
                         currentDataTable.Merge(newRowsTable);
                     }
 
-                    MessageBox.Show("Locres file(s) merged successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(".locres успішно об’єднано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while merging locres file(s):\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Сталася помилка під час об’єднання .locres:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 CloseFromState();
             }
@@ -815,7 +810,7 @@ namespace UELocalizationsTool
                     {
                         // This is the key change: use 'await' to wait for the method to finish.
                         await CSVFile.Instance.LoadByKeys(this.dataGridView1, ofd.FileName);
-                        MessageBox.Show("Successful import!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Імпортування виконано!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
@@ -840,7 +835,7 @@ namespace UELocalizationsTool
                     try
                     {
                         await CSVFile.Instance.LoadNewLines((NDataGridView)this.dataGridView1, ofd.FileName, (LocresFile)Asset);
-                        MessageBox.Show($"New rows imported successfully!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Нові рядки успішно імпортовані!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {

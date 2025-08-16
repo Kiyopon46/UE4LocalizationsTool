@@ -64,15 +64,6 @@ namespace UELocalizationsTool
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.Method2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.commandLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.DataCount = new System.Windows.Forms.ToolStripLabel();
             this.locresOprationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editSelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeSelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,6 +73,15 @@ namespace UELocalizationsTool
             this.mergeUassetFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.transferTextHashFromOriginalLocresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.Method2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.commandLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.DataCount = new System.Windows.Forms.ToolStripLabel();
             this.StateLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridView1 = new NDataGridView();
@@ -108,10 +108,10 @@ namespace UELocalizationsTool
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
+            this.locresOprationsToolStripMenuItem,
             this.ToolToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.DataCount,
-            this.locresOprationsToolStripMenuItem,
             this.StateLabel});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -373,82 +373,6 @@ namespace UELocalizationsTool
             this.pasteToolStripMenuItem1.Text = "Вставити";
             this.pasteToolStripMenuItem1.Click += new System.EventHandler(this.PasteToolStripMenuItem_Click);
             // 
-            // ToolToolStripMenuItem
-            // 
-            this.ToolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fontToolStripMenuItem,
-            this.darkModeToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.Method2});
-            this.ToolToolStripMenuItem.Name = "ToolToolStripMenuItem";
-            this.ToolToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
-            this.ToolToolStripMenuItem.Text = "Програма";
-            // 
-            // fontToolStripMenuItem
-            // 
-            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(344, 26);
-            this.fontToolStripMenuItem.Text = "Шрифт та розмір";
-            this.fontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
-            // 
-            // darkModeToolStripMenuItem
-            // 
-            this.darkModeToolStripMenuItem.CheckOnClick = true;
-            this.darkModeToolStripMenuItem.Name = "darkModeToolStripMenuItem";
-            this.darkModeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.D)));
-            this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(344, 26);
-            this.darkModeToolStripMenuItem.Text = "Темна тема";
-            this.darkModeToolStripMenuItem.ToolTipText = "Програма перевідкривається, якщо був відкритий файл – зміни втрачаються.";
-            this.darkModeToolStripMenuItem.CheckedChanged += new System.EventHandler(this.DarkModeToolStripMenuItem_CheckedChanged);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(341, 6);
-            // 
-            // Method2
-            // 
-            this.Method2.CheckOnClick = true;
-            this.Method2.Name = "Method2";
-            this.Method2.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.M)));
-            this.Method2.Size = new System.Drawing.Size(344, 26);
-            this.Method2.Text = "Підтримка .uasset/.umap";
-            this.Method2.CheckedChanged += new System.EventHandler(this.Method2_CheckedChanged);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.commandLinesToolStripMenuItem,
-            this.aboutToolStripMenuItem1});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(30, 24);
-            this.aboutToolStripMenuItem.Text = "?";
-            // 
-            // commandLinesToolStripMenuItem
-            // 
-            this.commandLinesToolStripMenuItem.Name = "commandLinesToolStripMenuItem";
-            this.commandLinesToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
-            this.commandLinesToolStripMenuItem.Text = "Командний рядок";
-            this.commandLinesToolStripMenuItem.Click += new System.EventHandler(this.CommandLinesToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem1
-            // 
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(218, 26);
-            this.aboutToolStripMenuItem1.Text = "Про програму";
-            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1_Click);
-            // 
-            // DataCount
-            // 
-            this.DataCount.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.DataCount.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.DataCount.Name = "DataCount";
-            this.DataCount.Size = new System.Drawing.Size(69, 21);
-            this.DataCount.Text = "----------";
-            // 
             // locresOprationsToolStripMenuItem
             // 
             this.locresOprationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -461,8 +385,8 @@ namespace UELocalizationsTool
             this.toolStripSeparator5,
             this.transferTextHashFromOriginalLocresToolStripMenuItem});
             this.locresOprationsToolStripMenuItem.Name = "locresOprationsToolStripMenuItem";
-            this.locresOprationsToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
-            this.locresOprationsToolStripMenuItem.Text = "Операції над .locres";
+            this.locresOprationsToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
+            this.locresOprationsToolStripMenuItem.Text = "Операції";
             // 
             // editSelectedRowToolStripMenuItem
             // 
@@ -517,6 +441,82 @@ namespace UELocalizationsTool
             this.transferTextHashFromOriginalLocresToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
             this.transferTextHashFromOriginalLocresToolStripMenuItem.Text = "Перенести хеші з оригінального .locres";
             this.transferTextHashFromOriginalLocresToolStripMenuItem.Click += new System.EventHandler(this.TransferTextHashFromOriginalLocresToolStripMenuItem_Click);
+            // 
+            // ToolToolStripMenuItem
+            // 
+            this.ToolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fontToolStripMenuItem,
+            this.darkModeToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.Method2});
+            this.ToolToolStripMenuItem.Name = "ToolToolStripMenuItem";
+            this.ToolToolStripMenuItem.Size = new System.Drawing.Size(125, 24);
+            this.ToolToolStripMenuItem.Text = "Налаштування";
+            // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(344, 26);
+            this.fontToolStripMenuItem.Text = "Шрифт та розмір тексту";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
+            // 
+            // darkModeToolStripMenuItem
+            // 
+            this.darkModeToolStripMenuItem.CheckOnClick = true;
+            this.darkModeToolStripMenuItem.Name = "darkModeToolStripMenuItem";
+            this.darkModeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.D)));
+            this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(344, 26);
+            this.darkModeToolStripMenuItem.Text = "Темна тема";
+            this.darkModeToolStripMenuItem.ToolTipText = "Програма перевідкривається, якщо був відкритий файл – зміни втрачаються.";
+            this.darkModeToolStripMenuItem.CheckedChanged += new System.EventHandler(this.DarkModeToolStripMenuItem_CheckedChanged);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(341, 6);
+            // 
+            // Method2
+            // 
+            this.Method2.CheckOnClick = true;
+            this.Method2.Name = "Method2";
+            this.Method2.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.M)));
+            this.Method2.Size = new System.Drawing.Size(344, 26);
+            this.Method2.Text = "Підтримка .uasset/.umap";
+            this.Method2.CheckedChanged += new System.EventHandler(this.Method2_CheckedChanged);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.commandLinesToolStripMenuItem,
+            this.aboutToolStripMenuItem1});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(30, 24);
+            this.aboutToolStripMenuItem.Text = "?";
+            // 
+            // commandLinesToolStripMenuItem
+            // 
+            this.commandLinesToolStripMenuItem.Name = "commandLinesToolStripMenuItem";
+            this.commandLinesToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.commandLinesToolStripMenuItem.Text = "Список CLI команд";
+            this.commandLinesToolStripMenuItem.Click += new System.EventHandler(this.CommandLinesToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(222, 26);
+            this.aboutToolStripMenuItem1.Text = "Про програму";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1_Click);
+            // 
+            // DataCount
+            // 
+            this.DataCount.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.DataCount.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.DataCount.Name = "DataCount";
+            this.DataCount.Size = new System.Drawing.Size(69, 21);
+            this.DataCount.Text = "----------";
             // 
             // StateLabel
             // 

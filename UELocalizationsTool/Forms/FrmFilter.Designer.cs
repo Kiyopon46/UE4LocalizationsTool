@@ -51,9 +51,10 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(261, 226);
+            this.button1.Location = new System.Drawing.Point(348, 278);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 23);
+            this.button1.Size = new System.Drawing.Size(107, 28);
             this.button1.TabIndex = 1;
             this.button1.Text = "Apply";
             this.button1.UseVisualStyleBackColor = true;
@@ -62,18 +63,21 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 25);
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(16, 31);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(172, 199);
+            this.listBox1.Size = new System.Drawing.Size(228, 244);
             this.listBox1.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.Size = new System.Drawing.Size(84, 16);
             this.label1.TabIndex = 3;
             this.label1.Text = "Filter Values:";
             // 
@@ -81,26 +85,29 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(228, 25);
+            this.textBox1.Location = new System.Drawing.Point(304, 31);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(207, 20);
+            this.textBox1.Size = new System.Drawing.Size(275, 22);
             this.textBox1.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(191, 28);
+            this.label3.Location = new System.Drawing.Point(255, 34);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.Size = new System.Drawing.Size(38, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "Input:";
             // 
             // Add
             // 
             this.Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Add.Location = new System.Drawing.Point(441, 23);
+            this.Add.Location = new System.Drawing.Point(588, 28);
+            this.Add.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Add.Name = "Add";
-            this.Add.Size = new System.Drawing.Size(115, 23);
+            this.Add.Size = new System.Drawing.Size(153, 28);
             this.Add.TabIndex = 6;
             this.Add.Text = "Add";
             this.Add.UseVisualStyleBackColor = true;
@@ -109,9 +116,10 @@
             // RemoveSelected
             // 
             this.RemoveSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemoveSelected.Location = new System.Drawing.Point(441, 52);
+            this.RemoveSelected.Location = new System.Drawing.Point(588, 64);
+            this.RemoveSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.RemoveSelected.Name = "RemoveSelected";
-            this.RemoveSelected.Size = new System.Drawing.Size(113, 23);
+            this.RemoveSelected.Size = new System.Drawing.Size(151, 28);
             this.RemoveSelected.TabIndex = 7;
             this.RemoveSelected.Text = "Remove Selected";
             this.RemoveSelected.UseVisualStyleBackColor = true;
@@ -120,9 +128,10 @@
             // ClearList
             // 
             this.ClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearList.Location = new System.Drawing.Point(441, 81);
+            this.ClearList.Location = new System.Drawing.Point(588, 100);
+            this.ClearList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ClearList.Name = "ClearList";
-            this.ClearList.Size = new System.Drawing.Size(113, 23);
+            this.ClearList.Size = new System.Drawing.Size(151, 28);
             this.ClearList.TabIndex = 8;
             this.ClearList.Text = "Clear List";
             this.ClearList.UseVisualStyleBackColor = true;
@@ -131,9 +140,10 @@
             // matchcase
             // 
             this.matchcase.AutoSize = true;
-            this.matchcase.Location = new System.Drawing.Point(228, 58);
+            this.matchcase.Location = new System.Drawing.Point(304, 71);
+            this.matchcase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.matchcase.Name = "matchcase";
-            this.matchcase.Size = new System.Drawing.Size(82, 17);
+            this.matchcase.Size = new System.Drawing.Size(98, 20);
             this.matchcase.TabIndex = 9;
             this.matchcase.Text = "Match case";
             this.matchcase.UseVisualStyleBackColor = true;
@@ -142,9 +152,10 @@
             // 
             this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtnClose.Location = new System.Drawing.Point(441, 110);
+            this.BtnClose.Location = new System.Drawing.Point(588, 135);
+            this.BtnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(113, 23);
+            this.BtnClose.Size = new System.Drawing.Size(151, 28);
             this.BtnClose.TabIndex = 10;
             this.BtnClose.Text = "Close";
             this.BtnClose.UseVisualStyleBackColor = true;
@@ -153,9 +164,10 @@
             // regularexpression
             // 
             this.regularexpression.AutoSize = true;
-            this.regularexpression.Location = new System.Drawing.Point(228, 81);
+            this.regularexpression.Location = new System.Drawing.Point(304, 100);
+            this.regularexpression.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.regularexpression.Name = "regularexpression";
-            this.regularexpression.Size = new System.Drawing.Size(116, 17);
+            this.regularexpression.Size = new System.Drawing.Size(146, 20);
             this.regularexpression.TabIndex = 11;
             this.regularexpression.Text = "Regular expression";
             this.regularexpression.UseVisualStyleBackColor = true;
@@ -164,9 +176,10 @@
             // reversemode
             // 
             this.reversemode.AutoSize = true;
-            this.reversemode.Location = new System.Drawing.Point(228, 103);
+            this.reversemode.Location = new System.Drawing.Point(304, 127);
+            this.reversemode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.reversemode.Name = "reversemode";
-            this.reversemode.Size = new System.Drawing.Size(95, 17);
+            this.reversemode.Size = new System.Drawing.Size(119, 20);
             this.reversemode.TabIndex = 12;
             this.reversemode.Text = "Reverse mode";
             this.reversemode.UseVisualStyleBackColor = true;
@@ -174,17 +187,19 @@
             // Columns
             // 
             this.Columns.FormattingEnabled = true;
-            this.Columns.Location = new System.Drawing.Point(58, 3);
+            this.Columns.Location = new System.Drawing.Point(77, 4);
+            this.Columns.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Columns.Name = "Columns";
-            this.Columns.Size = new System.Drawing.Size(156, 21);
+            this.Columns.Size = new System.Drawing.Size(207, 24);
             this.Columns.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 6);
+            this.label2.Location = new System.Drawing.Point(13, 7);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.Size = new System.Drawing.Size(55, 16);
             this.label2.TabIndex = 14;
             this.label2.Text = "Column:";
             // 
@@ -192,19 +207,20 @@
             // 
             this.ColumnPanel.Controls.Add(this.Columns);
             this.ColumnPanel.Controls.Add(this.label2);
-            this.ColumnPanel.Location = new System.Drawing.Point(211, 126);
+            this.ColumnPanel.Location = new System.Drawing.Point(281, 155);
+            this.ColumnPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ColumnPanel.Name = "ColumnPanel";
-            this.ColumnPanel.Size = new System.Drawing.Size(224, 27);
+            this.ColumnPanel.Size = new System.Drawing.Size(299, 33);
             this.ColumnPanel.TabIndex = 15;
             this.ColumnPanel.Visible = false;
             // 
             // FrmFilter
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(584, 261);
+            this.ClientSize = new System.Drawing.Size(776, 311);
             this.Controls.Add(this.ColumnPanel);
             this.Controls.Add(this.reversemode);
             this.Controls.Add(this.regularexpression);
@@ -221,14 +237,15 @@
             this.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(600, 300);
+            this.MaximumSize = new System.Drawing.Size(794, 358);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(600, 300);
+            this.MinimumSize = new System.Drawing.Size(794, 358);
             this.Name = "FrmFilter";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Filter";
+            this.Text = "Фільтрування";
             this.Load += new System.EventHandler(this.FrmFilter_Load);
             this.ColumnPanel.ResumeLayout(false);
             this.ColumnPanel.PerformLayout();

@@ -70,9 +70,12 @@ namespace UELocalizationsTool.Helper
                     {
                         if (update.shouldHighlight)
                         {
-                            dataGrid.Rows[update.rowIndex].Cells["Text"].Style.BackColor = Color.Yellow;
+                            dataGrid.SetValue(dataGrid.Rows[update.rowIndex].Cells["Text"], update.newValue);
                         }
-                        dataGrid.Rows[update.rowIndex].Cells["Text"].Value = update.newValue;
+                        else
+                        {
+                            dataGrid.Rows[update.rowIndex].Cells["Text"].Value = update.newValue;
+                        }
                     }
 
                     dataGrid.ResumeLayout();
@@ -133,9 +136,12 @@ namespace UELocalizationsTool.Helper
                     {
                         if (update.shouldHighlight)
                         {
-                            update.row.Cells["Text"].Style.BackColor = Color.Yellow;
+                            dataGrid.SetValue(update.row.Cells["Text"], update.newValue);
                         }
-                        update.row.Cells["Text"].Value = update.newValue;
+                        else
+                        {
+                            update.row.Cells["Text"].Value = update.newValue;
+                        }
                     }
 
                     dataGrid.ResumeLayout();
@@ -150,7 +156,7 @@ namespace UELocalizationsTool.Helper
                 var dt = dataGrid.DataSource as System.Data.DataTable;
                 if (dt == null) return;
 
-                var existingNames = new HashSet<string>();
+                var existingNames = new HashSet<string>(StringComparer.Ordinal);
                 foreach (DataRow row in dt.Rows)
                 {
                     if (row["ID"] != DBNull.Value)
@@ -158,6 +164,8 @@ namespace UELocalizationsTool.Helper
                         existingNames.Add(row["ID"].ToString());
                     }
                 }
+
+                var toAdd = new List<(string id, string text, HashTable hashTable)>();
 
                 using (var reader = new StreamReader(filePath))
                 using (var csv = new CsvReader(reader, GetConfig()))
@@ -169,23 +177,79 @@ namespace UELocalizationsTool.Helper
                         var recordDict = (IDictionary<string, object>)record;
                         if (recordDict.ContainsKey("key") && recordDict.ContainsKey("Translation"))
                         {
-                            string rowName = recordDict["key"]?.ToString();
-                            string value = recordDict["Translation"]?.ToString();
+                            string id = recordDict["key"]?.ToString();
+                            string text = recordDict["Translation"]?.ToString();
 
-                            if (!string.IsNullOrEmpty(rowName) && !string.IsNullOrEmpty(value) && !existingNames.Contains(rowName))
+                            if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(text) && !existingNames.Contains(id))
                             {
                                 var hashTable = new HashTable
                                 {
                                     NameHash = 0,
                                     KeyHash = 0,
-                                    ValueHash = asset.CalcHashExperimental(value)
+                                    ValueHash = asset.CalcHashExperimental(text)
                                 };
-                                dt.Rows.Add(rowName, value, hashTable);
-                                existingNames.Add(rowName);
+
+                                toAdd.Add((id, text, hashTable));
+                                existingNames.Add(id);
                             }
                         }
                     }
                 }
+
+                if (toAdd.Count == 0) return;
+
+                dataGrid.Invoke((MethodInvoker)delegate
+                {
+                    dataGrid.SuspendLayout();
+
+                    foreach (var item in toAdd)
+                    {
+                        var newRow = dt.NewRow();
+
+                        if (dt.Columns.Contains("ID")) newRow["ID"] = "";
+                        else if (dt.Columns.Count > 0) newRow[0] = "";
+
+                        if (dt.Columns.Contains("Text")) newRow["Text"] = "";
+                        else if (dt.Columns.Count > 1) newRow[1] = "";
+
+                        if (dt.Columns.Contains("HashTable")) newRow["HashTable"] = item.hashTable;
+                        else if (dt.Columns.Contains("Hash")) newRow["Hash"] = item.hashTable;
+                        else if (dt.Columns.Count > 2) newRow[2] = item.hashTable;
+
+                        dt.Rows.Add(newRow);
+
+                        DataGridViewRow gridRow = null;
+                        foreach (DataGridViewRow r in dataGrid.Rows)
+                        {
+                            if (r.DataBoundItem is DataRowView drv && drv.Row == newRow)
+                            {
+                                gridRow = r;
+                                break;
+                            }
+                        }
+
+                        if (gridRow != null)
+                        {
+                            DataGridViewCell idCell;
+                            DataGridViewCell textCell;
+
+                            if (dataGrid.Columns.Contains("ID"))
+                                idCell = gridRow.Cells["ID"];
+                            else
+                                idCell = gridRow.Cells[0];
+
+                            if (dataGrid.Columns.Contains("Text"))
+                                textCell = gridRow.Cells["Text"];
+                            else
+                                textCell = gridRow.Cells[1];
+
+                            dataGrid.SetValue(idCell, item.id);
+                            dataGrid.SetValue(textCell, item.text);
+                        }
+                    }
+
+                    dataGrid.ResumeLayout();
+                });
             });
         }
 

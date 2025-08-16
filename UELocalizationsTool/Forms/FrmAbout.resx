@@ -118,8 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>UE Localizations Tool is a simple tool to edit unreal engine text files.
-
+    <value>UE Localizations Tool – це зручний інструмент для редагування текстових файлів Unreal Engine.
 Author: amr shaheeen(@amrshaheen61)
 
 New features (by JunkBeat):
@@ -131,7 +130,12 @@ New features (by JunkBeat):
 Зміни (від Галицького Розбишаки/Hikaro):
 - Змінено бібліотеку CSV.
 - Переписано обробку CSV.
-- Оптимізація програми.</value>
+- Оптимізовано програму асинхронними методами.
+- Виправлено зависання програми при збереженні.
+- Покращено інтерфейс.
+- Українізація.
+- Переписано обробку .locres.
+- Додано підтримку .locres v4.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
