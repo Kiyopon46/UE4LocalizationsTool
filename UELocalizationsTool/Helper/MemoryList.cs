@@ -110,15 +110,6 @@ namespace Helper.MemoryList
             MemoryListData = FileData.ToList();
         }
 
-        //no plan for now
-        private MemoryList(MemoryList FileData, int offset, int Length)
-        {
-            //CutFromMemoryListData = true;
-            //CutOffset = offset;
-            //CutSize = Length;
-            //MemoryListData = FileData.MemoryListData;
-        }
-
         #region MemoryList Controls
         public void Seek(int Value, SeekOrigin SeekOrigin = SeekOrigin.Begin)
         {

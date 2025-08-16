@@ -34,17 +34,5 @@ namespace UELocalizationsTool.Properties {
                 this["DarkMode"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool GoodByeMessage {
-            get {
-                return ((bool)(this["GoodByeMessage"]));
-            }
-            set {
-                this["GoodByeMessage"] = value;
-            }
-        }
     }
 }

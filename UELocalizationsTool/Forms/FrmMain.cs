@@ -31,8 +31,8 @@ namespace UELocalizationsTool
         private async void OpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "All localizations files|*.uasset;*.locres;*.umap|Uasset File|*.uasset|Locres File|*.locres|Umap File|*.umap";
-            ofd.Title = "Open localizations File";
+            ofd.Filter = "Усі файли локалізації|*.uasset;*.locres;*.umap|Uasset файл|*.uasset|Locres файл|*.locres|Umap файл|*.umap";
+            ofd.Title = "Відкрити файл локалізації";
 
 
             if (ofd.ShowDialog() == DialogResult.OK)

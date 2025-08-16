@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using UELocalizationsTool.Controls;
 using UELocalizationsTool.Core.Hash;
@@ -18,12 +19,17 @@ namespace UELocalizationsTool.Forms
         {
             get
             {
-                return new HashTable()
+                var hash = new HashTable()
                 {
                     NameHash = uint.Parse(txtNameSapceHash.Text),
                     KeyHash = uint.Parse(txtKeyHash.Text),
                     ValueHash = uint.Parse(txtValueHash.Text),
                 };
+
+                if (txtExternID.Enabled && uint.TryParse(txtExternID.Text, out uint externID))
+                    hash.ExternID = externID;
+
+                return hash;
             }
         }
 
@@ -33,7 +39,6 @@ namespace UELocalizationsTool.Forms
         {
             InitializeComponent();
         }
-
 
         public FrmLocresEntryEditor(NDataGridView gridView, LocresFile asset)
         {
@@ -63,47 +68,76 @@ namespace UELocalizationsTool.Forms
             txtNameSapceHash.Text = Hashs.NameHash.ToString();
             txtKeyHash.Text = Hashs.KeyHash.ToString();
             txtValueHash.Text = Hashs.ValueHash.ToString();
-            Print();
+            Print(Hashs);
         }
 
         public FrmLocresEntryEditor(Form form, LocresFile asset)
         {
             InitializeComponent();
             this.Location = new Point(form.Location.X + (form.Width - this.Width) / 2, form.Location.Y + (form.Height - this.Height) / 2);
-            Apply.Text = "Add";
+            Apply.Text = "Додати";
             this.Asset = asset;
+            BtnExternID.Enabled = (Asset != null && Asset.Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16);
+            txtExternID.Enabled = BtnExternID.Enabled;
         }
 
-        private void Print()
+        private void Print(HashTable rowHash = null)
         {
             txtNameSpace.Text = NameSpace;
             txtKey.Text = Key;
             txtValue.Text = Value;
+
+            uint externID = 0;
+
+            if (rowHash != null && rowHash.ExternID != 0)
+                externID = rowHash.ExternID;
+            else if (Asset != null && Asset.Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
+            {
+                var assetHash = Asset.GetHash(NameSpace, Key);
+                if (assetHash != null)
+                    externID = assetHash.ExternID;
+            }
+
+            if (externID != 0)
+            {
+                txtExternID.Text = externID.ToString();
+                txtExternID.Enabled = true;
+            }
+            else
+            {
+                txtExternID.Text = "";
+                txtExternID.Enabled = false;
+            }
+
+            BtnExternID.Enabled = (Asset != null && Asset.Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16);
         }
 
         public void AddRow(NDataGridView gridView)
         {
             DataTable dt = (DataTable)gridView.DataSource;
-
             string RowName = GetName();
 
-            //bool rowExists = false;
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    if (string.Equals(row["ID"].ToString(), RowName, StringComparison.OrdinalIgnoreCase))
-            //    {
-            //        rowExists = true;
-            //        break;
-            //    }
-            //}
+            uint externID = 0;
 
-            //if (rowExists)
-            //{
-            //    throw new Exception("this NameSpace and Key already exists in the table.");
-            //}
+            if (txtExternID.Enabled && uint.TryParse(txtExternID.Text, out uint parsedID))
+            {
+                externID = parsedID;
+            }
+            else if (Asset != null && Asset.Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
+            {
+                var allExternIDs = Asset.SelectMany(ns => ns).Select(st => st.ExternID);
+                externID = (allExternIDs.Any() ? allExternIDs.Max() : 0) + 1;
+            }
 
-            dt.Rows.Add(RowName, Value, HashTable);
+            var newHash = new HashTable()
+            {
+                NameHash = uint.Parse(txtNameSapceHash.Text),
+                KeyHash = uint.Parse(txtKeyHash.Text),
+                ValueHash = uint.Parse(txtValueHash.Text),
+                ExternID = externID
+            };
 
+            dt.Rows.Add(RowName, Value, newHash);
         }
 
         private string GetName()
@@ -120,7 +154,19 @@ namespace UELocalizationsTool.Forms
         {
             DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["ID"], GetName());
             DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["Text"], txtValue.Text);
-            DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["Hash Table"], HashTable);
+
+            var hash = DGV.CurrentCell.OwningRow.Cells["Hash Table"].Value as HashTable;
+            if (hash != null)
+            {
+                hash.NameHash = uint.Parse(txtNameSapceHash.Text);
+                hash.KeyHash = uint.Parse(txtKeyHash.Text);
+                hash.ValueHash = uint.Parse(txtValueHash.Text);
+
+                if (txtExternID.Enabled && uint.TryParse(txtExternID.Text, out uint externID))
+                    hash.ExternID = externID;
+            }
+
+            DGV.SetValue(DGV.CurrentCell.OwningRow.Cells["Hash Table"], hash);
         }
 
         private void TxtNameSpace_TextChanged(object sender, EventArgs e)
@@ -153,18 +199,45 @@ namespace UELocalizationsTool.Forms
             txtValueHash.Text = txtValue.Text.StrCrc32().ToString();
         }
 
+        private void BtnExternID_Click(object sender, EventArgs e)
+        {
+            if (Asset != null && Asset.Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
+            {
+                var allExternIDs = Asset.SelectMany(ns => ns).Select(st => st.ExternID);
+
+                uint newExternID = (allExternIDs.Any() ? allExternIDs.Max() : 0) + 1;
+
+                txtExternID.Text = newExternID.ToString();
+                txtExternID.Enabled = true;
+            }
+            else
+            {
+                txtExternID.Text = "0";
+                txtExternID.Enabled = false;
+            }
+        }
+
         private void Apply_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtNameSapceHash.Text) || string.IsNullOrEmpty(txtKeyHash.Text) || string.IsNullOrEmpty(txtValueHash.Text))
+            if (string.IsNullOrEmpty(txtNameSapceHash.Text) ||
+                string.IsNullOrEmpty(txtKeyHash.Text) ||
+                string.IsNullOrEmpty(txtValueHash.Text))
             {
                 MessageBox.Show("NameSpace or Key or Value is empty");
                 return;
             }
 
-            if (!uint.TryParse(txtNameSapceHash.Text, out uint temp) || !uint.TryParse(txtKeyHash.Text, out uint temp1) || !uint.TryParse(txtValueHash.Text, out uint temp2))
+            if (!uint.TryParse(txtNameSapceHash.Text, out _) ||
+                !uint.TryParse(txtKeyHash.Text, out _) ||
+                !uint.TryParse(txtValueHash.Text, out _))
             {
                 MessageBox.Show("NameSpace or Key or Value is not a number");
                 return;
+            }
+
+            if (txtExternID.Enabled)
+            {
+                HashTable.ExternID = uint.TryParse(txtExternID.Text, out uint externID) ? externID : 0;
             }
         }
     }

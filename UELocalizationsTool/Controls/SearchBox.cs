@@ -35,8 +35,6 @@ namespace UELocalizationsTool.Controls
             label2.Text = string.Empty;
         }
 
-        // Оптимізований метод IsMatch
-        // Тепер приймає текст для пошуку як параметр, що усуває повторне звернення до InputSearch.Text
         private bool IsMatch(string value, string searchText)
         {
             if (string.IsNullOrWhiteSpace(searchText))
@@ -45,22 +43,18 @@ namespace UELocalizationsTool.Controls
             return value.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        // Оптимізований і спрощений метод FindCell
         private DataGridViewCell FindCell(int startRowIndex, string searchText, bool searchUpwards = false)
         {
             int step = searchUpwards ? -1 : 1;
             int count = DataGridView.Rows.Count;
 
-            // Якщо таблиця порожня або колонка не існує, виходимо
             if (count == 0 || !DataGridView.Columns.Contains(_columnName))
                 return null;
 
-            // Цикл пошуку
             for (int i = 0; i < count; i++)
             {
                 int rowIndex = (startRowIndex + i * step + count) % count;
 
-                // Перевірка на вихід за межі, щоб уникнути помилок
                 if (rowIndex < 0 || rowIndex >= count) continue;
 
                 DataGridViewCell cell = DataGridView.Rows[rowIndex].Cells[_columnName];
@@ -80,7 +74,6 @@ namespace UELocalizationsTool.Controls
                 return;
             }
 
-            // Починаємо пошук з наступного рядка після поточного
             int startIndex = _currentRowIndex == -1 ? 0 : _currentRowIndex + 1;
             var cell = FindCell(startIndex, InputSearch.Text);
 
@@ -102,7 +95,6 @@ namespace UELocalizationsTool.Controls
                 return;
             }
 
-            // Починаємо пошук з попереднього рядка від поточного
             int startIndex = _currentRowIndex == -1 ? DataGridView.Rows.Count - 1 : _currentRowIndex - 1;
             var cell = FindCell(startIndex, InputSearch.Text, true);
 
@@ -119,8 +111,8 @@ namespace UELocalizationsTool.Controls
         private void Failedmessage()
         {
             MessageBox.Show(
-                text: $"The searched value '{InputSearch.Text}' not found.",
-                caption: "Search Result",
+                text: $"'{InputSearch.Text}' не знайдено.",
+                caption: "Результат пошуку",
                 buttons: MessageBoxButtons.OK,
                 icon: MessageBoxIcon.Warning
             );
@@ -164,8 +156,6 @@ namespace UELocalizationsTool.Controls
             txtReplace.Focus();
         }
 
-        // Оптимізований метод CountTotalMatches
-        // Тепер перевіряє тільки одну колонку, що значно швидше
         public int CountTotalMatches()
         {
             if (string.IsNullOrWhiteSpace(InputSearch.Text) || DataGridView.Rows.Count == 0 || !DataGridView.Columns.Contains(_columnName))
@@ -198,7 +188,6 @@ namespace UELocalizationsTool.Controls
             listView1.Items.Clear();
             string searchText = InputSearch.Text;
 
-            // Оптимізований цикл
             if (DataGridView.Columns.Contains(_columnName))
             {
                 foreach (DataGridViewRow row in DataGridView.Rows)
@@ -221,7 +210,7 @@ namespace UELocalizationsTool.Controls
         {
             if (string.IsNullOrWhiteSpace(InputSearch.Text) || string.IsNullOrWhiteSpace(txtReplace.Text))
             {
-                MessageBox.Show("Search or replace text cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Поле для пошуку або заміни тексту не може бути порожнім.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -246,7 +235,6 @@ namespace UELocalizationsTool.Controls
             }
         }
 
-        // Винесено в окремий приватний метод для чистоти коду
         private void ReplaceCell(DataGridViewCell cell)
         {
             if (cell?.Value == null) return;
@@ -270,13 +258,13 @@ namespace UELocalizationsTool.Controls
         {
             if (DataGridView.Rows.Count == 0)
             {
-                MessageBox.Show("No data found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Текст не знайдено.", "Результат пошуку", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(InputSearch.Text) || string.IsNullOrWhiteSpace(txtReplace.Text))
             {
-                MessageBox.Show("Search or replace text cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Поле для пошуку або заміни тексту не може бути порожнім.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -284,7 +272,6 @@ namespace UELocalizationsTool.Controls
             string searchText = InputSearch.Text;
             string replaceText = txtReplace.Text;
 
-            // Оптимізація для швидкого оновлення UI
             DataGridView.SuspendLayout();
             try
             {
@@ -305,7 +292,7 @@ namespace UELocalizationsTool.Controls
                 DataGridView.ResumeLayout();
             }
 
-            MessageBox.Show($"Total matches replaced: {totalMatches}", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Загальна кількість замін: {totalMatches}", "Результат пошуку", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
