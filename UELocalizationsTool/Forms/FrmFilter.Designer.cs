@@ -51,176 +51,176 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(348, 278);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(324, 340);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 28);
+            this.button1.Size = new System.Drawing.Size(128, 35);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Apply";
+            this.button1.Text = "Застосувати";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(16, 31);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(16, 39);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(228, 244);
+            this.listBox1.Size = new System.Drawing.Size(228, 304);
             this.listBox1.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Location = new System.Drawing.Point(16, 14);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 16);
+            this.label1.Size = new System.Drawing.Size(67, 20);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Filter Values:";
+            this.label1.Text = "Фільтри:";
             // 
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(304, 31);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(304, 39);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(275, 22);
+            this.textBox1.Size = new System.Drawing.Size(275, 27);
             this.textBox1.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(255, 34);
+            this.label3.Location = new System.Drawing.Point(255, 42);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 16);
+            this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Input:";
+            this.label3.Text = "Ввід:";
             // 
             // Add
             // 
             this.Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Add.Location = new System.Drawing.Point(588, 28);
-            this.Add.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Add.Location = new System.Drawing.Point(588, 35);
+            this.Add.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Add.Name = "Add";
-            this.Add.Size = new System.Drawing.Size(153, 28);
+            this.Add.Size = new System.Drawing.Size(175, 35);
             this.Add.TabIndex = 6;
-            this.Add.Text = "Add";
+            this.Add.Text = "Додати";
             this.Add.UseVisualStyleBackColor = true;
             this.Add.Click += new System.EventHandler(this.Add_Click);
             // 
             // RemoveSelected
             // 
             this.RemoveSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemoveSelected.Location = new System.Drawing.Point(588, 64);
-            this.RemoveSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RemoveSelected.Location = new System.Drawing.Point(588, 80);
+            this.RemoveSelected.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.RemoveSelected.Name = "RemoveSelected";
-            this.RemoveSelected.Size = new System.Drawing.Size(151, 28);
+            this.RemoveSelected.Size = new System.Drawing.Size(175, 35);
             this.RemoveSelected.TabIndex = 7;
-            this.RemoveSelected.Text = "Remove Selected";
+            this.RemoveSelected.Text = "Видалити вибране";
             this.RemoveSelected.UseVisualStyleBackColor = true;
             this.RemoveSelected.Click += new System.EventHandler(this.RemoveSelected_Click);
             // 
             // ClearList
             // 
             this.ClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearList.Location = new System.Drawing.Point(588, 100);
-            this.ClearList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClearList.Location = new System.Drawing.Point(588, 125);
+            this.ClearList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ClearList.Name = "ClearList";
-            this.ClearList.Size = new System.Drawing.Size(151, 28);
+            this.ClearList.Size = new System.Drawing.Size(175, 35);
             this.ClearList.TabIndex = 8;
-            this.ClearList.Text = "Clear List";
+            this.ClearList.Text = "Очистити список";
             this.ClearList.UseVisualStyleBackColor = true;
             this.ClearList.Click += new System.EventHandler(this.ClearList_Click);
             // 
             // matchcase
             // 
             this.matchcase.AutoSize = true;
-            this.matchcase.Location = new System.Drawing.Point(304, 71);
-            this.matchcase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.matchcase.Location = new System.Drawing.Point(304, 89);
+            this.matchcase.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.matchcase.Name = "matchcase";
-            this.matchcase.Size = new System.Drawing.Size(98, 20);
+            this.matchcase.Size = new System.Drawing.Size(172, 24);
             this.matchcase.TabIndex = 9;
-            this.matchcase.Text = "Match case";
+            this.matchcase.Text = "Враховувати регістр";
             this.matchcase.UseVisualStyleBackColor = true;
             // 
             // BtnClose
             // 
             this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtnClose.Location = new System.Drawing.Point(588, 135);
-            this.BtnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnClose.Location = new System.Drawing.Point(588, 169);
+            this.BtnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(151, 28);
+            this.BtnClose.Size = new System.Drawing.Size(175, 35);
             this.BtnClose.TabIndex = 10;
-            this.BtnClose.Text = "Close";
+            this.BtnClose.Text = "Закрити";
             this.BtnClose.UseVisualStyleBackColor = true;
             this.BtnClose.Click += new System.EventHandler(this.Close_Click);
             // 
             // regularexpression
             // 
             this.regularexpression.AutoSize = true;
-            this.regularexpression.Location = new System.Drawing.Point(304, 100);
-            this.regularexpression.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.regularexpression.Location = new System.Drawing.Point(304, 125);
+            this.regularexpression.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.regularexpression.Name = "regularexpression";
-            this.regularexpression.Size = new System.Drawing.Size(146, 20);
+            this.regularexpression.Size = new System.Drawing.Size(157, 24);
             this.regularexpression.TabIndex = 11;
-            this.regularexpression.Text = "Regular expression";
+            this.regularexpression.Text = "Регулярний вираз";
             this.regularexpression.UseVisualStyleBackColor = true;
             this.regularexpression.CheckedChanged += new System.EventHandler(this.RegularExpression_CheckedChanged);
             // 
             // reversemode
             // 
             this.reversemode.AutoSize = true;
-            this.reversemode.Location = new System.Drawing.Point(304, 127);
-            this.reversemode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.reversemode.Location = new System.Drawing.Point(304, 159);
+            this.reversemode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.reversemode.Name = "reversemode";
-            this.reversemode.Size = new System.Drawing.Size(119, 20);
+            this.reversemode.Size = new System.Drawing.Size(154, 24);
             this.reversemode.TabIndex = 12;
-            this.reversemode.Text = "Reverse mode";
+            this.reversemode.Text = "Зворотній режим";
             this.reversemode.UseVisualStyleBackColor = true;
             // 
             // Columns
             // 
             this.Columns.FormattingEnabled = true;
-            this.Columns.Location = new System.Drawing.Point(77, 4);
-            this.Columns.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Columns.Location = new System.Drawing.Point(134, 6);
+            this.Columns.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Columns.Name = "Columns";
-            this.Columns.Size = new System.Drawing.Size(207, 24);
+            this.Columns.Size = new System.Drawing.Size(193, 28);
             this.Columns.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 7);
+            this.label2.Location = new System.Drawing.Point(48, 9);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 16);
+            this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Column:";
+            this.label2.Text = "Стовпець:";
             // 
             // ColumnPanel
             // 
             this.ColumnPanel.Controls.Add(this.Columns);
             this.ColumnPanel.Controls.Add(this.label2);
-            this.ColumnPanel.Location = new System.Drawing.Point(281, 155);
-            this.ColumnPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ColumnPanel.Location = new System.Drawing.Point(252, 194);
+            this.ColumnPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ColumnPanel.Name = "ColumnPanel";
-            this.ColumnPanel.Size = new System.Drawing.Size(299, 33);
+            this.ColumnPanel.Size = new System.Drawing.Size(335, 41);
             this.ColumnPanel.TabIndex = 15;
             this.ColumnPanel.Visible = false;
             // 
             // FrmFilter
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(776, 311);
+            this.ClientSize = new System.Drawing.Size(776, 389);
             this.Controls.Add(this.ColumnPanel);
             this.Controls.Add(this.reversemode);
             this.Controls.Add(this.regularexpression);
@@ -235,17 +235,18 @@
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(794, 358);
+            this.MaximumSize = new System.Drawing.Size(794, 436);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(794, 358);
+            this.MinimumSize = new System.Drawing.Size(794, 436);
             this.Name = "FrmFilter";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Фільтрування";
+            this.Text = "Фільтрування даних";
             this.Load += new System.EventHandler(this.FrmFilter_Load);
             this.ColumnPanel.ResumeLayout(false);
             this.ColumnPanel.PerformLayout();

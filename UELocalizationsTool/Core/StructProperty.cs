@@ -63,7 +63,7 @@ namespace AssetParser
                 catch (Exception ex)
                 {
                     _uexp.IsGood = false;
-                    ConsoleMode.Print($"Bug here: {ex.Message}", ConsoleColor.Red, ConsoleMode.ConsoleModeType.Error);
+                    ConsoleMode.Print($"Error: {ex.Message}", ConsoleColor.Red, ConsoleMode.ConsoleModeType.Error);
                     break;
                 }
             }
@@ -252,7 +252,7 @@ namespace AssetParser
                 case "StrProperty": new ReadStringProperty(memoryList, _uexp, propertyName, modify); break;
                 case "TextProperty": new TextHistory(memoryList, _uexp, propertyName, modify); break;
                 default:
-                    throw new NotSupportedException($"Unknown simple property type: {propertyType}");
+                    throw new NotSupportedException($"Невизначений тип властивості: {propertyType}");
             }
         }
     }

@@ -52,7 +52,7 @@ namespace UELocalizationsTool.Core.locres
                 {
                     return this[index];
                 }
-                throw new KeyNotFoundException($"key '{key}' not found.");
+                throw new KeyNotFoundException($"ID '{key}' не знайдено.");
             }
             set
             {
@@ -63,7 +63,7 @@ namespace UELocalizationsTool.Core.locres
                 }
                 else
                 {
-                    throw new KeyNotFoundException($"key '{key}' not found.");
+                    throw new KeyNotFoundException($"ID '{key}' не знайдено.");
                 }
             }
         }
@@ -133,7 +133,7 @@ namespace UELocalizationsTool.Core.locres
                 {
                     return this[index];
                 }
-                throw new KeyNotFoundException($"key '{Name}' not found.");
+                throw new KeyNotFoundException($"ID '{Name}' не знайдено.");
             }
             set
             {
@@ -144,7 +144,7 @@ namespace UELocalizationsTool.Core.locres
                 }
                 else
                 {
-                    throw new KeyNotFoundException($"key '{Name}' not found.");
+                    throw new KeyNotFoundException($"ID '{Name}' не знайдено.");
                 }
             }
         }

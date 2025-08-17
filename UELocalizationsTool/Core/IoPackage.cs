@@ -145,7 +145,7 @@ namespace AssetParser
 
             if (bHasVersioningInfo)
             {
-                throw new Exception("Not supported uasset!");
+                throw new Exception("Дана версія uasset не підтримується!");
             }
 
             //----------------------

@@ -30,13 +30,11 @@ namespace UELocalizationsTool
         private bool ReverseMode = false;
         private List<string> ArrayValues;
 
-        // Конструктор тепер ініціалізує поля і не є асинхронним
         public Commands()
         {
             Strings = new List<List<string>>();
         }
 
-        // Вся логіка переміщена в асинхронний метод
         public async Task RunAsync(string Options, string SourcePath, Args args)
         {
             Flags = args;
@@ -219,7 +217,6 @@ namespace UELocalizationsTool
             Console.Write(ConsoleText);
             Console.ForegroundColor = ConsoleColor.White;
 
-            // Виконуємо сканування файлів у фоновому потоці
             string[] LanguageFiles = await Task.Run(() =>
             {
                 return Directory.GetFiles(FolderPath, "*.*", SearchOption.AllDirectories)
@@ -233,12 +230,11 @@ namespace UELocalizationsTool
             Console.Write("Done\n");
             Console.ForegroundColor = ConsoleColor.White;
 
-            if (LanguageFiles.Length == 0) // Використовуємо .Length, це ефективніше, ніж .Count()
+            if (LanguageFiles.Length == 0)
             {
                 throw new Exception($"This directory '{FolderPath}' not contine any language files.");
             }
 
-            // Виконуємо цикл обробки файлів у фоновому потоці
             await Task.Run(() =>
             {
                 for (int i = 0; i < LanguageFiles.Length; i++)
@@ -250,7 +246,6 @@ namespace UELocalizationsTool
 
                     try
                     {
-                        // Припускаємо, що метод Export() є синхронним, тому він виконується всередині Task.Run
                         List<List<string>> Souce = Export(LanguageFiles[i]);
 
                         if (Flags.HasFlag(Args.filter))
@@ -375,7 +370,6 @@ namespace UELocalizationsTool
 
         private async Task ImportFolder(string FolderPath, string[] Values, string Option)
         {
-            // Виконуємо всю логіку імпорту у фоновому потоці
             await Task.Run(() =>
             {
                 if (!Directory.Exists(FolderPath))

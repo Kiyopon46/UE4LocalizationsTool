@@ -91,7 +91,6 @@ namespace UELocalizationsTool
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.searchBox = new UELocalizationsTool.Controls.SearchBox();
             this.StatusBlock = new System.Windows.Forms.Panel();
-            this.StatusText = new System.Windows.Forms.Label();
             this.StatusTitle = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
@@ -174,8 +173,8 @@ namespace UELocalizationsTool
             this.copyToolStripMenuItem1,
             this.pasteToolStripMenuItem1});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(110, 24);
-            this.editToolStripMenuItem.Text = "Редагування";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(99, 30);
+            this.editToolStripMenuItem.Text = "Редагувати";
             // 
             // exportAllTextToolStripMenuItem
             // 
@@ -385,7 +384,7 @@ namespace UELocalizationsTool
             this.toolStripSeparator5,
             this.transferTextHashFromOriginalLocresToolStripMenuItem});
             this.locresOprationsToolStripMenuItem.Name = "locresOprationsToolStripMenuItem";
-            this.locresOprationsToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
+            this.locresOprationsToolStripMenuItem.Size = new System.Drawing.Size(85, 30);
             this.locresOprationsToolStripMenuItem.Text = "Операції";
             // 
             // editSelectedRowToolStripMenuItem
@@ -413,21 +412,21 @@ namespace UELocalizationsTool
             // 
             this.mergeLocresFileToolStripMenuItem.Name = "mergeLocresFileToolStripMenuItem";
             this.mergeLocresFileToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
-            this.mergeLocresFileToolStripMenuItem.Text = "Об’єднати .locres";
+            this.mergeLocresFileToolStripMenuItem.Text = "Об’єднати декілька locres";
             this.mergeLocresFileToolStripMenuItem.Click += new System.EventHandler(this.MergeLocresFileToolStripMenuItem_Click);
             // 
             // mergeLocresFileStableNEWToolStripMenuItem
             // 
             this.mergeLocresFileStableNEWToolStripMenuItem.Name = "mergeLocresFileStableNEWToolStripMenuItem";
             this.mergeLocresFileStableNEWToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
-            this.mergeLocresFileStableNEWToolStripMenuItem.Text = "Об’єднати .locres (робоче)";
+            this.mergeLocresFileStableNEWToolStripMenuItem.Text = "Об’єднати декілька locres (робоче)";
             this.mergeLocresFileStableNEWToolStripMenuItem.Click += new System.EventHandler(this.MergeLocresFileStableNEWToolStripMenuItem_Click);
             // 
             // mergeUassetFileToolStripMenuItem
             // 
             this.mergeUassetFileToolStripMenuItem.Name = "mergeUassetFileToolStripMenuItem";
             this.mergeUassetFileToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
-            this.mergeUassetFileToolStripMenuItem.Text = "Об’єднати .uasset (бета)";
+            this.mergeUassetFileToolStripMenuItem.Text = "Об’єднати декілька uasset (бета)";
             this.mergeUassetFileToolStripMenuItem.Click += new System.EventHandler(this.MergeUassetFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
@@ -439,7 +438,7 @@ namespace UELocalizationsTool
             // 
             this.transferTextHashFromOriginalLocresToolStripMenuItem.Name = "transferTextHashFromOriginalLocresToolStripMenuItem";
             this.transferTextHashFromOriginalLocresToolStripMenuItem.Size = new System.Drawing.Size(366, 26);
-            this.transferTextHashFromOriginalLocresToolStripMenuItem.Text = "Перенести хеші з оригінального .locres";
+            this.transferTextHashFromOriginalLocresToolStripMenuItem.Text = "Перенести хеші з оригінального locres";
             this.transferTextHashFromOriginalLocresToolStripMenuItem.Click += new System.EventHandler(this.TransferTextHashFromOriginalLocresToolStripMenuItem_Click);
             // 
             // ToolToolStripMenuItem
@@ -468,7 +467,7 @@ namespace UELocalizationsTool
             | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
             this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(344, 26);
-            this.darkModeToolStripMenuItem.Text = "Темна тема";
+            this.darkModeToolStripMenuItem.Text = "Темна тема (обережно)";
             this.darkModeToolStripMenuItem.ToolTipText = "Програма перевідкривається, якщо був відкритий файл – зміни втрачаються.";
             this.darkModeToolStripMenuItem.CheckedChanged += new System.EventHandler(this.DarkModeToolStripMenuItem_CheckedChanged);
             // 
@@ -521,10 +520,10 @@ namespace UELocalizationsTool
             // StateLabel
             // 
             this.StateLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.StateLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.StateLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.StateLabel.ForeColor = System.Drawing.Color.Maroon;
             this.StateLabel.Name = "StateLabel";
-            this.StateLabel.Size = new System.Drawing.Size(69, 21);
+            this.StateLabel.Size = new System.Drawing.Size(69, 27);
             this.StateLabel.Text = "----------";
             // 
             // toolStripSeparator3
@@ -549,12 +548,12 @@ namespace UELocalizationsTool
             this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.dataGridView1.IsFilterApplied = false;
             this.dataGridView1.Location = new System.Drawing.Point(0, 24);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(982, 499);
+            this.dataGridView1.Size = new System.Drawing.Size(982, 622);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.FilterApplied += new System.EventHandler(this.DataGridView1_FilterApplied);
             this.dataGridView1.FilterCleared += new System.EventHandler(this.DataGridView1_FilterCleared);
@@ -589,9 +588,9 @@ namespace UELocalizationsTool
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Green;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(7, 31);
+            this.pictureBox1.Size = new System.Drawing.Size(10, 37);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Visible = false;
@@ -602,10 +601,11 @@ namespace UELocalizationsTool
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBox.DataGridView = this.dataGridView1;
             this.searchBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.searchBox.Location = new System.Drawing.Point(0, 523);
-            this.searchBox.Margin = new System.Windows.Forms.Padding(4);
+            this.searchBox.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.searchBox.Location = new System.Drawing.Point(0, 646);
+            this.searchBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(982, 35);
+            this.searchBox.Size = new System.Drawing.Size(982, 52);
             this.searchBox.TabIndex = 2;
             this.searchBox.Visible = false;
             // 
@@ -615,45 +615,35 @@ namespace UELocalizationsTool
             this.StatusBlock.AutoSize = true;
             this.StatusBlock.BackColor = System.Drawing.Color.White;
             this.StatusBlock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StatusBlock.Controls.Add(this.StatusText);
             this.StatusBlock.Controls.Add(this.StatusTitle);
             this.StatusBlock.Controls.Add(this.pictureBox2);
-            this.StatusBlock.Location = new System.Drawing.Point(284, 202);
-            this.StatusBlock.Margin = new System.Windows.Forms.Padding(4);
+            this.StatusBlock.Location = new System.Drawing.Point(284, 252);
+            this.StatusBlock.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.StatusBlock.Name = "StatusBlock";
-            this.StatusBlock.Size = new System.Drawing.Size(410, 140);
+            this.StatusBlock.Size = new System.Drawing.Size(410, 130);
             this.StatusBlock.TabIndex = 8;
             this.StatusBlock.Visible = false;
-            // 
-            // StatusText
-            // 
-            this.StatusText.AutoSize = true;
-            this.StatusText.Location = new System.Drawing.Point(141, 80);
-            this.StatusText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.StatusText.Name = "StatusText";
-            this.StatusText.Size = new System.Drawing.Size(35, 16);
-            this.StatusText.TabIndex = 2;
-            this.StatusText.Text = "-------";
             // 
             // StatusTitle
             // 
             this.StatusTitle.AutoSize = true;
-            this.StatusTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatusTitle.Location = new System.Drawing.Point(137, 27);
+            this.StatusTitle.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.StatusTitle.Location = new System.Drawing.Point(120, 39);
             this.StatusTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.StatusTitle.Name = "StatusTitle";
-            this.StatusTitle.Size = new System.Drawing.Size(137, 39);
+            this.StatusTitle.Size = new System.Drawing.Size(150, 45);
             this.StatusTitle.TabIndex = 0;
             this.StatusTitle.Text = "----------";
+            this.StatusTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(12, 15);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(110, 110);
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -661,18 +651,19 @@ namespace UELocalizationsTool
             // FrmMain
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 558);
+            this.ClientSize = new System.Drawing.Size(982, 698);
             this.Controls.Add(this.StatusBlock);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.searchBox);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1000, 600);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(1000, 740);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UE Localizations Tool";
@@ -738,7 +729,6 @@ namespace UELocalizationsTool
         private ToolStripMenuItem removeSelectedRowToolStripMenuItem;
         private ToolStripMenuItem addNewRowToolStripMenuItem;
         private ToolStripMenuItem mergeLocresFileToolStripMenuItem;
-        private Label StatusText;
         private Label StatusTitle;
         private PictureBox pictureBox2;
         private Panel StatusBlock;
