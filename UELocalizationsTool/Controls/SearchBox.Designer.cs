@@ -59,7 +59,7 @@ namespace UELocalizationsTool.Controls
             this.SearchHide.AutoSize = true;
             this.SearchHide.Cursor = System.Windows.Forms.Cursors.Hand;
             this.SearchHide.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.SearchHide.Location = new System.Drawing.Point(775, 10);
+            this.SearchHide.Location = new System.Drawing.Point(777, 10);
             this.SearchHide.Name = "SearchHide";
             this.SearchHide.Size = new System.Drawing.Size(19, 20);
             this.SearchHide.TabIndex = 5;
@@ -110,7 +110,7 @@ namespace UELocalizationsTool.Controls
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 40);
+            this.panel1.Size = new System.Drawing.Size(802, 40);
             this.panel1.TabIndex = 0;
             // 
             // label2
@@ -154,7 +154,7 @@ namespace UELocalizationsTool.Controls
             this.Replacepanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.Replacepanel.Location = new System.Drawing.Point(0, 40);
             this.Replacepanel.Name = "Replacepanel";
-            this.Replacepanel.Size = new System.Drawing.Size(800, 40);
+            this.Replacepanel.Size = new System.Drawing.Size(802, 40);
             this.Replacepanel.TabIndex = 1;
             this.Replacepanel.Visible = false;
             // 
@@ -195,7 +195,7 @@ namespace UELocalizationsTool.Controls
             this.label4.AutoSize = true;
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(775, 10);
+            this.label4.Location = new System.Drawing.Point(777, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 20);
             this.label4.TabIndex = 5;
@@ -226,7 +226,7 @@ namespace UELocalizationsTool.Controls
             this.listView1.Location = new System.Drawing.Point(0, 80);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(800, 215);
+            this.listView1.Size = new System.Drawing.Size(802, 215);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -235,25 +235,25 @@ namespace UELocalizationsTool.Controls
             // 
             // RowIndex
             // 
-            this.RowIndex.Text = "Індекс рядка";
-            this.RowIndex.Width = 100;
+            this.RowIndex.Text = "№ рядка";
+            this.RowIndex.Width = 75;
             // 
             // CellValue
             // 
             this.CellValue.Text = "Текст";
-            this.CellValue.Width = 593;
+            this.CellValue.Width = 800;
             // 
             // SearchBox
             // 
             this.AutoSize = true;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.Replacepanel);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Location = new System.Drawing.Point(155, 23);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "SearchBox";
-            this.Size = new System.Drawing.Size(800, 295);
+            this.Size = new System.Drawing.Size(802, 297);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.Replacepanel.ResumeLayout(false);

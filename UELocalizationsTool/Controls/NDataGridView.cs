@@ -124,9 +124,6 @@ public class NDataGridView : DataGridView
         IsFilterApplied = false;
     }
 
-
-
-
     protected override void OnCellValidating(DataGridViewCellValidatingEventArgs e)
     {
         base.OnCellValidating(e);
@@ -138,7 +135,6 @@ public class NDataGridView : DataGridView
             UpdateBackColor(Rows[e.RowIndex].Cells[e.ColumnIndex]);
         }
     }
-
 
     public void SetValue(DataGridViewCell cell, object Value)
     {
@@ -213,13 +209,13 @@ public class NDataGridView : DataGridView
     private void InitializeContextMenu()
     {
         contextMenuStrip = new ContextMenuStrip();
-        ToolStripMenuItem copyMenuItem = new ToolStripMenuItem("Copy");
+        ToolStripMenuItem copyMenuItem = new ToolStripMenuItem("Копіювати");
         copyMenuItem.ShortcutKeyDisplayString = "Ctrl+C";
         copyMenuItem.Click += CopyMenuItem_Click;
         contextMenuStrip.Items.Add(copyMenuItem);
 
 
-        ToolStripMenuItem pasteMenuItem = new ToolStripMenuItem("Paste");
+        ToolStripMenuItem pasteMenuItem = new ToolStripMenuItem("Вставити");
         pasteMenuItem.ShortcutKeyDisplayString = "Ctrl+V";
         pasteMenuItem.Click += PasteMenuItem_Click;
         contextMenuStrip.Items.Add(pasteMenuItem);

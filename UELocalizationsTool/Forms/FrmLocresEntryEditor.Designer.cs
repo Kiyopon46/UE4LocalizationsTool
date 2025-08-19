@@ -345,6 +345,8 @@ namespace UELocalizationsTool.Forms
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Редактор рядка";
+            this.MaximizeBox = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.ResumeLayout(false);
             this.PerformLayout();
 

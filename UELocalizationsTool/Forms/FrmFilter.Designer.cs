@@ -51,7 +51,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(324, 340);
+            this.button1.Location = new System.Drawing.Point(324, 308);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(128, 35);
@@ -85,16 +85,16 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(304, 39);
+            this.textBox1.Location = new System.Drawing.Point(57, 13);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(275, 27);
+            this.textBox1.Size = new System.Drawing.Size(255, 27);
             this.textBox1.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(255, 42);
+            this.label3.Location = new System.Drawing.Point(8, 16);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 20);
@@ -104,7 +104,7 @@
             // Add
             // 
             this.Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Add.Location = new System.Drawing.Point(588, 35);
+            this.Add.Location = new System.Drawing.Point(588, 39);
             this.Add.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Add.Name = "Add";
             this.Add.Size = new System.Drawing.Size(175, 35);
@@ -116,7 +116,7 @@
             // RemoveSelected
             // 
             this.RemoveSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemoveSelected.Location = new System.Drawing.Point(588, 80);
+            this.RemoveSelected.Location = new System.Drawing.Point(588, 87);
             this.RemoveSelected.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.RemoveSelected.Name = "RemoveSelected";
             this.RemoveSelected.Size = new System.Drawing.Size(175, 35);
@@ -128,7 +128,7 @@
             // ClearList
             // 
             this.ClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearList.Location = new System.Drawing.Point(588, 125);
+            this.ClearList.Location = new System.Drawing.Point(588, 135);
             this.ClearList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ClearList.Name = "ClearList";
             this.ClearList.Size = new System.Drawing.Size(175, 35);
@@ -140,7 +140,7 @@
             // matchcase
             // 
             this.matchcase.AutoSize = true;
-            this.matchcase.Location = new System.Drawing.Point(304, 89);
+            this.matchcase.Location = new System.Drawing.Point(94, 50);
             this.matchcase.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.matchcase.Name = "matchcase";
             this.matchcase.Size = new System.Drawing.Size(172, 24);
@@ -152,7 +152,7 @@
             // 
             this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtnClose.Location = new System.Drawing.Point(588, 169);
+            this.BtnClose.Location = new System.Drawing.Point(588, 183);
             this.BtnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(175, 35);
@@ -164,7 +164,7 @@
             // regularexpression
             // 
             this.regularexpression.AutoSize = true;
-            this.regularexpression.Location = new System.Drawing.Point(304, 125);
+            this.regularexpression.Location = new System.Drawing.Point(94, 79);
             this.regularexpression.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.regularexpression.Name = "regularexpression";
             this.regularexpression.Size = new System.Drawing.Size(157, 24);
@@ -176,7 +176,7 @@
             // reversemode
             // 
             this.reversemode.AutoSize = true;
-            this.reversemode.Location = new System.Drawing.Point(304, 159);
+            this.reversemode.Location = new System.Drawing.Point(94, 109);
             this.reversemode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.reversemode.Name = "reversemode";
             this.reversemode.Size = new System.Drawing.Size(154, 24);
@@ -186,17 +186,18 @@
             // 
             // Columns
             // 
+            this.Columns.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Columns.FormattingEnabled = true;
-            this.Columns.Location = new System.Drawing.Point(134, 6);
+            this.Columns.Location = new System.Drawing.Point(94, 161);
             this.Columns.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Columns.Name = "Columns";
-            this.Columns.Size = new System.Drawing.Size(193, 28);
+            this.Columns.Size = new System.Drawing.Size(218, 28);
             this.Columns.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(48, 9);
+            this.label2.Location = new System.Drawing.Point(8, 164);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
@@ -206,11 +207,16 @@
             // ColumnPanel
             // 
             this.ColumnPanel.Controls.Add(this.Columns);
+            this.ColumnPanel.Controls.Add(this.regularexpression);
+            this.ColumnPanel.Controls.Add(this.matchcase);
+            this.ColumnPanel.Controls.Add(this.reversemode);
             this.ColumnPanel.Controls.Add(this.label2);
-            this.ColumnPanel.Location = new System.Drawing.Point(252, 194);
+            this.ColumnPanel.Controls.Add(this.label3);
+            this.ColumnPanel.Controls.Add(this.textBox1);
+            this.ColumnPanel.Location = new System.Drawing.Point(252, 26);
             this.ColumnPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ColumnPanel.Name = "ColumnPanel";
-            this.ColumnPanel.Size = new System.Drawing.Size(335, 41);
+            this.ColumnPanel.Size = new System.Drawing.Size(327, 232);
             this.ColumnPanel.TabIndex = 15;
             this.ColumnPanel.Visible = false;
             // 
@@ -220,17 +226,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(776, 389);
+            this.ClientSize = new System.Drawing.Size(776, 363);
             this.Controls.Add(this.ColumnPanel);
-            this.Controls.Add(this.reversemode);
-            this.Controls.Add(this.regularexpression);
             this.Controls.Add(this.BtnClose);
-            this.Controls.Add(this.matchcase);
             this.Controls.Add(this.ClearList);
             this.Controls.Add(this.RemoveSelected);
             this.Controls.Add(this.Add);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
@@ -240,9 +241,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(794, 436);
+            this.MaximumSize = new System.Drawing.Size(794, 420);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(794, 436);
+            this.MinimumSize = new System.Drawing.Size(794, 410);
             this.Name = "FrmFilter";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
