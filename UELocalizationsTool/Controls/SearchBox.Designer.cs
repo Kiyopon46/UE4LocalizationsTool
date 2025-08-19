@@ -116,6 +116,7 @@ namespace UELocalizationsTool.Controls
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label2.Location = new System.Drawing.Point(740, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 20);
@@ -225,7 +226,7 @@ namespace UELocalizationsTool.Controls
             this.listView1.Location = new System.Drawing.Point(0, 80);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(800, 155);
+            this.listView1.Size = new System.Drawing.Size(800, 215);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -252,7 +253,7 @@ namespace UELocalizationsTool.Controls
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Location = new System.Drawing.Point(155, 23);
             this.Name = "SearchBox";
-            this.Size = new System.Drawing.Size(800, 235);
+            this.Size = new System.Drawing.Size(800, 295);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.Replacepanel.ResumeLayout(false);

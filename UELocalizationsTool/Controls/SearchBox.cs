@@ -124,7 +124,8 @@ namespace UELocalizationsTool.Controls
                 return;
 
             DataGridView.ClearSelection();
-            DataGridView.Rows[rowIndex].Selected = true;
+            DataGridView.CurrentCell = DataGridView.Rows[rowIndex].Cells[colIndex];
+            DataGridView.Rows[rowIndex].Cells[colIndex].Selected = true;
             DataGridView.FirstDisplayedScrollingRowIndex = rowIndex;
             _currentRowIndex = rowIndex;
             _currentColumnIndex = colIndex;
@@ -141,11 +142,12 @@ namespace UELocalizationsTool.Controls
         public new void Show()
         {
             base.Show();
-            InputSearch.Focus();
             if (DataGridView?.CurrentCell != null)
             {
                 InputSearch.Text = DataGridView.CurrentCell.Value?.ToString();
             }
+            InputSearch.Focus();
+            InputSearch.SelectAll();
             label2.Text = string.Empty;
         }
 
