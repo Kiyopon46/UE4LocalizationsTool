@@ -9,9 +9,9 @@
 
 Для тестування швидкості було взято `.locres` файл на **107233** рядка з **мільйоном слів**.
 ### UE4 Localizations Tool 2.7:
-Відкриття `.locres`: **28 с**; Імпорт `CSV`: **2,60 с**; Збереження `.locres`: **2 хв 47 с**.
+Відкриття `.locres`: **28 с 567 мс**; Імпорт `CSV`: **2,983 с**; Збереження `.locres`: **2 хв 49 с 350 мс**.
 ### UE Localizations Tool 2.7.8:
-Відкриття `.locres`: **1,283 с**; Імпорт `CSV`: **2,567 с**; Збереження `.locres`: **2,750 с**.
+Відкриття `.locres`: **1 с 283 мс**; Імпорт `CSV`: **2 с 567 мс**; Збереження `.locres`: **2 с 750 мс**.
 
 Original author of program is **amrshaheen61**
 https://github.com/amrshaheen61/UE4LocalizationsTool
