@@ -13,5 +13,12 @@
 ### UE Localizations Tool 2.7.8:
 Відкриття `.locres`: **1 с 283 мс**; Імпорт `CSV`: **2 с 567 мс**; Збереження `.locres`: **2 с 750 мс**.
 
+Відкриття `.locres` стало приблизно на **95,5%** швидшим.
+
+Імпорт `.csv` став приблизно на **13,9%** швидшим.
+
+Збереження `.locres` стало приблизно на **98,4%** швидшим.
+
+
 Original author of program is **amrshaheen61**
 https://github.com/amrshaheen61/UE4LocalizationsTool
