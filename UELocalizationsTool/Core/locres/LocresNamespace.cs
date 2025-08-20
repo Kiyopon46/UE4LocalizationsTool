@@ -16,10 +16,8 @@ namespace UELocalizationsTool.Core.locres
         public uint ValueHash { get; set; }
         public uint ExternID { get; set; } = 0;
 
-        public HashTable()
-        {
+        public HashTable() { }
 
-        }
         public HashTable(uint NameHash, uint KeyHash = 0, uint ValueHash = 0)
         {
             this.NameHash = NameHash;
@@ -35,8 +33,11 @@ namespace UELocalizationsTool.Core.locres
 
     public class NameSpaceTable : List<StringTable>
     {
+        private Dictionary<string, StringTable> keyLookup = new Dictionary<string, StringTable>();
+
         public uint NameHash { get; set; } = 0;
         public string Name { get; set; }
+
         public NameSpaceTable(string TableName, uint NameHash = 0)
         {
             this.Name = TableName;
@@ -45,40 +46,18 @@ namespace UELocalizationsTool.Core.locres
 
         public StringTable this[string key]
         {
-            get
-            {
-                int index = FindIndex(x => x.Key == key);
-                if (index >= 0)
-                {
-                    return this[index];
-                }
-                throw new KeyNotFoundException($"ID '{key}' не знайдено.");
-            }
-            set
-            {
-                int index = FindIndex(x => x.Key == key);
-                if (index >= 0)
-                {
-                    this[index] = value;
-                }
-                else
-                {
-                    throw new KeyNotFoundException($"ID '{key}' не знайдено.");
-                }
-            }
+            get => keyLookup[key];
+            set => keyLookup[key] = value;
         }
 
-        public bool ContainsKey(string key)
-        {
-            return FindIndex(x => x.Key == key) >= 0;
-        }
+        public bool ContainsKey(string key) => keyLookup.ContainsKey(key);
 
         public void RemoveKey(string key)
         {
-            int index = FindIndex(x => x.Key == key);
-            if (index >= 0)
+            if (keyLookup.TryGetValue(key, out var table))
             {
-                RemoveAt(index);
+                base.Remove(table);
+                keyLookup.Remove(key);
             }
         }
 
@@ -86,6 +65,7 @@ namespace UELocalizationsTool.Core.locres
         {
             table.root = this;
             base.Add(table);
+            keyLookup[table.Key] = table;
         }
     }
 
@@ -98,10 +78,7 @@ namespace UELocalizationsTool.Core.locres
         public uint ExternID { get; set; } = 0;
         public NameSpaceTable root;
 
-        public StringTable()
-        {
-
-        }
+        public StringTable() { }
 
         public StringTable(string TableKey, string TableValue, uint keyHash = 0, uint ValueHash = 0, uint ExternID = 0)
         {
@@ -124,64 +101,55 @@ namespace UELocalizationsTool.Core.locres
 
     public class LocresFile : List<NameSpaceTable>, IAsset
     {
-        public NameSpaceTable this[string Name]
-        {
-            get
-            {
-                int index = FindIndex(x => x.Name == Name);
-                if (index >= 0)
-                {
-                    return this[index];
-                }
-                throw new KeyNotFoundException($"ID '{Name}' не знайдено.");
-            }
-            set
-            {
-                int index = FindIndex(x => x.Name == Name);
-                if (index >= 0)
-                {
-                    this[index] = value;
-                }
-                else
-                {
-                    throw new KeyNotFoundException($"ID '{Name}' не знайдено.");
-                }
-            }
-        }
-
-        bool ContainsKey(string key)
-        {
-            return FindIndex(x => x.Name == key) >= 0;
-        }
-
-        //{7574140E-4A67-FC03-4A15-909DC3377F1B}
+        private Dictionary<string, NameSpaceTable> nsLookup = new Dictionary<string, NameSpaceTable>();
         private readonly byte[] MagicGUID = { 0x0E, 0x14, 0x74, 0x75, 0x67, 0x4A, 0x03, 0xFC, 0x4A, 0x15, 0x90, 0x9D, 0xC3, 0x37, 0x7F, 0x1B };
-        public bool IsGood { get; set; } = true;
+
         MemoryList locresData;
         public LocresVersion Version;
+        public bool IsGood { get; set; } = true;
+
         public LocresFile(string FilePath)
         {
             locresData = new MemoryList(FilePath);
             Load();
         }
 
-        void Load()
+        public new void Add(NameSpaceTable ns)
+        {
+            base.Add(ns);
+            nsLookup[ns.Name] = ns;
+        }
+
+        public NameSpaceTable this[string Name]
+        {
+            get => nsLookup[Name];
+            set => nsLookup[Name] = value;
+        }
+
+        public bool ContainsKey(string Name) => nsLookup.ContainsKey(Name);
+
+        private void Load()
         {
             locresData.Seek(0);
             byte[] fileGUID = locresData.GetBytes(16);
 
-            if (fileGUID.SequenceEqual(MagicGUID))
-                Version = (LocresVersion)locresData.GetByteValue();
-            else
+            bool guidsEqual = true;
+            for (int i = 0; i < 16; i++)
             {
-                Version = LocresVersion.Legacy;
-                locresData.Seek(0);
+                if (fileGUID[i] != MagicGUID[i])
+                {
+                    guidsEqual = false;
+                    break;
+                }
             }
+
+            Version = guidsEqual ? (LocresVersion)locresData.GetByteValue() : LocresVersion.Legacy;
+            if (!guidsEqual) locresData.Seek(0);
 
             if (Version > LocresVersion.Optimized_CityHash64_ExternID_UTF16)
                 throw new Exception("Дана версія locres не підтримується");
 
-            string[] localizedStrings = new string[0];
+            List<string> localizedStrings = null;
 
             if (Version >= LocresVersion.Compact)
             {
@@ -191,12 +159,11 @@ namespace UELocalizationsTool.Core.locres
                 locresData.Seek(localizedStringOffset);
 
                 int localizedStringCount = locresData.GetIntValue();
-                localizedStrings = new string[localizedStringCount];
+                localizedStrings = new List<string>(localizedStringCount);
 
                 for (int i = 0; i < localizedStringCount; i++)
                 {
-                    localizedStrings[i] = locresData.GetStringUE();
-
+                    localizedStrings.Add(locresData.GetStringUE());
                     if (Version >= LocresVersion.Optimized)
                         locresData.Skip(4); // ref count
                 }
@@ -250,9 +217,7 @@ namespace UELocalizationsTool.Core.locres
                         int localizedIndex = locresData.GetIntValue();
                         string value = localizedStrings[localizedIndex];
 
-                        uint externID = 0;
-                        if (Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
-                            externID = locresData.GetUIntValue();
+                        uint externID = Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16 ? locresData.GetUIntValue() : 0;
 
                         AddString(nsStr, keyStr, value, nsHash, keyHash, valueHash);
                         if (Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
@@ -262,21 +227,185 @@ namespace UELocalizationsTool.Core.locres
             }
         }
 
-        void ReadTextKey(MemoryList memoryList, LocresVersion locresVersion, out uint StrHash, out string Str)
+        private void ReadTextKey(MemoryList memoryList, LocresVersion locresVersion, out uint StrHash, out string Str)
         {
-            if (locresVersion >= LocresVersion.Optimized)
-            {
-                StrHash = memoryList.GetUIntValue(); // crc32
-            }
-            else
-            {
-                StrHash = 0;
-            }
-
+            StrHash = locresVersion >= LocresVersion.Optimized ? memoryList.GetUIntValue() : 0;
             Str = memoryList.GetStringUE();
         }
 
-        //build
+        public void AddString(string NameSpace, string key, string value, uint NameSpaceHash = 0, uint keyHash = 0, uint ValueHash = 0, uint ExternID = 0)
+        {
+            if (!ContainsKey(NameSpace))
+                Add(new NameSpaceTable(NameSpace, NameSpaceHash));
+
+            var nsTable = this[NameSpace];
+
+            if (!nsTable.ContainsKey(key))
+            {
+                var newEntry = new StringTable(key, value, keyHash, ValueHash, ExternID);
+                nsTable.Add(newEntry);
+            }
+            else
+            {
+                var existingEntry = nsTable[key];
+                existingEntry.Value = value;
+
+                if (Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
+                    existingEntry.ExternID = ExternID;
+
+                if (keyHash != 0) existingEntry.KeyHash = keyHash;
+                if (ValueHash != 0) existingEntry.ValueHash = ValueHash;
+                if (NameSpaceHash != 0) nsTable.NameHash = NameSpaceHash;
+            }
+        }
+
+        public void RemoveString(string NameSpace, string key)
+        {
+            this[NameSpace].RemoveKey(key);
+        }
+
+        public void RemoveNameSpace(string NameSpace)
+        {
+            if (nsLookup.TryGetValue(NameSpace, out var ns))
+            {
+                base.Remove(ns);
+                nsLookup.Remove(NameSpace);
+            }
+        }
+
+        public uint Optimized_CityHash64_UTF16Hash(string value)
+        {
+            var Hash = CityHash.CityHash64(Encoding.Unicode.GetBytes(value));
+            return (uint)Hash + ((uint)(Hash >> 32) * 23);
+        }
+
+        public uint CalcHash(string Str)
+        {
+            if (string.IsNullOrEmpty(Str))
+                return 0;
+
+            if (Version == LocresVersion.Optimized_CityHash64_UTF16 ||
+                Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
+                return Optimized_CityHash64_UTF16Hash(Str);
+            else if (Version >= LocresVersion.Optimized)
+                return Str.StrCrc32();
+            else
+                return 0;
+        }
+
+        public uint CalcHashExperimental(string Str)
+        {
+            if (string.IsNullOrEmpty(Str)) return 0;
+
+            if (Version == LocresVersion.Optimized_CityHash64_UTF16)
+                return Optimized_CityHash64_UTF16Hash(Str);
+            else
+                return Str.StrCrc32();
+        }
+
+        public HashTable GetHash(string nameSpace, string key)
+        {
+            if (!ContainsKey(nameSpace)) return null;
+            var ns = this[nameSpace];
+            if (!ns.ContainsKey(key)) return null;
+            var entry = ns[key];
+            return new HashTable(ns.NameHash, entry.KeyHash, entry.ValueHash)
+            {
+                ExternID = entry.ExternID
+            };
+        }
+
+        // === IAsset interface methods ===
+
+        public void AddItemsToDataGridView(DataGridView dataGrid)
+        {
+            dataGrid.DataSource = null;
+            dataGrid.Rows.Clear();
+            dataGrid.Columns.Clear();
+
+            var dataTable = new System.Data.DataTable();
+            dataTable.Columns.Add("ID", typeof(string));
+            dataTable.Columns.Add("Text", typeof(string));
+            dataTable.Columns.Add("Hash Table", typeof(HashTable));
+
+            foreach (var ns in this)
+            {
+                foreach (var entry in ns)
+                {
+                    string name = string.IsNullOrEmpty(ns.Name) ? entry.Key : ns.Name + "::" + entry.Key;
+                    dataTable.Rows.Add(
+                        name,
+                        entry.Value,
+                        new HashTable(ns.NameHash, entry.KeyHash, entry.ValueHash) { ExternID = entry.ExternID }
+                    );
+                }
+            }
+
+            dataGrid.DataSource = dataTable;
+            dataGrid.Columns["Text"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGrid.Columns["Hash Table"].Visible = false;
+        }
+
+        public void LoadFromDataGridView(DataGridView dataGrid)
+        {
+            Clear();
+            nsLookup.Clear();
+
+            foreach (DataGridViewRow row in dataGrid.Rows)
+            {
+                var idCellValue = row.Cells["ID"].Value?.ToString() ?? "";
+                var items = idCellValue.Split(new string[] { "::" }, StringSplitOptions.None);
+
+                var nsStr = items.Length == 2 ? items[0] : "";
+                var keyStr = items.Length == 2 ? items[1] : items[0];
+
+                if (row.Cells["Hash Table"].Value is HashTable hashTable)
+                {
+                    AddString(
+                        nsStr,
+                        keyStr,
+                        row.Cells["Text"].Value?.ToString() ?? "",
+                        hashTable.NameHash,
+                        hashTable.KeyHash,
+                        hashTable.ValueHash,
+                        hashTable.ExternID
+                    );
+                }
+            }
+        }
+
+        public void SaveFile(string filePath)
+        {
+            Save();
+            locresData.WriteFile(filePath);
+        }
+
+        public List<List<string>> ExtractTexts()
+        {
+            var result = new List<List<string>>();
+            foreach (var ns in this)
+            {
+                foreach (var entry in ns)
+                {
+                    result.Add(new List<string>() { string.IsNullOrEmpty(ns.Name) ? entry.Key : ns.Name + "::" + entry.Key, entry.Value });
+                }
+            }
+            return result;
+        }
+
+        public void ImportTexts(List<List<string>> strings)
+        {
+            int i = 0;
+            foreach (var ns in this)
+            {
+                foreach (var entry in ns)
+                {
+                    entry.Value = strings[i++][1];
+                }
+            }
+        }
+
+        // === Saving ===
         private void Save()
         {
             locresData.Clear();
@@ -291,24 +420,20 @@ namespace UELocalizationsTool.Core.locres
             locresData.SetByteValue((byte)Version);
 
             long localizedStringOffsetPos = locresData.GetPosition();
-            locresData.SetInt64Value(0);
+            locresData.SetInt64Value(0); // резерв для offset
 
             if (Version >= LocresVersion.Optimized)
-            {
-                int totalKeys = this.Sum(ns => ns.Count);
-                locresData.SetIntValue(totalKeys);
-            }
+                locresData.SetIntValue(this.Sum(ns => ns.Count));
 
             locresData.SetIntValue(Count);
 
             var stringTable = new List<StringEntry>();
+            var stringIndexLookup = new Dictionary<string, int>();
 
             foreach (var ns in this)
             {
                 if (Version >= LocresVersion.Optimized)
-                {
                     locresData.SetUIntValue(ns.NameHash != 0 ? ns.NameHash : CalcHash(ns.Name));
-                }
 
                 locresData.SetStringUE(ns.Name);
                 locresData.SetIntValue(ns.Count);
@@ -316,19 +441,16 @@ namespace UELocalizationsTool.Core.locres
                 foreach (var entry in ns)
                 {
                     if (Version >= LocresVersion.Optimized)
-                    {
                         locresData.SetUIntValue(entry.KeyHash != 0 ? entry.KeyHash : CalcHash(entry.Key));
-                    }
 
                     locresData.SetStringUE(entry.Key);
-
                     locresData.SetUIntValue(entry.ValueHash != 0 ? entry.ValueHash : entry.Value.StrCrc32());
 
-                    int stringIndex = stringTable.FindIndex(x => x.Text == entry.Value);
-                    if (stringIndex == -1)
+                    if (!stringIndexLookup.TryGetValue(entry.Value, out int stringIndex))
                     {
                         stringIndex = stringTable.Count;
-                        stringTable.Add(new StringEntry() { Text = entry.Value, RefCount = 1 });
+                        stringTable.Add(new StringEntry { Text = entry.Value, RefCount = 1 });
+                        stringIndexLookup[entry.Value] = stringIndex;
                     }
                     else
                     {
@@ -356,225 +478,24 @@ namespace UELocalizationsTool.Core.locres
             locresData.SetInt64Value(localizedStringOffset);
         }
 
-        public void SaveFile(string FilPath)
-        {
-            Save();
-            locresData.WriteFile(FilPath);
-        }
-
-
-
         private void BuildLegacyFile()
         {
             locresData.SetIntValue(Count);
 
-
-            foreach (var names in this)
+            foreach (var ns in this)
             {
-                locresData.SetStringUE(names.Name, true);
-                locresData.SetIntValue(names.Count);
-                foreach (var table in names)
+                locresData.SetStringUE(ns.Name, true);
+                locresData.SetIntValue(ns.Count);
+                foreach (var table in ns)
                 {
                     locresData.SetStringUE(table.Key, true);
-
-                    if (table.ValueHash == 0)
-                    {
-                        locresData.SetUIntValue(table.Value.StrCrc32());
-                    }
-                    else
-                    {
-                        locresData.SetUIntValue(table.ValueHash);
-                    }
-
+                    locresData.SetUIntValue(table.ValueHash == 0 ? table.Value.StrCrc32() : table.ValueHash);
                     locresData.SetStringUE(table.Value, true);
                 }
             }
-
-
         }
 
-        public void AddString(string NameSpace, string key, string value, uint NameSpaceHash = 0, uint keyHash = 0, uint ValueHash = 0, uint ExternID = 0)
-        {
-            if (!ContainsKey(NameSpace))
-            {
-                Add(new NameSpaceTable(NameSpace, NameSpaceHash));
-            }
-
-            var nsTable = this[NameSpace];
-
-            if (!nsTable.ContainsKey(key))
-            {
-                var newEntry = new StringTable(key, value, keyHash, ValueHash, ExternID);
-
-                if (Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
-                    newEntry.ExternID = ExternID;
-
-                nsTable.Add(newEntry);
-            }
-            else
-            {
-                var existingEntry = nsTable[key];
-                existingEntry.Value = value;
-
-                if (Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
-                    existingEntry.ExternID = ExternID;
-
-                if (keyHash != 0) existingEntry.KeyHash = keyHash;
-                if (ValueHash != 0) existingEntry.ValueHash = ValueHash;
-                if (NameSpaceHash != 0) nsTable.NameHash = NameSpaceHash;
-            }
-        }
-
-        public void RemoveString(string NameSpace, string key)
-        {
-            this[NameSpace].RemoveKey(key);
-        }
-
-        public void RemoveNameSpace(string NameSpace)
-        {
-            int index = FindIndex(x => x.Name == NameSpace);
-            if (index >= 0)
-            {
-                RemoveAt(index);
-            }
-        }
-        public uint Optimized_CityHash64_UTF16Hash(string value)
-        {
-            var Hash = CityHash.CityHash64(Encoding.Unicode.GetBytes(value));
-            return (uint)Hash + ((uint)(Hash >> 32) * 23);
-        }
-
-
-        public void AddItemsToDataGridView(DataGridView dataGrid)
-        {
-            dataGrid.DataSource = null;
-            dataGrid.Rows.Clear();
-            dataGrid.Columns.Clear();
-
-            var dataTable = new System.Data.DataTable();
-            dataTable.Columns.Add("ID", typeof(string));
-            dataTable.Columns.Add("Text", typeof(string));
-            dataTable.Columns.Add("Hash Table", typeof(HashTable));
-
-            foreach (var names in this)
-            {
-                foreach (var table in names)
-                {
-                    string name = string.IsNullOrEmpty(names.Name) ? table.Key : names.Name + "::" + table.Key;
-                    string textValue = table.Value;
-                    dataTable.Rows.Add(
-                        name,
-                        textValue,
-                        new HashTable(names.NameHash, table.KeyHash, table.ValueHash) { ExternID = table.ExternID }
-                    );
-                }
-            }
-            dataGrid.DataSource = dataTable;
-            dataGrid.Columns["Text"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGrid.Columns["Hash Table"].Visible = false;
-        }
-
-        public void LoadFromDataGridView(DataGridView dataGrid)
-        {
-            Clear();
-            foreach (DataGridViewRow row in dataGrid.Rows)
-            {
-                var idCellValue = row.Cells["ID"].Value?.ToString() ?? "";
-                var items = idCellValue.Split(new string[] { "::" }, StringSplitOptions.None);
-
-                var nameSpaceStr = items.Length == 2 ? items[0] : "";
-                var keyStr = items.Length == 2 ? items[1] : items[0];
-
-                if (row.Cells["Hash Table"].Value is HashTable hashTable)
-                {
-                    AddString(
-                        nameSpaceStr,
-                        keyStr,
-                        row.Cells["Text"].Value?.ToString() ?? "",
-                        hashTable.NameHash,
-                        hashTable.KeyHash,
-                        hashTable.ValueHash,
-                        hashTable.ExternID
-                    );
-                }
-            }
-        }
-
-        public List<List<string>> ExtractTexts()
-        {
-            var strings = new List<List<string>>();
-            foreach (var names in this)
-            {
-                foreach (var table in names)
-                {
-                    if (!string.IsNullOrEmpty(names.Name))
-                        strings.Add(new List<string>() { names.Name + "::" + table.Key, table.Value });
-                    else
-                        strings.Add(new List<string>() { table.Key, table.Value });
-
-                }
-            }
-            return strings;
-        }
-
-        public void ImportTexts(List<List<string>> strings)
-        {
-            int i = 0;
-            foreach (var names in this)
-            {
-                foreach (var table in names)
-                {
-                    table.Value = strings[i++][1];
-                }
-            }
-        }
-
-        public uint CalcHash(string Str)
-        {
-            if (string.IsNullOrEmpty(Str))
-                return 0;
-
-            if (Version == LocresVersion.Optimized_CityHash64_UTF16 ||
-                Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16)
-                return Optimized_CityHash64_UTF16Hash(Str);
-            else if (Version >= LocresVersion.Optimized)
-                return Str.StrCrc32();
-            else
-                return 0;
-        }
-
-        // Generate hash anyway (don't return 0)
-        public uint CalcHashExperimental(string Str)
-        {
-            if (string.IsNullOrEmpty(Str))
-            {
-                return 0;
-            }
-
-            if (Version == LocresVersion.Optimized_CityHash64_UTF16)
-                return Optimized_CityHash64_UTF16Hash(Str);
-            else
-                return Str.StrCrc32();
-        }
-
-        public HashTable GetHash(string nameSpace, string key)
-        {
-            if (!ContainsKey(nameSpace))
-                return null;
-
-            var ns = this[nameSpace];
-            if (!ns.ContainsKey(key))
-                return null;
-
-            var entry = ns[key];
-            return new HashTable(ns.NameHash, entry.KeyHash, entry.ValueHash)
-            {
-                ExternID = entry.ExternID
-            };
-        }
-
-
-        public class StringEntry
+        private class StringEntry
         {
             public string Text { get; set; }
             public int RefCount { get; set; }
