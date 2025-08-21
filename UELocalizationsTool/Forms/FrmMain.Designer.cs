@@ -46,6 +46,7 @@ namespace UELocalizationsTool
             this.csvFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importAllTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importAllTextByKeystoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importTXTbyID = new System.Windows.Forms.ToolStripMenuItem();
             this.importNewLinesFromCSVtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.find = new System.Windows.Forms.ToolStripMenuItem();
@@ -160,6 +161,7 @@ namespace UELocalizationsTool
             this.exportAllTextToolStripMenuItem,
             this.importAllTextToolStripMenuItem,
             this.importAllTextByKeystoolStripMenuItem,
+            this.importTXTbyID,
             this.importNewLinesFromCSVtoolStripMenuItem,
             this.toolStripSeparator1,
             this.find,
@@ -173,7 +175,7 @@ namespace UELocalizationsTool
             this.copyToolStripMenuItem1,
             this.pasteToolStripMenuItem1});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(99, 30);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(99, 24);
             this.editToolStripMenuItem.Text = "Редагувати";
             // 
             // exportAllTextToolStripMenuItem
@@ -226,8 +228,16 @@ namespace UELocalizationsTool
             this.importAllTextByKeystoolStripMenuItem.Enabled = false;
             this.importAllTextByKeystoolStripMenuItem.Name = "importAllTextByKeystoolStripMenuItem";
             this.importAllTextByKeystoolStripMenuItem.Size = new System.Drawing.Size(327, 26);
-            this.importAllTextByKeystoolStripMenuItem.Text = "Імпорт за ID (повільно)";
+            this.importAllTextByKeystoolStripMenuItem.Text = "Імпорт CSV за ID (повільно)";
             this.importAllTextByKeystoolStripMenuItem.Click += new System.EventHandler(this.ImportAllTextByKeystoolStripMenuItem_Click);
+            // 
+            // importTXTbyID
+            // 
+            this.importTXTbyID.Enabled = false;
+            this.importTXTbyID.Name = "importTXTbyID";
+            this.importTXTbyID.Size = new System.Drawing.Size(327, 26);
+            this.importTXTbyID.Text = "Імпорт TXT за ID (повільно)";
+            this.importTXTbyID.Click += new System.EventHandler(this.ImportTextByIDToolStripMenuItem_Click);
             // 
             // importNewLinesFromCSVtoolStripMenuItem
             // 
@@ -384,7 +394,7 @@ namespace UELocalizationsTool
             this.toolStripSeparator5,
             this.transferTextHashFromOriginalLocresToolStripMenuItem});
             this.locresOprationsToolStripMenuItem.Name = "locresOprationsToolStripMenuItem";
-            this.locresOprationsToolStripMenuItem.Size = new System.Drawing.Size(85, 30);
+            this.locresOprationsToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.locresOprationsToolStripMenuItem.Text = "Операції";
             // 
             // editSelectedRowToolStripMenuItem
@@ -523,7 +533,7 @@ namespace UELocalizationsTool
             this.StateLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.StateLabel.ForeColor = System.Drawing.Color.Maroon;
             this.StateLabel.Name = "StateLabel";
-            this.StateLabel.Size = new System.Drawing.Size(69, 27);
+            this.StateLabel.Size = new System.Drawing.Size(69, 21);
             this.StateLabel.Text = "----------";
             // 
             // toolStripSeparator3
@@ -605,7 +615,7 @@ namespace UELocalizationsTool
             this.searchBox.Location = new System.Drawing.Point(0, 656);
             this.searchBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(982, 52);
+            this.searchBox.Size = new System.Drawing.Size(982, 42);
             this.searchBox.TabIndex = 2;
             this.searchBox.Visible = false;
             // 
@@ -741,6 +751,7 @@ namespace UELocalizationsTool
         private ToolStripMenuItem importNewLinesFromCSVtoolStripMenuItem;
         private ToolStripMenuItem fontToolStripMenuItem;
         private ToolStripMenuItem ToolToolStripMenuItem;
+        private ToolStripMenuItem importTXTbyID;
     }
 }
 

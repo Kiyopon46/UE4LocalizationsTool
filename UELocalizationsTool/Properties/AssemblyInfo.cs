@@ -11,4 +11,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("amr shaheen")]
 [assembly: ComVisible(false)]
 [assembly: AssemblyVersion("1.0")]
-[assembly: AssemblyFileVersion("2.7.8")]
+[assembly: AssemblyFileVersion("2.7.9")]

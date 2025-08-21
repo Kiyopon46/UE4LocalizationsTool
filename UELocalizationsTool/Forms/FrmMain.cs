@@ -105,7 +105,7 @@ namespace UELocalizationsTool
                 redoToolStripMenuItem, filterToolStripMenuItem,
                 noNamesToolStripMenuItem, withNamesToolStripMenuItem,
                 clearFilterToolStripMenuItem, csvFileToolStripMenuItem,
-                importAllTextByKeystoolStripMenuItem, importNewLinesFromCSVtoolStripMenuItem
+                importAllTextByKeystoolStripMenuItem, importNewLinesFromCSVtoolStripMenuItem, importTXTbyID
             };
 
             foreach (var control in controls)
@@ -221,6 +221,58 @@ namespace UELocalizationsTool
 
                         MessageBox.Show("Успішно імпортовано!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ToolName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ImportTextByIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Файли тексту|*.txt";
+            ofd.Title = "Імпорт TXT за ID";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Завантаження даних з TXT-файлу
+                    string[] DataGridStrings = System.IO.File.ReadAllLines(ofd.FileName);
+
+                    bool hasNames = DataGridStrings[0].StartsWith("[~NAMES-INCLUDED~]", StringComparison.OrdinalIgnoreCase);
+                    IEnumerable<string> importLines = hasNames ? DataGridStrings.Skip(1) : DataGridStrings;
+
+                    // Створюємо словник ID -> текст
+                    var importDict = new Dictionary<string, string>();
+                    foreach (var line in importLines)
+                    {
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+
+                        string[] parts = hasNames
+                            ? line.Split(new[] { '=' }, 2)
+                            : line.Split(new[] { '=' }, 2); // Якщо без [~NAMES-INCLUDED~], можна змінити під власну логіку
+
+                        if (parts.Length < 2) continue;
+
+                        string id = parts[0].Trim();
+                        string value = parts[1].Trim();
+                        importDict[id] = value;
+                    }
+
+                    // Імпорт у DataGridView по ID
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        string rowID = row.Cells["ID"].Value?.ToString(); // колонка ID
+                        if (rowID != null && importDict.TryGetValue(rowID, out string text))
+                        {
+                            dataGridView1.SetValue(row.Cells["Text"], text);
+                        }
+                    }
+
+                    MessageBox.Show("Успішно імпортовано по ID!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {

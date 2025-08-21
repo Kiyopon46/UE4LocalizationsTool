@@ -92,7 +92,7 @@ namespace Helper.MemoryList
         {
             if (new FileInfo(FilePath).Length > int.MaxValue)
             {
-                throw new Exception("Can't read this file: " + FilePath);
+                throw new Exception("Неможливо прочитати файл: " + FilePath);
             }
             MemoryListData = File.ReadAllBytes(FilePath).ToList();
 
