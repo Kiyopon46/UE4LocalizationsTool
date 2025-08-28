@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UELocalizationsTool.Properties;
 
 namespace AssetParser
 {
@@ -145,7 +146,7 @@ namespace AssetParser
 
             if (bHasVersioningInfo)
             {
-                throw new Exception("Дана версія uasset не підтримується!");
+                throw new Exception(Resources.Msg_NotSupportedUassetVersion);
             }
 
             //----------------------

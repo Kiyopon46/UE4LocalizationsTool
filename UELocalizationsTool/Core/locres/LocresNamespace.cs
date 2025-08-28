@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using UELocalizationsTool.Core.Hash;
+using UELocalizationsTool.Properties;
 
 namespace UELocalizationsTool.Core.locres
 {
@@ -147,7 +148,7 @@ namespace UELocalizationsTool.Core.locres
             if (!guidsEqual) locresData.Seek(0);
 
             if (Version > LocresVersion.Optimized_CityHash64_ExternID_UTF16)
-                throw new Exception("Дана версія locres не підтримується");
+                throw new Exception(Resources.Msg_NotSupportedLocresVersion);
 
             List<string> localizedStrings = null;
 

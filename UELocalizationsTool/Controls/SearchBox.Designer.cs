@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using UELocalizationsTool.Properties;
 
 namespace UELocalizationsTool.Controls
 {
@@ -73,7 +74,7 @@ namespace UELocalizationsTool.Controls
             this.FindPrevious.Name = "FindPrevious";
             this.FindPrevious.Size = new System.Drawing.Size(153, 27);
             this.FindPrevious.TabIndex = 4;
-            this.FindPrevious.Text = "Знайти попереднє";
+            this.FindPrevious.Text = Resources.Btn_FindPrevious;
             this.FindPrevious.UseVisualStyleBackColor = true;
             this.FindPrevious.Click += new System.EventHandler(this.FindPrevious_Click);
             // 
@@ -84,7 +85,7 @@ namespace UELocalizationsTool.Controls
             this.FindNext.Name = "FindNext";
             this.FindNext.Size = new System.Drawing.Size(115, 27);
             this.FindNext.TabIndex = 3;
-            this.FindNext.Text = "Знайти далі";
+            this.FindNext.Text = Resources.Btn_FindNext;
             this.FindNext.UseVisualStyleBackColor = true;
             this.FindNext.Click += new System.EventHandler(this.FindNext_Click);
             // 
@@ -96,7 +97,7 @@ namespace UELocalizationsTool.Controls
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Пошук:";
+            this.label1.Text = Resources.Lbl_Search;
             // 
             // panel1
             // 
@@ -129,7 +130,7 @@ namespace UELocalizationsTool.Controls
             this.FindAll.Name = "FindAll";
             this.FindAll.Size = new System.Drawing.Size(110, 27);
             this.FindAll.TabIndex = 7;
-            this.FindAll.Text = "Знайти все";
+            this.FindAll.Text = Resources.Lbl_FindAll;
             this.FindAll.UseVisualStyleBackColor = true;
             this.FindAll.Click += new System.EventHandler(this.FindAll_Click);
             // 
@@ -138,7 +139,7 @@ namespace UELocalizationsTool.Controls
             this.InputSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.InputSearch.Location = new System.Drawing.Point(65, 7);
             this.InputSearch.Name = "InputSearch";
-            this.InputSearch.PlaceholderText = "Введіть текст для пошуку...";
+            this.InputSearch.PlaceholderText = Resources.Placeholder_SearchText;
             this.InputSearch.Size = new System.Drawing.Size(200, 27);
             this.InputSearch.StopEnterKey = false;
             this.InputSearch.TabIndex = 0;
@@ -165,7 +166,7 @@ namespace UELocalizationsTool.Controls
             this.ReplaceAll.Name = "ReplaceAll";
             this.ReplaceAll.Size = new System.Drawing.Size(115, 27);
             this.ReplaceAll.TabIndex = 6;
-            this.ReplaceAll.Text = "Замінити все";
+            this.ReplaceAll.Text = Resources.Lbl_ReplaceAll;
             this.ReplaceAll.UseVisualStyleBackColor = true;
             this.ReplaceAll.Click += new System.EventHandler(this.ReplaceAll_Click);
             // 
@@ -174,7 +175,7 @@ namespace UELocalizationsTool.Controls
             this.txtReplace.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtReplace.Location = new System.Drawing.Point(65, 7);
             this.txtReplace.Name = "txtReplace";
-            this.txtReplace.PlaceholderText = "Введіть текст для заміни...";
+            this.txtReplace.PlaceholderText = Resources.Placeholder_ReplaceText;
             this.txtReplace.Size = new System.Drawing.Size(200, 27);
             this.txtReplace.StopEnterKey = false;
             this.txtReplace.TabIndex = 0;
@@ -187,7 +188,7 @@ namespace UELocalizationsTool.Controls
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 20);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Заміна:";
+            this.label3.Text = Resources.Lbl_Replace;
             // 
             // label4
             // 
@@ -209,7 +210,7 @@ namespace UELocalizationsTool.Controls
             this.Replace.Name = "Replace";
             this.Replace.Size = new System.Drawing.Size(110, 27);
             this.Replace.TabIndex = 3;
-            this.Replace.Text = "Замінити";
+            this.Replace.Text = Resources.Btn_Replace;
             this.Replace.UseVisualStyleBackColor = true;
             this.Replace.Click += new System.EventHandler(this.Replace_Click);
             // 
@@ -235,12 +236,12 @@ namespace UELocalizationsTool.Controls
             // 
             // RowIndex
             // 
-            this.RowIndex.Text = "№ рядка";
+            this.RowIndex.Text = Resources.ColHeader_RowIndex;
             this.RowIndex.Width = 75;
             // 
             // CellValue
             // 
-            this.CellValue.Text = "Текст";
+            this.CellValue.Text = Resources.ColHeader_Text;
             this.CellValue.Width = 800;
             // 
             // SearchBox

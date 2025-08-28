@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Resources = UELocalizationsTool.Properties.Resources;
 
 namespace UELocalizationsTool.Controls
 {
@@ -111,8 +112,8 @@ namespace UELocalizationsTool.Controls
         private void Failedmessage()
         {
             MessageBox.Show(
-                text: $"'{InputSearch.Text}' не знайдено.",
-                caption: "Результат пошуку",
+                text: string.Format(Resources.Msg_SearchNotFound, InputSearch.Text),    //$"'{InputSearch.Text}' не знайдено.",
+                caption: Resources.Title_SearchResult,  //"Результат пошуку",
                 buttons: MessageBoxButtons.OK,
                 icon: MessageBoxIcon.Warning
             );
@@ -205,14 +206,14 @@ namespace UELocalizationsTool.Controls
             }
 
             listView1.Visible = true;
-            label2.Text = $"Всього збігів: {listView1.Items.Count}";
+            label2.Text = string.Format(Resources.Lbl_NumOfMatches, listView1.Items.Count);  //$"Всього збігів: {listView1.Items.Count}";
         }
 
         private void Replace_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(InputSearch.Text) || string.IsNullOrWhiteSpace(txtReplace.Text))
             {
-                MessageBox.Show("Поле для пошуку або заміни тексту не може бути порожнім.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.Msg_CannotBeEmptySearchTextOrReplaceFields, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -260,13 +261,13 @@ namespace UELocalizationsTool.Controls
         {
             if (DataGridView.Rows.Count == 0)
             {
-                MessageBox.Show("Текст не знайдено.", "Результат пошуку", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Resources.Msg_TextNotFound, Resources.Title_SearchResult, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(InputSearch.Text) || string.IsNullOrWhiteSpace(txtReplace.Text))
             {
-                MessageBox.Show("Поле для пошуку або заміни тексту не може бути порожнім.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.Msg_CannotBeEmptySearchTextOrReplaceFields, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -294,7 +295,7 @@ namespace UELocalizationsTool.Controls
                 DataGridView.ResumeLayout();
             }
 
-            MessageBox.Show($"Загальна кількість замін: {totalMatches}", "Результат пошуку", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(string.Format(Resources.Lbl_NumOfReplaced, totalMatches), Resources.Title_SearchResult, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

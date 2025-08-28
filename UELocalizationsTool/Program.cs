@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UELocalizationsTool.Properties;
 namespace UELocalizationsTool
 {
     internal static class Program
@@ -115,7 +116,7 @@ namespace UELocalizationsTool
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Помилка завантаження файлу:\n" + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Resources.Msg_ErrorForReadFile + ex.Message, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     };
 

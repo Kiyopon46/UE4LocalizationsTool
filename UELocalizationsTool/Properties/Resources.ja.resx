@@ -13,438 +13,438 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
   </resheader>
   <data name="Btn_Add" xml:space="preserve">
-    <value>Add</value>
+    <value>追加</value>
   </data>
   <data name="Btn_Apply" xml:space="preserve">
-    <value>Apply</value>
+    <value>適用</value>
   </data>
   <data name="Btn_Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="Btn_ClearList" xml:space="preserve">
-    <value>Clear List</value>
+    <value>リストをクリア</value>
   </data>
   <data name="Btn_Close" xml:space="preserve">
-    <value>Close</value>
+    <value>閉じる</value>
   </data>
   <data name="Btn_FindNext" xml:space="preserve">
-    <value>Find Next</value>
+    <value>次を検索</value>
   </data>
   <data name="Btn_FindPrevious" xml:space="preserve">
-    <value>Find Previous</value>
+    <value>前を検索</value>
   </data>
   <data name="Btn_OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Btn_RemoveSelected" xml:space="preserve">
-    <value>Remove Selected</value>
+    <value>選択項目を削除</value>
   </data>
   <data name="Btn_Replace" xml:space="preserve">
-    <value>Replace</value>
+    <value>置換</value>
   </data>
   <data name="CheckBox_MatchCase" xml:space="preserve">
-    <value>Case Sensitive</value>
+    <value>大文字と小文字を区別</value>
   </data>
   <data name="CheckBox_RegExp" xml:space="preserve">
-    <value>Regular Expression</value>
+    <value>正規表現</value>
   </data>
   <data name="CheckBox_ReverseMode" xml:space="preserve">
-    <value>Reverse Mode</value>
+    <value>逆モード</value>
   </data>
   <data name="ColHeader_RowIndex" xml:space="preserve">
-    <value>Line Number</value>
+    <value>行番号</value>
   </data>
   <data name="ColHeader_Text" xml:space="preserve">
-    <value>Text</value>
+    <value>テキスト</value>
   </data>
   <data name="Filter_Csv" xml:space="preserve">
-    <value>CSV File|*.csv</value>
+    <value>CSVファイル|*.csv</value>
   </data>
   <data name="Filter_Locres" xml:space="preserve">
-    <value>Locres File|*.locres</value>
+    <value>Locresファイル|*.locres</value>
   </data>
   <data name="Filter_LocresMulti" xml:space="preserve">
-    <value>Locres File|*.locres</value>
+    <value>Locresファイル|*.locres</value>
   </data>
   <data name="Filter_OpenFileDialogOfLocalization" xml:space="preserve">
-    <value>All Localization Files|*.uasset;*.locres;*.umap|Uasset Files|*.uasset|Locres Files|*.locres|Umap Files|*.umap</value>
+    <value>すべてのローカリゼーションファイル|*.uasset;*.locres;*.umap|Uasset ファイル|*.uasset|Locres ファイル|*.locres|Umap ファイル|*.umap</value>
   </data>
   <data name="Filter_OpenFileDialogTextOrCsv" xml:space="preserve">
-    <value>Text File|*.txt;*.csv</value>
+    <value>テキストファイル|*.txt;*.csv</value>
   </data>
   <data name="Filter_SaveFileDialogToExportText" xml:space="preserve">
-    <value>Text File|*.txt</value>
+    <value>テキストファイル|*.txt</value>
   </data>
   <data name="Filter_Text" xml:space="preserve">
-    <value>Text File|*.txt</value>
+    <value>テキストファイル|*.txt</value>
   </data>
   <data name="Filter_Uasset" xml:space="preserve">
-    <value>Uasset File|*.uasset</value>
+    <value>Uassetファイル|*.uasset</value>
   </data>
   <data name="Filter_UassetOrUmap" xml:space="preserve">
-    <value>Uasset/Umap File|*.uasset;*.umap</value>
+    <value>Uasset/Umapファイル|*.uasset;*.umap</value>
   </data>
   <data name="Filter_Umap" xml:space="preserve">
-    <value>Umap File|*.umap</value>
+    <value>Umapファイル|*.umap</value>
   </data>
   <data name="Info_Description" xml:space="preserve">
-    <value>A Useful Tool for Editing Text in Unreal Engine</value>
+    <value>Unreal Engineのテキスト編集に便利なツール</value>
   </data>
   <data name="Lbl_Column" xml:space="preserve">
-    <value>Column:</value>
+    <value>列:</value>
   </data>
   <data name="Lbl_DataCount" xml:space="preserve">
-    <value>Number of rows:</value>
+    <value>行数:</value>
   </data>
   <data name="Lbl_DataFiltering" xml:space="preserve">
-    <value>Data Filtering</value>
+    <value>データフィルタリング</value>
   </data>
   <data name="Lbl_EntryEditor" xml:space="preserve">
-    <value>Row Editor</value>
+    <value>行エディター</value>
   </data>
   <data name="Lbl_ExternIDLocresV4Only" xml:space="preserve">
-    <value>External ID (.locres v4 only)</value>
+    <value>外部ID (.locres v4 のみ)</value>
   </data>
   <data name="Lbl_Filter" xml:space="preserve">
-    <value>Filter:</value>
+    <value>フィルター:</value>
   </data>
   <data name="Lbl_FindAll" xml:space="preserve">
-    <value>Find All</value>
+    <value>すべて検索</value>
   </data>
   <data name="Lbl_IDHash" xml:space="preserve">
-    <value>ID Hash</value>
+    <value>IDハッシュ</value>
   </data>
   <data name="Lbl_Input" xml:space="preserve">
-    <value>Input:</value>
+    <value>入力:</value>
   </data>
   <data name="Lbl_Namespace" xml:space="preserve">
-    <value>Namespace</value>
+    <value>名前空間</value>
   </data>
   <data name="Lbl_NamespaceHash" xml:space="preserve">
-    <value>Namespace Hash</value>
+    <value>名前空間ハッシュ</value>
   </data>
   <data name="Lbl_NumOfMatches" xml:space="preserve">
-    <value>Number of matches: {0}</value>
+    <value>一致した数: {0}</value>
   </data>
   <data name="Lbl_NumOfReplaced" xml:space="preserve">
-    <value>Number of replacements: {0}</value>
+    <value>置換した数: {0}</value>
   </data>
   <data name="Lbl_Replace" xml:space="preserve">
-    <value>Replace:</value>
+    <value>置換:</value>
   </data>
   <data name="Lbl_ReplaceAll" xml:space="preserve">
-    <value>Replace All</value>
+    <value>すべて置換</value>
   </data>
   <data name="Lbl_Search" xml:space="preserve">
-    <value>Find:</value>
+    <value>検索:</value>
   </data>
   <data name="Lbl_Text" xml:space="preserve">
-    <value>Text</value>
+    <value>テキスト</value>
   </data>
   <data name="Lbl_TextHash" xml:space="preserve">
-    <value>Text Hash</value>
+    <value>テキストハッシュ</value>
   </data>
   <data name="Lbl_VersionInfo" xml:space="preserve">
-    <value>About</value>
+    <value>バージョン情報</value>
   </data>
   <data name="Menu_About" xml:space="preserve">
-    <value>About the Program</value>
+    <value>プログラムについて</value>
   </data>
   <data name="Menu_AddRow" xml:space="preserve">
-    <value>Add New Rows</value>
+    <value>新しい行を追加</value>
   </data>
   <data name="Menu_AscendingA2Z" xml:space="preserve">
-    <value>Ascending (A-Z)</value>
+    <value>昇順（A-Z）</value>
   </data>
   <data name="Menu_CancelFilter" xml:space="preserve">
-    <value>Undo Filter</value>
+    <value>フィルターを元に戻す</value>
   </data>
   <data name="Menu_CLIList" xml:space="preserve">
-    <value>CLI Commands</value>
+    <value>CLIコマンド一覧</value>
   </data>
   <data name="Menu_Copy" xml:space="preserve">
-    <value>Copy</value>
+    <value>コピー</value>
   </data>
   <data name="Menu_DarkModeCareful" xml:space="preserve">
-    <value>Dark Theme (Caution)</value>
+    <value>ダークテーマ（注意）</value>
   </data>
   <data name="Menu_DeleteSelectedRows" xml:space="preserve">
-    <value>Delete Selected Rows</value>
+    <value>選択した行を削除</value>
   </data>
   <data name="Menu_DescendingZ2A" xml:space="preserve">
-    <value>Descending (Z-A)</value>
+    <value>降順（Z-A）</value>
   </data>
   <data name="Menu_Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>編集</value>
   </data>
   <data name="Menu_EditSelectedRows" xml:space="preserve">
-    <value>Edit Selected Rows</value>
+    <value>選択した行を編集</value>
   </data>
   <data name="Menu_Exit" xml:space="preserve">
-    <value>Exit</value>
+    <value>終了</value>
   </data>
   <data name="Menu_Export" xml:space="preserve">
-    <value>Export</value>
+    <value>エクスポート</value>
   </data>
   <data name="Menu_File" xml:space="preserve">
-    <value>File</value>
+    <value>ファイル</value>
   </data>
   <data name="Menu_Filter" xml:space="preserve">
-    <value>Filter</value>
+    <value>フィルター</value>
   </data>
   <data name="Menu_FontAndTextSize" xml:space="preserve">
-    <value>Font and Text Size</value>
+    <value>フォントとテキストサイズ</value>
   </data>
   <data name="Menu_IDOrder" xml:space="preserve">
-    <value>By ID</value>
+    <value>ID順</value>
   </data>
   <data name="Menu_ImportByRowOrder" xml:space="preserve">
-    <value>Import by Row</value>
+    <value>行順でインポート</value>
   </data>
   <data name="Menu_ImportCsvByIDSlow" xml:space="preserve">
-    <value>Import CSV by ID (Slow)</value>
+    <value>IDでCSVをインポート（遅い）</value>
   </data>
   <data name="Menu_ImportRowsFromCsv" xml:space="preserve">
-    <value>Import New Row from CSV</value>
+    <value>CSVから新しい行をインポート</value>
   </data>
   <data name="Menu_ImportTxtByIDSlow" xml:space="preserve">
-    <value>Import TXT by ID (Slow)</value>
+    <value>IDでTXTをインポート（低速）</value>
   </data>
   <data name="Menu_MergeLocres" xml:space="preserve">
-    <value>Merge Multiple Locations</value>
+    <value>複数の場所を結合</value>
   </data>
   <data name="Menu_MergeLocresWorking" xml:space="preserve">
-    <value>Merge Multiple Locations (Working)</value>
+    <value>複数の場所を結合（動作中）</value>
   </data>
   <data name="Menu_MergeUassetBeta" xml:space="preserve">
-    <value>Merge Multiple UAssets (Beta)</value>
+    <value>複数のuassetを結合（ベータ版）</value>
   </data>
   <data name="Menu_Open" xml:space="preserve">
-    <value>Open</value>
+    <value>開く</value>
   </data>
   <data name="Menu_Operations" xml:space="preserve">
-    <value>Actions</value>
+    <value>操作</value>
   </data>
   <data name="Menu_Paste" xml:space="preserve">
-    <value>Paste</value>
+    <value>貼り付け</value>
   </data>
   <data name="Menu_Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>やり直す</value>
   </data>
   <data name="Menu_Replace" xml:space="preserve">
-    <value>Replace</value>
+    <value>置換</value>
   </data>
   <data name="Menu_SaveAs" xml:space="preserve">
-    <value>Save As...</value>
+    <value>名前を付けて保存...</value>
   </data>
   <data name="Menu_Search" xml:space="preserve">
-    <value>Find</value>
+    <value>検索</value>
   </data>
   <data name="Menu_Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>設定</value>
   </data>
   <data name="Menu_Sort" xml:space="preserve">
-    <value>Sort</value>
+    <value>並べ替え</value>
   </data>
   <data name="Menu_SupportUassetOrUmap" xml:space="preserve">
-    <value>Support for .uasset/.umap</value>
+    <value>.uasset/.umapのサポート</value>
   </data>
   <data name="Menu_TextOrder" xml:space="preserve">
-    <value>By Text</value>
+    <value>テキスト順</value>
   </data>
   <data name="Menu_TransferTextHashFromOriginalLocres" xml:space="preserve">
-    <value>Migrate Hash from Source Locres</value>
+    <value>元のlocresからハッシュを移行</value>
   </data>
   <data name="Menu_TxtWithoutID" xml:space="preserve">
-    <value>TXT (No ID)</value>
+    <value>TXT（IDなし）</value>
   </data>
   <data name="Menu_Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>元に戻す</value>
   </data>
   <data name="Msg_CannotBeEmptySearchTextOrReplaceFields" xml:space="preserve">
-    <value>The text search or replace field cannot be empty.</value>
+    <value>テキスト検索または置換フィールドは空にできません。</value>
   </data>
   <data name="Msg_CannotReadFile" xml:space="preserve">
-    <value>Unable to Load File:</value>
+    <value>ファイルを読み込めません：</value>
   </data>
   <data name="Msg_CannotWriteFile" xml:space="preserve">
-    <value>Unable to write file!</value>
+    <value>ファイルを書き込めません！</value>
   </data>
   <data name="Msg_CompleteToAddRow" xml:space="preserve">
-    <value>A new row was added successfully.</value>
+    <value>新しい行が正常に追加されました。</value>
   </data>
   <data name="Msg_CompleteToEditRow" xml:space="preserve">
-    <value>The row was edited successfully.</value>
+    <value>行は正常に編集されました。</value>
   </data>
   <data name="Msg_CompleteToExport" xml:space="preserve">
-    <value>Export successful!</value>
+    <value>エクスポートに成功しました！</value>
   </data>
   <data name="Msg_CompleteToExportAndBeforeImport" xml:space="preserve">
-    <value>Exported successfully! \nPlease apply the same filter before importing.</value>
+    <value>正常にエクスポートされました！\nインポートする前に同じフィルターを適用してください。</value>
   </data>
   <data name="Msg_CompleteToForwardTextHash" xml:space="preserve">
-    <value>Locres file hashes have been migrated successfully.</value>
+    <value>locres ファイルのハッシュが正常に移行されました。</value>
   </data>
   <data name="Msg_CompleteToImport" xml:space="preserve">
-    <value>Import successful!</value>
+    <value>インポートに成功しました！</value>
   </data>
   <data name="Msg_CompleteToImportAndBeforeImport" xml:space="preserve">
-    <value>Import successful! \nPlease apply the same filter before importing.</value>
+    <value>インポートに成功しました！\nインポート前に同じフィルターを適用してください。</value>
   </data>
   <data name="Msg_CompleteToImportByID" xml:space="preserve">
-    <value>Import successful by ID!</value>
+    <value>IDでインポートに成功しました！</value>
   </data>
   <data name="Msg_CompleteToImportRows" xml:space="preserve">
-    <value>New rows successfully imported!</value>
+    <value>新しい行のインポートに成功しました！</value>
   </data>
   <data name="Msg_CompleteToMergeLocresFiles" xml:space="preserve">
-    <value>Locres file(s) merged successfully.</value>
+    <value>Locresファイルが正常にマージされました。</value>
   </data>
   <data name="Msg_CompleteToMergeUassetFiles" xml:space="preserve">
-    <value>Uasset file(s) merged successfully.</value>
+    <value>uasset ファイルが正常にマージされました。</value>
   </data>
   <data name="Msg_CompleteToSaveFile" xml:space="preserve">
-    <value>Saving successful.</value>
+    <value>保存に成功しました。</value>
   </data>
   <data name="Msg_ConfirmToDeleteSelectedRows" xml:space="preserve">
-    <value>Are you sure you want to delete the selected rows?</value>
+    <value>選択した行を削除してもよろしいですか？</value>
   </data>
   <data name="Msg_ErrorForAddRow" xml:space="preserve">
-    <value>An error occurred while adding the row:\n</value>
+    <value>行の追加中にエラーが発生しました:\n</value>
   </data>
   <data name="Msg_ErrorForEditRow" xml:space="preserve">
-    <value>An error occurred while editing the row:\n</value>
+    <value>行の編集中にエラーが発生しました:\n</value>
   </data>
   <data name="Msg_ErrorForForwardTextHash" xml:space="preserve">
-    <value>An error occurred while migrating .locres hashes:\n{0}</value>
+    <value>.locres ハッシュの移行中にエラーが発生しました:\n{0}</value>
   </data>
   <data name="Msg_ErrorForMergeLocresFiles" xml:space="preserve">
-    <value>An error occurred while merging locres file(s):\n{0}</value>
+    <value>locresファイルのマージ中にエラーが発生しました:\n{0}</value>
   </data>
   <data name="Msg_ErrorForMergeUassetFiles" xml:space="preserve">
-    <value>An error occurred while merging uasset file(s):\n{0}</value>
+    <value>uasset ファイルのマージ中にエラーが発生しました:\n{0}</value>
   </data>
   <data name="Msg_ErrorForReadFile" xml:space="preserve">
-    <value>Error Loading File:</value>
+    <value>ファイルの読み込みエラー：</value>
   </data>
   <data name="Msg_FailedToExport" xml:space="preserve">
-    <value>Failed to create export file!</value>
+    <value>エクスポートファイルの作成に失敗しました！</value>
   </data>
   <data name="Msg_ForwardingTextHash" xml:space="preserve">
-    <value>Transferring text hashes. Please wait.</value>
+    <value>テキストハッシュを転送しています。お待ちください。</value>
   </data>
   <data name="Msg_MergeLocressFiles" xml:space="preserve">
-    <value>Merging locres. Please wait.</value>
+    <value>locresをマージしています。お待ちください。</value>
   </data>
   <data name="Msg_MergeUassetFiles" xml:space="preserve">
-    <value>Merging uasset. Please wait.</value>
+    <value>uasset をマージしています。お待ちください。</value>
   </data>
   <data name="Msg_NotEnoughRowsToImport" xml:space="preserve">
-    <value>File does not have enough rows to import</value>
+    <value>ファイルにインポートする行数が足りません</value>
   </data>
   <data name="Msg_NotFoundUexpFile" xml:space="preserve">
-    <value>uexp file not found!</value>
+    <value>uexp ファイルが見つかりません！</value>
   </data>
   <data name="Msg_NotSelectedRowsToDelete" xml:space="preserve">
-    <value>No rows selected to delete.</value>
+    <value>削除する行が選択されていません。</value>
   </data>
   <data name="Msg_NotSupportedLocresVersion" xml:space="preserve">
-    <value>This version of locres is not supported</value>
+    <value>このバージョンの locres はサポートされていません</value>
   </data>
   <data name="Msg_NotSupportedProperty" xml:space="preserve">
-    <value>Undefined property type: {0}</value>
+    <value>未定義のプロパティタイプ: {0}</value>
   </data>
   <data name="Msg_NotSupportedUassetVersion" xml:space="preserve">
-    <value>This version of uasset is not supported!</value>
+    <value>このバージョンの uasset はサポートされていません！</value>
   </data>
   <data name="Msg_SaveFile" xml:space="preserve">
-    <value>Saving file. Please wait.</value>
+    <value>ファイルを保存しています。お待ちください。</value>
   </data>
   <data name="Msg_SearchNotFound" xml:space="preserve">
-    <value>{0} not found.</value>
+    <value>{0} が見つかりません。</value>
   </data>
   <data name="Msg_SelectRowToEdit" xml:space="preserve">
-    <value>Please select one row to edit.</value>
+    <value>編集する行を1行選択してください。</value>
   </data>
   <data name="Msg_StatOpeningFile" xml:space="preserve">
-    <value>Opening file. Please wait.</value>
+    <value>ファイルを開いています。お待ちください。</value>
   </data>
   <data name="Msg_TextNotFound" xml:space="preserve">
-    <value>Text not found.</value>
+    <value>テキストが見つかりません。</value>
   </data>
   <data name="Msg_WarnFileNotReadCompletely" xml:space="preserve">
-    <value>"Warning: File was not fully loaded, some text may be missing."</value>
+    <value>警告: ファイルが完全に読み込まれなかったため、一部のテキストが欠落している可能性があります。</value>
   </data>
   <data name="Placeholder_ReplaceText" xml:space="preserve">
-    <value>Enter text to replace...</value>
+    <value>置換するテキストを入力...</value>
   </data>
   <data name="Placeholder_SearchText" xml:space="preserve">
-    <value>Enter text to find...</value>
+    <value>検索するテキストを入力...</value>
   </data>
   <data name="Title_CLIList" xml:space="preserve">
-    <value>CLI Command List</value>
+    <value>CLIコマンド一覧</value>
   </data>
   <data name="Title_Complete" xml:space="preserve">
-    <value>Done</value>
+    <value>完了</value>
   </data>
   <data name="Title_Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>確認</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
-    <value>Error</value>
+    <value>エラー</value>
   </data>
   <data name="Title_ExportCsv" xml:space="preserve">
-    <value>Export CSV</value>
+    <value>CSVをエクスポート</value>
   </data>
   <data name="Title_ForwardingTextHash" xml:space="preserve">
-    <value>Transferring text hashes...</value>
+    <value>テキストハッシュを転送しています...</value>
   </data>
   <data name="Title_ImportByIDSlow" xml:space="preserve">
-    <value>Import by ID (Slow)</value>
+    <value>ID によるインポート (遅い)</value>
   </data>
   <data name="Title_ImportRowsFromCsv" xml:space="preserve">
-    <value>Importing new rows from CSV</value>
+    <value>CSVから新しい行をインポートしています</value>
   </data>
   <data name="Title_ImportTextByID" xml:space="preserve">
-    <value>Import TXT by ID</value>
+    <value>IDでTXTをインポート</value>
   </data>
   <data name="Title_MergeLocressFiles" xml:space="preserve">
-    <value>Merging locres...</value>
+    <value>locresをマージしています...</value>
   </data>
   <data name="Title_MergeUassetFiles" xml:space="preserve">
-    <value>Merging uasset...</value>
+    <value>uasset をマージしています...</value>
   </data>
   <data name="Title_OpenFileDialogTextOrCsv" xml:space="preserve">
-    <value>Importing text</value>
+    <value>テキストをインポートしています</value>
   </data>
   <data name="Title_OpenLocalizationFile" xml:space="preserve">
-    <value>Open Localization File</value>
+    <value>ローカリゼーションファイルを開く</value>
   </data>
   <data name="Title_OutOfRange" xml:space="preserve">
-    <value>Out of range</value>
+    <value>範囲外です</value>
   </data>
   <data name="Title_SaveFile" xml:space="preserve">
-    <value>Saving file</value>
+    <value>ファイルを保存しています</value>
   </data>
   <data name="Title_SaveFileDialogToExportText" xml:space="preserve">
-    <value>Export TXT</value>
+    <value>TXTをエクスポート</value>
   </data>
   <data name="Title_SaveFileEndsWithEllipsis" xml:space="preserve">
-    <value>Saving file...</value>
+    <value>ファイルを保存しています...</value>
   </data>
   <data name="Title_SearchResult" xml:space="preserve">
-    <value>Search Results</value>
+    <value>検索結果</value>
   </data>
   <data name="Title_SelectLocresMulti" xml:space="preserve">
-    <value>Select localization file(s)</value>
+    <value>ローカリゼーションファイルを選択（複数可）</value>
   </data>
   <data name="Title_StatOpeningFile" xml:space="preserve">
-    <value>Opening file...</value>
+    <value>ファイルを開いています...</value>
   </data>
   <data name="Title_UassetOrUmap" xml:space="preserve">
-    <value>Select uasset file(s)</value>
+    <value>uasset ファイルを選択（複数可）</value>
   </data>
   <data name="ToolTip_WarnRestartIfFileOpened" xml:space="preserve">
-    <value>The program will restart if a file is open. Changes will be lost.</value>
+    <value>ファイルが開かれていた場合はプログラムが再起動します。変更は失われます。</value>
   </data>
 </root>

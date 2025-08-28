@@ -1,4 +1,6 @@
-﻿namespace UELocalizationsTool
+﻿using UELocalizationsTool.Properties;
+
+namespace UELocalizationsTool
 {
     partial class FrmAbout
     {
@@ -49,7 +51,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 35);
             this.button1.TabIndex = 1;
-            this.button1.Text = "ОК";
+            this.button1.Text = Resources.Btn_OK;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
@@ -88,7 +90,7 @@
             this.Name = "FrmAbout";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Про програму";
+            this.Text = Resources.Lbl_VersionInfo;
             this.ResumeLayout(false);
             this.PerformLayout();
 

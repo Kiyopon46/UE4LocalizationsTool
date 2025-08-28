@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using UELocalizationsTool;
+using Resources = UELocalizationsTool.Properties.Resources;
 
 public class NDataGridView : DataGridView
 {
@@ -209,13 +210,13 @@ public class NDataGridView : DataGridView
     private void InitializeContextMenu()
     {
         contextMenuStrip = new ContextMenuStrip();
-        ToolStripMenuItem copyMenuItem = new ToolStripMenuItem("Копіювати");
+        ToolStripMenuItem copyMenuItem = new ToolStripMenuItem(Resources.Menu_Copy); //("Копіювати");
         copyMenuItem.ShortcutKeyDisplayString = "Ctrl+C";
         copyMenuItem.Click += CopyMenuItem_Click;
         contextMenuStrip.Items.Add(copyMenuItem);
 
 
-        ToolStripMenuItem pasteMenuItem = new ToolStripMenuItem("Вставити");
+        ToolStripMenuItem pasteMenuItem = new ToolStripMenuItem(Resources.Menu_Paste);   // ("Вставити");
         pasteMenuItem.ShortcutKeyDisplayString = "Ctrl+V";
         pasteMenuItem.Click += PasteMenuItem_Click;
         contextMenuStrip.Items.Add(pasteMenuItem);

@@ -10,6 +10,7 @@ using UELocalizationsTool.Core.Hash;
 using UELocalizationsTool.Core.locres;
 using UELocalizationsTool.Forms;
 using UELocalizationsTool.Helper;
+using UELocalizationsTool.Properties;
 
 namespace UELocalizationsTool
 {
@@ -31,8 +32,8 @@ namespace UELocalizationsTool
         private async void OpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Усі файли локалізації|*.uasset;*.locres;*.umap|Файл Uasset|*.uasset|Файл Locres|*.locres|Файл Umap|*.umap";
-            ofd.Title = "Відкрити файл локалізації";
+            ofd.Filter = Resources.Filter_OpenFileDialogOfLocalization;
+            ofd.Title = Resources.Title_OpenLocalizationFile;
 
 
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -49,7 +50,7 @@ namespace UELocalizationsTool
 
             try
             {
-                StatusMessage("Відкриття файлу...", "Відкриття файлу, зачекайте.");
+                StatusMessage(Resources.Title_StatOpeningFile, Resources.Msg_StatOpeningFile);
 
                 if (filePath.ToLower().EndsWith(".locres"))
                 {
@@ -65,7 +66,7 @@ namespace UELocalizationsTool
                     CreateBackupList();
                     if (!Asset.IsGood)
                     {
-                        StateLabel.Text = "Увага: файл прочитано не повністю, деякі тексти можуть бути відсутні.";
+                        StateLabel.Text = Resources.Msg_WarnFileNotReadCompletely;
                     }
                 }
 
@@ -77,7 +78,7 @@ namespace UELocalizationsTool
             catch (Exception ex)
             {
                 CloseFromState();
-                MessageBox.Show(ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -125,8 +126,8 @@ namespace UELocalizationsTool
             if (this.SortApply && !(Asset is LocresFile)) SortDataGrid(2, true);
 
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Текстовий файл|*.txt";
-            sfd.Title = "Експорт TXT";
+            sfd.Filter = Resources.Filter_SaveFileDialogToExportText;
+            sfd.Title = Resources.Title_SaveFileDialogToExportText;
             sfd.FileName = Path.GetFileName(FilePath) + ".txt";
 
 
@@ -154,16 +155,16 @@ namespace UELocalizationsTool
                     }
                     if (dataGridView1.IsFilterApplied)
                     {
-                        MessageBox.Show("Успішно експортовано!\nНе забудьте застосувати той самий фільтр перед імпортом.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Resources.Msg_CompleteToExportAndBeforeImport, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Успішно експортовано!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Resources.Msg_CompleteToExport, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Не вдалося створити файл експорту!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show(Resources.Msg_FailedToExport, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
             }
         }
@@ -171,8 +172,8 @@ namespace UELocalizationsTool
         private async void ImportAllTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Файли тексту|*.txt;*.csv";
-            ofd.Title = "Імпортування тексту";
+            ofd.Filter = Resources.Filter_OpenFileDialogTextOrCsv;
+            ofd.Title = Resources.Title_OpenFileDialogTextOrCsv;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -186,11 +187,11 @@ namespace UELocalizationsTool
 
                         if (dataGridView1.IsFilterApplied)
                         {
-                            MessageBox.Show("Успішно імпортовано!\nНе забудьте застосувати той самий фільтр перед імпортом.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(Resources.Msg_CompleteToImportAndBeforeImport, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Успішно імпортовано!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(Resources.Msg_CompleteToImport, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -200,7 +201,7 @@ namespace UELocalizationsTool
 
                         if (DataGridStrings.Length < dataGridView1.Rows.Count)
                         {
-                            MessageBox.Show("Файл не містить достатньої кількості рядків для імпорту", "Поза діапазоном", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Resources.Msg_NotEnoughRowsToImport, Resources.Title_OutOfRange, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
 
@@ -219,7 +220,7 @@ namespace UELocalizationsTool
                             dataGridView1.SetValue(dataGridView1.Rows[n].Cells["Text"], valueToImport);
                         }
 
-                        MessageBox.Show("Успішно імпортовано!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Resources.Msg_CompleteToImport, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch (Exception ex)
@@ -232,8 +233,8 @@ namespace UELocalizationsTool
         private void ImportTextByIDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Файли тексту|*.txt";
-            ofd.Title = "Імпорт TXT за ID";
+            ofd.Filter = Resources.Filter_Text;
+            ofd.Title = Resources.Title_ImportTextByID;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -272,7 +273,7 @@ namespace UELocalizationsTool
                         }
                     }
 
-                    MessageBox.Show("Успішно імпортовано по ID!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Msg_CompleteToImportByID, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -286,35 +287,35 @@ namespace UELocalizationsTool
             SaveFileDialog sfd = new SaveFileDialog();
             if (FilePath.ToLower().EndsWith(".locres"))
             {
-                sfd.Filter = "Файл Locres|*.locres";
+                sfd.Filter = Resources.Filter_Locres;
             }
             else if (FilePath.ToLower().EndsWith(".uasset"))
             {
-                sfd.Filter = "Файл Uasset|*.uasset";
+                sfd.Filter = Resources.Filter_Uasset;
             }
             else if (FilePath.ToLower().EndsWith(".umap"))
             {
-                sfd.Filter = "Файл Umap|*.umap";
+                sfd.Filter = Resources.Filter_Umap;
             }
 
-            sfd.Title = "Збереження файлу";
+            sfd.Title = Resources.Title_SaveFile;
             sfd.FileName = Path.GetFileNameWithoutExtension(FilePath) + "_NEW";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    StatusMessage("Збереження файлу...", "Збереження файлу, зачекайте.");
+                    StatusMessage(Resources.Title_SaveFileEndsWithEllipsis, Resources.Msg_SaveFile);
                     await Task.Run(() =>
                     {
                         Asset.LoadFromDataGridView(dataGridView1);
                         Asset.SaveFile(sfd.FileName);
                     });
-                    MessageBox.Show("Успішно збережено.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Msg_CompleteToSaveFile, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 CloseFromState();
@@ -368,7 +369,7 @@ namespace UELocalizationsTool
 
         private void CommandLinesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Program.commandlines, "Список CLI команд", MessageBoxButtons.OK);
+            MessageBox.Show(Program.commandlines, Resources.Title_CLIList, MessageBoxButtons.OK);
         }
 
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -383,7 +384,7 @@ namespace UELocalizationsTool
 
         private void UpdateCounter()
         {
-            DataCount.Text = "К-сть рядків: " + dataGridView1.Rows.Count;
+            DataCount.Text = Resources.Lbl_DataCount + dataGridView1.Rows.Count;
         }
 
         private void NoNamesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -482,8 +483,8 @@ namespace UELocalizationsTool
         private async void CsvFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Файл CSV|*.csv";
-            sfd.Title = "Експорт CSV";
+            sfd.Filter = Resources.Filter_Csv;
+            sfd.Title = Resources.Title_ExportCsv;
             sfd.FileName = Path.GetFileName(FilePath) + ".csv";
 
 
@@ -496,16 +497,16 @@ namespace UELocalizationsTool
 
                     if (dataGridView1.IsFilterApplied)
                     {
-                        MessageBox.Show("Успішно експортовано!\n Не забудьте застосувати той самий фільтр перед імпортом.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Resources.Msg_CompleteToExportAndBeforeImport, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Успішно експортовано!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Resources.Msg_CompleteToExport, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Не вдається записати файл!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show(Resources.Msg_CannotWriteFile, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
             }
         }
@@ -536,12 +537,12 @@ namespace UELocalizationsTool
         {
             if (dataGridView1.SelectedCells.Count == 0)
             {
-                MessageBox.Show("Не вибрано рядків для видалення.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Resources.Msg_NotSelectedRowsToDelete, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
 
-            DialogResult result = MessageBox.Show("Ви дійсно хочете видалити вибрані рядки?", "Підтвердження", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(Resources.Msg_ConfirmToDeleteSelectedRows, Resources.Title_Confirm, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -566,7 +567,7 @@ namespace UELocalizationsTool
         {
             if (dataGridView1.SelectedCells.Count > 1 || dataGridView1.SelectedCells.Count == 0)
             {
-                MessageBox.Show("Виберіть один рядок для редагування.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Resources.Msg_SelectRowToEdit, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -576,11 +577,11 @@ namespace UELocalizationsTool
                 try
                 {
                     EntryEditor.EditRow(dataGridView1);
-                    MessageBox.Show("Рядок успішно відредаговано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Msg_CompleteToEditRow, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Сталася помилка під час редагування рядка:\n " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Resources.Msg_ErrorForEditRow + ex.Message, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -596,11 +597,11 @@ namespace UELocalizationsTool
                     dataGridView1.BeginEdit(false);
                     EntryEditor.AddRow(dataGridView1);
                     dataGridView1.EndEdit();
-                    MessageBox.Show("Новий рядок успішно додано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Msg_CompleteToAddRow, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Сталася помилка під час додавання рядка:\n " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Resources.Msg_ErrorForAddRow + ex.Message, Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -608,13 +609,13 @@ namespace UELocalizationsTool
         private async void MergeLocresFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Файл(-и) Locres|*.locres";
-            ofd.Title = "Виберіть файл(-и) локалізації";
+            ofd.Filter = Resources.Filter_LocresMulti;
+            ofd.Title = Resources.Title_SelectLocresMulti;
             ofd.Multiselect = true;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                StatusMessage("Об’єднання locres...", "Об’єднання locres, зачекайте.");
+                StatusMessage(Resources.Title_MergeLocressFiles, Resources.Msg_MergeLocressFiles);
 
                 try
                 {
@@ -647,11 +648,11 @@ namespace UELocalizationsTool
                     });
 
                     ((System.Data.DataTable)dataGridView1.DataSource).Merge(dataTable);
-                    MessageBox.Show("Файл(-и) locres успішно об’єднано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Msg_CompleteToMergeLocresFiles, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Сталася помилка під час об’єднання файлів locres:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format(Resources.Msg_ErrorForMergeLocresFiles, ex.Message), Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -676,13 +677,13 @@ namespace UELocalizationsTool
             // The ofd variable needs to be declared here to be used in this method.
             OpenFileDialog ofd = new OpenFileDialog();
             // It's also a good practice to set the filter and title here as well.
-            ofd.Filter = "Файл(-и) Uasset/Umap|*.uasset;*.umap";
-            ofd.Title = "Виберіть файл(-и) uasset";
+            ofd.Filter = Resources.Filter_UassetOrUmap;
+            ofd.Title = Resources.Title_UassetOrUmap;
             ofd.Multiselect = true;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                StatusMessage("Об’єднання uasset...", "Об’єднання uasset, зачекайте.");
+                StatusMessage(Resources.Title_MergeUassetFiles, Resources.Msg_MergeUassetFiles);
 
                 try
                 {
@@ -712,11 +713,11 @@ namespace UELocalizationsTool
                     });
 
                     ((System.Data.DataTable)dataGridView1.DataSource).Merge(dataTable);
-                    MessageBox.Show("Файл(-и) uasset успішно об'єднано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Msg_CompleteToMergeUassetFiles, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Сталася помилка під час об'єднання файлів uasset:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format(Resources.Msg_ErrorForMergeUassetFiles, ex.Message), Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -734,13 +735,13 @@ namespace UELocalizationsTool
         {
             // Declare ofd here as well, because each method is a separate scope.
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Файл(-и) Locres|*.locres";
-            ofd.Title = "Виберіть файл(-и) локалізації";
+            ofd.Filter = Resources.Filter_LocresMulti;
+            ofd.Title = Resources.Title_SelectLocresMulti;
             ofd.Multiselect = true;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                StatusMessage("Перенесення хешів тексту...", "Перенесення хешів тексту, зачекайте.");
+                StatusMessage(Resources.Title_ForwardingTextHash, Resources.Msg_ForwardingTextHash);
                 var sourceHashes = new Dictionary<string, HashTable>();
 
                 try
@@ -770,11 +771,11 @@ namespace UELocalizationsTool
                         }
                     }
 
-                    MessageBox.Show("Хеші файлу(-ів) locres успішно перенесено.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Msg_CompleteToForwardTextHash, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Сталася помилка під час перенесення хешів .locres:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format(Resources.Msg_ErrorForForwardTextHash, ex.Message), Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 CloseFromState();
             }
@@ -783,13 +784,13 @@ namespace UELocalizationsTool
         private async void MergeLocresFileStableNEWToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Файл(-и) Locres|*.locres";
-            ofd.Title = "Виберіть файл(-и) локалізації";
+            ofd.Filter = Resources.Filter_LocresMulti;
+            ofd.Title = Resources.Title_SelectLocresMulti;
             ofd.Multiselect = true;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                StatusMessage("Об’єднання locres...", "Об’єднання locres, зачекайте.");
+                StatusMessage(Resources.Title_MergeLocressFiles, Resources.Msg_MergeLocressFiles);
 
                 try
                 {
@@ -835,11 +836,11 @@ namespace UELocalizationsTool
                         currentDataTable.Merge(newRowsTable);
                     }
 
-                    MessageBox.Show("locres успішно об’єднано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Resources.Msg_CompleteToMergeLocresFiles, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Сталася помилка під час об’єднання locres:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format(Resources.Msg_ErrorForMergeLocresFiles, ex.Message), Resources.Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 CloseFromState();
             }
@@ -848,8 +849,8 @@ namespace UELocalizationsTool
         private async void ImportAllTextByKeystoolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Файл CSV|*.csv";
-            ofd.Title = "Імпорт за ID (повільно)";
+            ofd.Filter = Resources.Filter_Csv;
+            ofd.Title = Resources.Title_ImportByIDSlow;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -861,7 +862,7 @@ namespace UELocalizationsTool
                     {
                         // This is the key change: use 'await' to wait for the method to finish.
                         await CSVFile.Instance.LoadByKeys(this.dataGridView1, ofd.FileName);
-                        MessageBox.Show("Успішно імпортовано!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(Resources.Msg_CompleteToImport, Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
@@ -874,8 +875,8 @@ namespace UELocalizationsTool
         private async void ImportNewLinesFromCSVtoolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Файл CSV|*.csv";
-            ofd.Title = "Імпорт нових рядків з CSV";
+            ofd.Filter = Resources.Filter_Csv;
+            ofd.Title = Resources.Title_ImportRowsFromCsv;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -886,7 +887,7 @@ namespace UELocalizationsTool
                     try
                     {
                         await CSVFile.Instance.LoadNewLines((NDataGridView)this.dataGridView1, ofd.FileName, (LocresFile)Asset);
-                        MessageBox.Show($"Нові рядки успішно імпортовані!", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(string.Format(Resources.Msg_CompleteToImportRows), Resources.Title_Complete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {

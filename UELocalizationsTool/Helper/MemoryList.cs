@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using UELocalizationsTool.Properties;
 
 namespace Helper.MemoryList
 {
@@ -92,7 +93,7 @@ namespace Helper.MemoryList
         {
             if (new FileInfo(FilePath).Length > int.MaxValue)
             {
-                throw new Exception("Неможливо прочитати файл: " + FilePath);
+                throw new Exception(Resources.Msg_CannotReadFile + FilePath);
             }
             MemoryListData = File.ReadAllBytes(FilePath).ToList();
 

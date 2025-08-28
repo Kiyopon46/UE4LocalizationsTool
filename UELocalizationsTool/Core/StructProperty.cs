@@ -1,5 +1,6 @@
 ﻿using Helper.MemoryList;
 using System;
+using UELocalizationsTool.Properties;
 
 namespace AssetParser
 {
@@ -252,7 +253,7 @@ namespace AssetParser
                 case "StrProperty": new ReadStringProperty(memoryList, _uexp, propertyName, modify); break;
                 case "TextProperty": new TextHistory(memoryList, _uexp, propertyName, modify); break;
                 default:
-                    throw new NotSupportedException($"Невизначений тип властивості: {propertyType}");
+                    throw new NotSupportedException(string.Format(Resources.Msg_NotSupportedProperty, propertyType));
             }
         }
     }

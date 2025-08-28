@@ -1,4 +1,5 @@
 ﻿using UELocalizationsTool.Core.locres;
+using UELocalizationsTool.Properties;
 
 namespace UELocalizationsTool.Forms
 {
@@ -63,7 +64,7 @@ namespace UELocalizationsTool.Forms
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 20);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Текст";
+            this.label3.Text = Resources.Lbl_Text;
             // 
             // label2
             // 
@@ -85,7 +86,7 @@ namespace UELocalizationsTool.Forms
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 20);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Область імен";
+            this.label1.Text = Resources.Lbl_Namespace;
             // 
             // button2
             // 
@@ -97,7 +98,7 @@ namespace UELocalizationsTool.Forms
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(110, 30);
             this.button2.TabIndex = 5;
-            this.button2.Text = "Скасувати";
+            this.button2.Text = Resources.Btn_Cancel;
             this.button2.UseVisualStyleBackColor = true;
             // 
             // Apply
@@ -110,7 +111,7 @@ namespace UELocalizationsTool.Forms
             this.Apply.Name = "Apply";
             this.Apply.Size = new System.Drawing.Size(110, 30);
             this.Apply.TabIndex = 4;
-            this.Apply.Text = "Застосувати";
+            this.Apply.Text = Resources.Btn_Apply;
             this.Apply.UseVisualStyleBackColor = true;
             this.Apply.Click += new System.EventHandler(this.Apply_Click);
             // 
@@ -196,7 +197,7 @@ namespace UELocalizationsTool.Forms
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(129, 20);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Хеш області імен";
+            this.label4.Text = Resources.Lbl_NamespaceHash;
             // 
             // KeyHash
             // 
@@ -208,7 +209,7 @@ namespace UELocalizationsTool.Forms
             this.KeyHash.Name = "KeyHash";
             this.KeyHash.Size = new System.Drawing.Size(57, 20);
             this.KeyHash.TabIndex = 12;
-            this.KeyHash.Text = "Хеш ID";
+            this.KeyHash.Text = Resources.Lbl_IDHash;
             // 
             // label6
             // 
@@ -220,7 +221,7 @@ namespace UELocalizationsTool.Forms
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(83, 20);
             this.label6.TabIndex = 14;
-            this.label6.Text = "Хеш тексту";
+            this.label6.Text = Resources.Lbl_TextHash;
             // 
             // txtValueHash
             // 
@@ -284,7 +285,7 @@ namespace UELocalizationsTool.Forms
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(186, 20);
             this.label7.TabIndex = 18;
-            this.label7.Text = "ExternID (тільки .locres v4)";
+            this.label7.Text = Resources.Lbl_ExternIDLocresV4Only;
             // 
             // txtExternID
             // 
@@ -344,7 +345,7 @@ namespace UELocalizationsTool.Forms
             this.Name = "FrmLocresEntryEditor";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Редактор рядка";
+            this.Text = Resources.Lbl_EntryEditor;
             this.MaximizeBox = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.ResumeLayout(false);

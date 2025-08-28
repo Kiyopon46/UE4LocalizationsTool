@@ -1,4 +1,6 @@
-﻿namespace UELocalizationsTool
+﻿using UELocalizationsTool.Properties;
+
+namespace UELocalizationsTool
 {
     partial class FrmFilter
     {
@@ -56,7 +58,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(128, 35);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Застосувати";
+            this.button1.Text = Resources.Btn_Apply;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
@@ -79,7 +81,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 20);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Фільтри:";
+            this.label1.Text = Resources.Lbl_Filter;
             // 
             // textBox1
             // 
@@ -99,7 +101,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Ввід:";
+            this.label3.Text = Resources.Lbl_Input;
             // 
             // Add
             // 
@@ -109,7 +111,7 @@
             this.Add.Name = "Add";
             this.Add.Size = new System.Drawing.Size(175, 35);
             this.Add.TabIndex = 6;
-            this.Add.Text = "Додати";
+            this.Add.Text = Resources.Btn_Add;
             this.Add.UseVisualStyleBackColor = true;
             this.Add.Click += new System.EventHandler(this.Add_Click);
             // 
@@ -121,7 +123,7 @@
             this.RemoveSelected.Name = "RemoveSelected";
             this.RemoveSelected.Size = new System.Drawing.Size(175, 35);
             this.RemoveSelected.TabIndex = 7;
-            this.RemoveSelected.Text = "Видалити вибране";
+            this.RemoveSelected.Text = Resources.Btn_RemoveSelected;
             this.RemoveSelected.UseVisualStyleBackColor = true;
             this.RemoveSelected.Click += new System.EventHandler(this.RemoveSelected_Click);
             // 
@@ -133,7 +135,7 @@
             this.ClearList.Name = "ClearList";
             this.ClearList.Size = new System.Drawing.Size(175, 35);
             this.ClearList.TabIndex = 8;
-            this.ClearList.Text = "Очистити список";
+            this.ClearList.Text = Resources.Btn_ClearList;
             this.ClearList.UseVisualStyleBackColor = true;
             this.ClearList.Click += new System.EventHandler(this.ClearList_Click);
             // 
@@ -145,7 +147,7 @@
             this.matchcase.Name = "matchcase";
             this.matchcase.Size = new System.Drawing.Size(172, 24);
             this.matchcase.TabIndex = 9;
-            this.matchcase.Text = "Враховувати регістр";
+            this.matchcase.Text = Resources.CheckBox_MatchCase;
             this.matchcase.UseVisualStyleBackColor = true;
             // 
             // BtnClose
@@ -157,7 +159,7 @@
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(175, 35);
             this.BtnClose.TabIndex = 10;
-            this.BtnClose.Text = "Закрити";
+            this.BtnClose.Text = Resources.Btn_Close;
             this.BtnClose.UseVisualStyleBackColor = true;
             this.BtnClose.Click += new System.EventHandler(this.Close_Click);
             // 
@@ -169,7 +171,7 @@
             this.regularexpression.Name = "regularexpression";
             this.regularexpression.Size = new System.Drawing.Size(157, 24);
             this.regularexpression.TabIndex = 11;
-            this.regularexpression.Text = "Регулярний вираз";
+            this.regularexpression.Text = Resources.CheckBox_RegExp;
             this.regularexpression.UseVisualStyleBackColor = true;
             this.regularexpression.CheckedChanged += new System.EventHandler(this.RegularExpression_CheckedChanged);
             // 
@@ -181,7 +183,7 @@
             this.reversemode.Name = "reversemode";
             this.reversemode.Size = new System.Drawing.Size(154, 24);
             this.reversemode.TabIndex = 12;
-            this.reversemode.Text = "Зворотній режим";
+            this.reversemode.Text = Resources.CheckBox_ReverseMode;
             this.reversemode.UseVisualStyleBackColor = true;
             // 
             // Columns
@@ -202,7 +204,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Стовпець:";
+            this.label2.Text = Resources.Lbl_Column;
             // 
             // ColumnPanel
             // 
@@ -247,7 +249,7 @@
             this.Name = "FrmFilter";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Фільтрування даних";
+            this.Text = Resources.Lbl_DataFiltering;
             this.Load += new System.EventHandler(this.FrmFilter_Load);
             this.ColumnPanel.ResumeLayout(false);
             this.ColumnPanel.PerformLayout();

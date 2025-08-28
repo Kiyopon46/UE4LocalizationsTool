@@ -3,6 +3,7 @@ using Helper.MemoryList;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UELocalizationsTool.Properties;
 
 namespace AssetParser
 {
@@ -69,7 +70,7 @@ namespace AssetParser
             {
                 if (!File.Exists(Path.ChangeExtension(FilePath, ".uexp")))
                 {
-                    throw new Exception("Файлу uexp не знайдено!");
+                    throw new Exception(Resources.Msg_NotFoundUexpFile);
                 }
                 UexpFile = new MemoryList(Path.ChangeExtension(FilePath, ".uexp"));
                 IsNotUseUexp = false;

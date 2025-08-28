@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using UELocalizationsTool.Controls;
 using UELocalizationsTool.Core.Hash;
 using UELocalizationsTool.Core.locres;
+using UELocalizationsTool.Properties;
 
 namespace UELocalizationsTool.Forms
 {
@@ -75,7 +76,7 @@ namespace UELocalizationsTool.Forms
         {
             InitializeComponent();
             this.Location = new Point(form.Location.X + (form.Width - this.Width) / 2, form.Location.Y + (form.Height - this.Height) / 2);
-            Apply.Text = "Додати";
+            Apply.Text = Resources.Btn_Add;
             this.Asset = asset;
             BtnExternID.Enabled = (Asset != null && Asset.Version == LocresVersion.Optimized_CityHash64_ExternID_UTF16);
             txtExternID.Enabled = BtnExternID.Enabled;
