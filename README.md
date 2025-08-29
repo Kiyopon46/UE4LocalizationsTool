@@ -1,22 +1,23 @@
+English | [українська](README-uk.md) | [日本語](README-ja.md)
+
 # UE Localizations Tool
 
-- Замінено бібліотеку для `.csv`.
-- Виправлено роботу з `.csv`, через що втрачалися пробіли при імпорті в **Google Sheets** та **Crowdin**.
-- Виправлено зависання програми при збереженні великого `.locres`.
-- Прискорено роботу програми шляхом використання асинхронних методів.
-- Українізація та покращення інтерфейсу.
-- Підтримка `.locres v4` (**Stellar Blade**).
+- Replaced the library for `.csv`.
+- Fixed the work with `.csv`, which caused the loss of spaces when importing into **Google Sheets** and **Crowdin**.
+- Fixed the program freezing when saving a large `.locres`.
+- Speeded up the program by using asynchronous methods.
+- Ukrainianization and interface improvement.
+- Support for `.locres v4` (**Stellar Blade**).
 
-Для тестування швидкості було взято `.locres` файл на **107233** рядка з **мільйоном слів**.
+For speed testing, a `.locres` file with **107233** lines and **a million words** was taken.
 ### UE4 Localizations Tool 2.7:
-Відкриття `.locres`: **28 с 567 мс**; Імпорт `.csv`: **2 с 983 мс**; Збереження `.locres`: **2 хв 49 с 350 мс**.
+Opening `.locres`: **28 s 567 ms**; Importing `.csv`: **2 s 983 ms**; Saving `.locres`: **2 min 49 s 350 ms**.
 ### UE Localizations Tool 2.7.8:
-Відкриття `.locres`: **1 с 283 мс**; Імпорт `.csv`: **2 с 567 мс**; Збереження `.locres`: **2 с 750 мс**.
+Opening `.locres`: **1 s 283 ms**; Importing `.csv`: **2 s 567 ms**; Saving `.locres`: **2 s 750 ms**.
 
-- Відкриття стало приблизно на **95,5%** швидшим.
-- Імпорт став приблизно на **13,9%** швидшим.
-- Збереження стало приблизно на **98,4%** швидшим.
-
+- Opening is about **95.5%** faster.
+- Import is about **13.9%** faster.
+- Saving is about **98.4%** faster.
 
 Original author of program is **amrshaheen61**
 https://github.com/amrshaheen61/UE4LocalizationsTool
